@@ -3,7 +3,7 @@
 export const LoginForm = () => {
 
   return (
-    <div>asd</div>
+    <div className="text-white">FORM</div>
   )
 }
 

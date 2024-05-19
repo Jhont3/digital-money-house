@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export const Hero = () => {
   return (
-    <div className="relative flex flex-col justify-between h-full w-full min-h-[84vh]">
+    <div className="relative flex flex-col justify-between h-full w-full min-h-[86vh]">
       <Image
         src="/imgs/bgImgMobile.png"
         alt="background image women looking phone"
@@ -13,7 +13,7 @@ export const Hero = () => {
         className="bottom-0 w-full bg-green-1 rounded-t-2xl inline-block absolute h-2/5 -z-30"
       />
 
-      <article className="w-full p-4 ">
+      <article className="w-full p-4 mb-16">
         <p className="text-white text-2xl w-1/2 mt-8 h-1/4 font-semibold">
           <span className="block">De ahora</span> en adelante, hacés más con tu
           dinero
