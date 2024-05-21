@@ -1,13 +1,12 @@
+
 "use client"
 import { useLogInContext } from '@/context';
 import { useFormC } from '@/hooks';
-import { useRouter } from 'next/navigation';
 import { FormEvent } from 'react';
-
 // import { LoginForm } from './ui/LoginForm';
 
-export default function LoginPage() {
-  const router = useRouter();
+
+export default function LoginPassPage() {
 
   const { finalStateForm, setFinalForm } = useLogInContext();
   const { formState, onInputChange, onResetForm } = useFormC(finalStateForm);
@@ -15,31 +14,28 @@ export default function LoginPage() {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // email validation
-    setFinalForm(formState);
+    // setFinalForm(formState);
     console.log(formState, "form state")
     console.log(finalStateForm, "final state")
-    router.push(`/auth/login/pass`);
     onResetForm();
   }
 
   return (
     <>
-        <h2 className='text-white pt-6 text-3xl'>Hola, ingresá tu email</h2>
+        <h2 className='text-white pt-6 text-3xl'>Ingresá tu contraseña</h2>
         {/* <LoginForm/> */}
         <form onSubmit={onSubmit} className="text-white">
-            <div>
-                <label>Email:</label>
+            <div className='text-black'>
+                <label>Password:</label>
                 <input
-                    type="email"
-                    name="email"
-                    value={formState.email}
+                    type="password"
+                    name="password"
+                    value={formState.password}
                     onChange={onInputChange}
-                    className='text-black'
                 />
             </div>
 
-            <button type="submit">Continuar</button>
-            <button >Crear Cuenta</button>
+            <button type="submit">Ingresar</button>
         </form>
     </>
   )
