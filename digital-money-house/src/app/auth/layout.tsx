@@ -8,7 +8,7 @@ export default async function AuthLayout( { children }: {
     <main className="flex flex-col justify-center ">
       <Navbar isBgGreen={true}/>
 
-      <div className="w-full sm:w-[350px] px-10 min-h-[86vh] bg-dark-1">
+      <div className="w-full min-h-[86vh] bg-dark-1 flex flex-col justify-center">
         { children }
       </div>
 

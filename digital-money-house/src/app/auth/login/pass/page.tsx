@@ -22,21 +22,31 @@ export default function LoginPassPage() {
 
   return (
     <>
-        <h2 className='text-white pt-6 text-3xl'>Ingresá tu contraseña</h2>
-        {/* <LoginForm/> */}
-        <form onSubmit={onSubmit} className="text-white">
-            <div className='text-black'>
-                <label>Password:</label>
-                <input
-                    type="password"
-                    name="password"
-                    value={formState.password}
-                    onChange={onInputChange}
-                />
-            </div>
+      <h2 className='text-xl font-semibold text-white text-center -mt-[14vh] pb-6'>Ingresá tu contraseña</h2>
+      <form onSubmit={onSubmit} className="text-white flex flex-col justify-center px-[10vw] gap-5">
+          <div>                
+              <input
+                  id='password'
+                  type="password"
+                  name="password"
+                  value={formState.password}
+                  onChange={onInputChange}
+                  className='text-black text-base w-full py-3 px-4 rounded-lg border-[1.6px] border-error-2'
+                  placeholder='Contraseña'
+                  autoComplete='on'
+              />
+          </div>
 
-            <button type="submit">Ingresar</button>
-        </form>
+          <div className='relative'>
+            <button type="submit" className='bg-green-1 text-black text-base font-bold rounded-xl p-3 w-full'>Ingresar</button>
+            <div className='text-error-1 italic text-sm text-center absolute left-1/2 -bottom-10 transform -translate-x-1/2 w-full'>
+                  <p>Contraseña incorrecta. Vuelve a intentarlo</p>
+            </div>
+          </div>
+
+          <div className='p-3 text-black w-full'>-</div>
+          
+      </form>
     </>
   )
 }
