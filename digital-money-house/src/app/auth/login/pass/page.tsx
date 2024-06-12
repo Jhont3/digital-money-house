@@ -8,11 +8,43 @@ import { FormEvent } from 'react';
 
 export default function LoginPassPage() {
 
-  const { finalStateForm, setFinalForm } = useLogInContext();
+  const { finalStateForm } = useLogInContext();
   const { formState, onInputChange, onResetForm } = useFormC(finalStateForm);
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    try {
+      const response = await fetch('https://digitalmoney.digitalhouse.com/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: finalStateForm.email,
+          password: formState.password
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Login failed');
+      }
+
+      const data = await response.json();
+      console.log(data);
+      
+      // Authorization: `Bearer ${localStorage.getItem("token")}`,
+      
+      // Maneja la respuesta exitosa, por ejemplo, redirigiendo a otra página o almacenando el token
+      // router.push('/dashboard'); 
+      // O cualquier otra ruta después de un login exitoso
+
+    } catch (error) {
+      console.error('Error during login:', error);
+      // setErrorMessage('Contraseña incorrecta. Vuelve a intentarlo');
+    }
+
+    onResetForm();
     // email validation
     // setFinalForm(formState);
     console.log(formState, "form state")
@@ -33,7 +65,7 @@ export default function LoginPassPage() {
                   onChange={onInputChange}
                   className='text-black text-base w-full py-3 px-4 rounded-lg border-[1.6px] border-error-2'
                   placeholder='Contraseña'
-                  autoComplete='on'
+                  autoComplete='current-password'
               />
           </div>
 
