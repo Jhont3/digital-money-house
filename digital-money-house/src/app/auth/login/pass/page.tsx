@@ -2,19 +2,34 @@
 "use client"
 import { useLogInContext } from '@/context';
 import { useFormC } from '@/hooks';
-import { FormEvent } from 'react';
-// import { LoginForm } from './ui/LoginForm';
+import clsx from 'clsx';
+import { useRouter } from 'next/navigation';
+import { FormEvent, useState } from 'react';
 
 
 export default function LoginPassPage() {
 
-  const { finalStateForm } = useLogInContext();
+  const { finalStateForm, convertInfoToken } = useLogInContext();
   const { formState, onInputChange, onResetForm } = useFormC(finalStateForm);
+  
+  const [isValidPass, setIsValidPass] = useState<undefined | boolean>(undefined)
+
+  const router = useRouter();
+
+  const validatePassword = (password: string): boolean => {
+    return /^(?=.*\d)[a-zA-Z\d]{6,}$/.test(password);
+  };
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
+         
+      const passValid = validatePassword(formState.password);
+      setIsValidPass(passValid);
+
+      if (!passValid) return;
+
       const response = await fetch('https://digitalmoney.digitalhouse.com/api/login', {
         method: 'POST',
         headers: {
@@ -26,27 +41,25 @@ export default function LoginPassPage() {
         })
       });
 
+   
       if (!response.ok) {
         throw new Error('Login failed');
       }
 
       const data = await response.json();
       console.log(data);
-      
-      // Authorization: `Bearer ${localStorage.getItem("token")}`,
-      
-      // Maneja la respuesta exitosa, por ejemplo, redirigiendo a otra página o almacenando el token
-      // router.push('/dashboard'); 
-      // O cualquier otra ruta después de un login exitoso
+
+      localStorage.setItem("token", data.token);
+      convertInfoToken();
+      // TODO
+      // localStorage.setItem("token-init-date", new Date().getTime());
+      onResetForm();
+      router.push(`/`);
 
     } catch (error) {
       console.error('Error during login:', error);
-      // setErrorMessage('Contraseña incorrecta. Vuelve a intentarlo');
     }
 
-    onResetForm();
-    // email validation
-    // setFinalForm(formState);
     console.log(formState, "form state")
     console.log(finalStateForm, "final state")
     onResetForm();
@@ -63,21 +76,26 @@ export default function LoginPassPage() {
                   name="password"
                   value={formState.password}
                   onChange={onInputChange}
-                  className='text-black text-base w-full py-3 px-4 rounded-lg border-[1.6px] border-error-2'
+                  className={ clsx ({
+                    'border-dark-1' : isValidPass || isValidPass == undefined, 
+                    'border-error-2' : isValidPass == false,
+                  },
+                  'text-black text-base w-full py-3 px-4 rounded-lg border-[1.6px]')} 
                   placeholder='Contraseña'
                   autoComplete='current-password'
               />
           </div>
-
-          <div className='relative'>
-            <button type="submit" className='bg-green-1 text-black text-base font-bold rounded-xl p-3 w-full'>Ingresar</button>
-            <div className='text-error-1 italic text-sm text-center absolute left-1/2 -bottom-10 transform -translate-x-1/2 w-full'>
-                  <p>Contraseña incorrecta. Vuelve a intentarlo</p>
-            </div>
-          </div>
-
-          <div className='p-3 text-black w-full'>-</div>
           
+          <div className=' relative'>
+              <button type="submit" className='bg-green-1 text-black text-base font-bold rounded-xl p-3 w-full'>Ingresar</button>
+              <div className={ clsx({
+                'hidden': isValidPass !== false
+              },   
+              'text-error-1 italic text-sm text-center absolute left-1/2 -bottom-10 transform -translate-x-1/2 w-full')}>
+                  <p>Contraseña incorrecta. Vuelve a intentarlo</p>
+              </div>
+          </div>
+          <div className='p-3 text-black w-full'>-</div>
       </form>
     </>
   )

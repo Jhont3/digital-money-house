@@ -15,34 +15,22 @@ export default function LoginPage() {
 
   const [isValidEmail, setIsValidEmail] = useState<undefined | boolean>(undefined)
 
-  // const handleEmailValidation = () => {
-  //   setIsValidEmail(/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i.test(formState.email));
-  // };
-
   const validateEmail = (email: string): boolean => {
     return /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i.test(email);
   };
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // email validation
-
-    console.log(formState, "form state")
-    console.log(finalStateForm, "final state")
 
     const emailValid = validateEmail(formState.email);
     setIsValidEmail(emailValid);
 
     if (!emailValid) return;
-    
-    // handleEmailValidation();
 
-    // if (isValidEmail == false || isValidEmail == undefined) return;
-    console.log( "llegó")
-    console.log(finalStateForm, "final state")
     setFinalForm(formState);
-    router.push(`/auth/login/pass`);
     onResetForm();
+    
+    router.push(`/auth/login/pass`);
   }
 
 
@@ -58,10 +46,10 @@ export default function LoginPage() {
                     value={formState.email}
                     onChange={onInputChange}
                     className={ clsx ({
-                      'border-error-2' : !isValidEmail,
-                      'border-dark-1' : isValidEmail || isValidEmail == undefined  
+                      'border-dark-1' : isValidEmail || isValidEmail == undefined, 
+                      'border-error-2' : isValidEmail == false,
                     },
-                      'text-black text-base w-full py-3 px-4 rounded-lg border-[1.6px]')}
+                      'text-black text-base w-full py-3 px-4 rounded-lg border-[1.6px] border-dark-1')}
                     placeholder='Correo electrónico'
                     autoComplete='email'                    
                 />
