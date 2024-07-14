@@ -5,7 +5,7 @@ export default function WalletLayout( {children} : { children: React.ReactNode} 
     <main>
         <Navbar isBgGreen={false}/>
 
-        <div className="px-0 sm:px-10">
+        <div className="px-0 w-full min-h-[86vh]">
             {children}
         </div>
         

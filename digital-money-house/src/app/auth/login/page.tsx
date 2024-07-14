@@ -36,8 +36,8 @@ export default function LoginPage() {
 
   return (
     <>
-        <h2 className='text-xl font-semibold text-white text-center -mt-[14vh] pb-6'>¡Hola!, ingresá tu e-mail</h2>
-        <form onSubmit={onSubmit} className="text-white flex flex-col justify-center px-[10vw] gap-5">
+        <h2 className='text-xl font-semibold text-white text-center -mt-[14vh] pb-6 md:-mt-[20vh] lg:-mt-[10vh]'>¡Hola!, ingresá tu e-mail</h2>
+        <form onSubmit={onSubmit} className="text-white flex flex-col justify-center px-[10vw] gap-5 md:px-[30vw] lg:px-[36vw] lg:gap-4">
             <div>                
                 <input
                     id='email'
@@ -62,7 +62,7 @@ export default function LoginPage() {
                <div className={ clsx({
                 'hidden': isValidEmail !== false
               },   
-              'text-error-1 italic text-sm text-center absolute left-1/2 -bottom-10 transform -translate-x-1/2 w-full')}>
+              'text-error-1 italic text-sm text-center absolute left-1/2 -bottom-10 transform -translate-x-1/2 w-full ')}>
                   <p>Usuario inexistente. Vuelve a intentarlo </p>
               </div>
             </div>
