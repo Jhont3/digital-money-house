@@ -5,9 +5,10 @@ import { useMemo } from "react";
 
 interface NavbarProps {
   isBgGreen : boolean;
+  loginBtnOn?: boolean;
 }
 
-export const Navbar: React.FC<NavbarProps> = ( {isBgGreen} ) => {
+export const Navbar: React.FC<NavbarProps> = ( {isBgGreen, loginBtnOn} ) => {
 
   const logoSrc = useMemo(() => isBgGreen ? '/imgs/simpleLogoBlack.png' : '/imgs/simpleLogoGreen.png', [isBgGreen]);
 
@@ -47,6 +48,19 @@ export const Navbar: React.FC<NavbarProps> = ( {isBgGreen} ) => {
           Crear cuenta
         </Link>
       </div>
+      <div className={ clsx({
+        'hidden': !loginBtnOn
+      },
+       "flex justify-end gap-2 p-2 w-[70%] md:w-1/3 ")
+       }>
+        <Link
+          className="bg-dark-1 text-white font-bold text-xs border border-green-1 py-2 px-4 rounded text-center align-middle md:w-auto "
+          href="/auth/login"
+        >
+          Iniciar sesion
+        </Link>
+      </div>
+
     </nav>
   );
 };

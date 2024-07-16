@@ -1,6 +1,6 @@
 import { Footer, Navbar } from "@/components";
 
-export default async function AuthLayout( { children }: {
+export default async function LoginLayout( { children }: {
   children: React.ReactNode;
 } ) {
 
