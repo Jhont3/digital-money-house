@@ -7,36 +7,38 @@ import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 
 
-export default function LoginPassPage() {
+export default function EmailValidationPage() {
 
-  const { finalStateForm, setFinalForm, convertInfoToken, emailValidated } = useLogInContext();
+  const { finalStateForm, setFinalForm, convertInfoToken, setEmailValidated } = useLogInContext();
   const { formState, onInputChange, onResetForm } = useFormC(finalStateForm);
   
-  const [isValidPass, setIsValidPass] = useState<undefined | boolean>(undefined)
+  const [isValidCode, setIsValidCode] = useState<undefined | boolean>(undefined)
 
   const router = useRouter();
 
-  const validatePassword = (password: string): boolean => {
-    return /^(?=.*\d)[a-zA-Z\d]{6,}$/.test(password);
+  const validateCode = (code: string): boolean => {
+    return /^[a-zA-Z\d]{3,}$/.test(code);
   };
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-         
-      const passValid = validatePassword(formState.password);
-      setIsValidPass(passValid);
+      console.log(formState.validationCode)
 
-      if (!passValid) return;
-
-      console.log(emailValidated, "email validation")
-      if (!emailValidated) {
-        setFinalForm({ ...formState, password: formState.password });
-        onResetForm();
-        router.push(`/auth/login/pass/email-validation`);
+      const code = formState?.validationCode ?? '';
+      const codeValid = validateCode(code);
+      setIsValidCode(codeValid);
+      
+      if (code === "000") {
+        setEmailValidated(true);
+      } else {
+        setEmailValidated(false);
         return;
       }
+      if (!codeValid) return;
+
+      console.log(finalStateForm, "final state")
 
       const response = await fetch('https://digitalmoney.digitalhouse.com/api/login', {
         method: 'POST',
@@ -45,7 +47,7 @@ export default function LoginPassPage() {
         },
         body: JSON.stringify({
           email: finalStateForm.email,
-          password: formState.password
+          password: finalStateForm.password
         })
       });
 
@@ -62,7 +64,11 @@ export default function LoginPassPage() {
       // TODO
       // localStorage.setItem("token-init-date", new Date().getTime());
       onResetForm();
-
+      setFinalForm(  {
+          email: "",
+          password: "",
+      });
+      
       router.push(`/`);
 
     } catch (error) {
@@ -76,21 +82,20 @@ export default function LoginPassPage() {
 
   return (
     <>
-      <h2 className='text-xl font-semibold text-white text-center -mt-[14vh] pb-6 md:-mt-[20vh] lg:-mt-[10vh]'>Ingresá tu contraseña</h2>
+      <h2 className='text-xl font-semibold text-white text-center -mt-[14vh] pb-6 md:-mt-[20vh] lg:-mt-[10vh]'>Ingresá el código de verificación</h2>
       <form onSubmit={onSubmit} className="text-white flex flex-col justify-center px-[10vw] gap-5  md:px-[30vw] lg:px-[36vw] lg:gap-4">
           <div>                
               <input
-                  id='password'
-                  type="password"
-                  name="password"
-                  value={formState.password}
+                  id='validationCode'
+                  name='validationCode'
+                  value={formState.validationCode ?? ""}
                   onChange={onInputChange}
                   className={ clsx ({
-                    'border-dark-1' : isValidPass || isValidPass == undefined, 
-                    'border-error-2' : isValidPass == false,
+                    'border-dark-1' : isValidCode || isValidCode == undefined, 
+                    'border-error-2' : isValidCode == false,
                   },
                   'text-black text-base w-full py-3 px-4 rounded-lg border-[1.6px]')} 
-                  placeholder='Contraseña'
+                  placeholder='Código'
                   autoComplete='current-password'
               />
           </div>
@@ -98,10 +103,10 @@ export default function LoginPassPage() {
           <div className=' relative'>
               <button type="submit" className='bg-green-1 text-black text-base font-bold rounded-xl p-3 w-full'>Ingresar</button>
               <div className={ clsx({
-                'hidden': isValidPass !== false
+                'hidden': isValidCode !== false
               },   
               'text-error-1 italic text-sm text-center absolute left-1/2 -bottom-10 transform -translate-x-1/2 w-full')}>
-                  <p>Contraseña incorrecta. Vuelve a intentarlo</p>
+                  <p>Código incorrecto. Vuelve a intentarlo</p>
               </div>
           </div>
           <div className='p-3 text-black w-full'>-</div>

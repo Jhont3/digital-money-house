@@ -39,11 +39,11 @@ export default function RegisterPage() {
           lastName: data.lastName,
           dni: Number(data.dni),
           email: data.email,
-          pass: data.pass,
+          password: data.pass,
           phone: data.phone,
         })
       });
-
+     
 
       if (!response.ok) {
         throw new Error('Login failed');
@@ -51,7 +51,7 @@ export default function RegisterPage() {
       const responseData  = await response.json();
 
       console.log(data);
-      console.log(responseData);
+      console.log(responseData, "respuesta");
       // localStorage.setItem("token", responseData?.token);
 
       reset()

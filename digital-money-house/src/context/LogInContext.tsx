@@ -14,6 +14,8 @@ interface LogInContextType {
         email: string;
         exp: string;
     };
+    emailValidated: boolean;
+    setEmailValidated: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface LogInProviderProps {
@@ -47,6 +49,7 @@ export const LogInProvider = ({ children }: LogInProviderProps) => {
         password: "",
     }) 
 
+    const [emailValidated, setEmailValidated] = useState(false)
 
     const convertInfoToken = () => {
         const token = localStorage.getItem("token");
@@ -67,7 +70,7 @@ export const LogInProvider = ({ children }: LogInProviderProps) => {
 
 
     return (
-        <LogInContext.Provider value={{finalStateForm, setFinalForm, convertInfoToken, dataUser}}>
+        <LogInContext.Provider value={{finalStateForm, setFinalForm, convertInfoToken, dataUser, emailValidated, setEmailValidated }}>
             {children}
         </LogInContext.Provider>
     )
