@@ -2,9 +2,9 @@ import Image from "next/image";
 
 export const Hero = () => {
   return (
-    <div className="relative flex flex-col justify-between h-full w-full min-h-[86vh] ">
+    <div className="relative flex flex-col justify-between h-full w-full ">
   
-          <Image
+          {/* <Image
             src="/imgs/bgImgMobile.png "
             alt="background image women looking phone"
             layout="fill"
@@ -23,7 +23,7 @@ export const Hero = () => {
             alt="background image women looking phone"
             layout="fill"
             className=" -z-50 absolute object-cover min-h-[60vh] "   
-          />
+          /> */}
  
     <div
         className="bottom-0 w-full bg-green-1 rounded-t-2xl inline-block absolute h-2/5 -z-30 lg:h-1/5"
