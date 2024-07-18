@@ -33,6 +33,9 @@ export default function LoginPage() {
     router.push(`/auth/login/pass`);
   }
 
+  const handleGoToRegister = () => {
+    router.push(`/auth/new-account`);
+  };
 
   return (
     <>
@@ -58,7 +61,7 @@ export default function LoginPage() {
             <button type="submit" className='bg-green-1 text-black text-base font-bold rounded-xl p-3'>Continuar</button>
             
             <div className=' relative'>
-               <button className='bg-gray-1 text-black text-base font-bold rounded-xl p-3 w-full'>Crear Cuenta</button>
+               <button onClick={handleGoToRegister} className='bg-gray-1 text-black text-base font-bold rounded-xl p-3 w-full'>Crear Cuenta</button>
                <div className={ clsx({
                 'hidden': isValidEmail !== false
               },   

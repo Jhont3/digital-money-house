@@ -5,14 +5,12 @@ export default async function LoginLayout( { children }: {
 } ) {
 
   return (
-    <main className="flex flex-col justify-center">
+    <>
       <Navbar isBgGreen={true}/>
-
-      <div className="w-full min-h-[86vh] bg-dark-1 flex flex-col justify-center">
+      <main className="w-full min-h-[86vh] bg-dark-1 flex flex-col justify-center">
         { children }
-      </div>
-
+      </main>
       <Footer/>
-    </main>
+    </>
   );
 }

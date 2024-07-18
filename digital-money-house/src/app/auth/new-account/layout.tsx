@@ -5,11 +5,9 @@ export default async function NewAccountLayout( { children }: {
 } ) {
 
   return (
-    <main className="flex flex-col justify-center">
-      <div>
-        { children }
-      </div>
+    <>
+      { children } 
       <Footer/>
-    </main>
+    </>
   );
 }

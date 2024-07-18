@@ -19,6 +19,8 @@ export const Navbar: React.FC<NavbarProps> = ( {isBgGreen, loginBtnOn} ) => {
       'text-white': isBgGreen
     }, 
     "flex justify-between items-center w-full h-[7vh] lg:max-h-[7vh] lg:px-3")}>
+
+      {/* Page logo */}
       <div className="p-2" >
         <Link href="/" >
           <Image
@@ -30,6 +32,8 @@ export const Navbar: React.FC<NavbarProps> = ( {isBgGreen, loginBtnOn} ) => {
           />
         </Link>
       </div>
+
+      {/* Normal login/register links */}
       <div className={ clsx({
         'hidden': isBgGreen,
       },
@@ -48,6 +52,8 @@ export const Navbar: React.FC<NavbarProps> = ( {isBgGreen, loginBtnOn} ) => {
           Crear cuenta
         </Link>
       </div>
+
+       {/* Opcional login */}
       <div className={ clsx({
         'hidden': !loginBtnOn
       },
