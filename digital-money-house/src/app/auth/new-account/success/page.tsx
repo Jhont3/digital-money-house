@@ -16,7 +16,7 @@ export default function SuccessPage() {
 
   return (
     <>
-      <Navbar isBgGreen={true} />
+      <Navbar isBgGreen={true} onUserPage={false}/>
       <main className="w-full min-h-[86vh] bg-dark-1 flex flex-col justify-center">
         <div className="flex flex-col justify-center items-center gap-8 px-[15vw]">
         <h2 className="text-white text-center font-semibold text-3xl ">Registro Existoso</h2>

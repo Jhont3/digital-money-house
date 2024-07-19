@@ -6,9 +6,10 @@ import { useMemo } from "react";
 interface NavbarProps {
   isBgGreen : boolean;
   loginBtnOn?: boolean;
+  onUserPage: boolean;
 }
 
-export const Navbar: React.FC<NavbarProps> = ( {isBgGreen, loginBtnOn} ) => {
+export const Navbar: React.FC<NavbarProps> = ( {isBgGreen, loginBtnOn, onUserPage} ) => {
 
   const logoSrc = useMemo(() => isBgGreen ? '/imgs/simpleLogoBlack.png' : '/imgs/simpleLogoGreen.png', [isBgGreen]);
 
@@ -18,7 +19,7 @@ export const Navbar: React.FC<NavbarProps> = ( {isBgGreen, loginBtnOn} ) => {
       'bg-green-1': isBgGreen,
       'text-white': isBgGreen
     }, 
-    "flex justify-between items-center w-full h-[7vh] lg:max-h-[7vh] lg:px-3")}>
+    "flex justify-between items-center w-full h-[7vh] lg:max-h-[7vh] ")}>
 
       {/* Page logo */}
       <div className="p-2" >
@@ -34,7 +35,7 @@ export const Navbar: React.FC<NavbarProps> = ( {isBgGreen, loginBtnOn} ) => {
       </div>
 
       {/* Normal login/register links */}
-      <div className={ clsx({
+      {!onUserPage && <div className={ clsx({
         'hidden': isBgGreen,
       },
        "flex justify-end gap-2 p-2 w-[70%] md:w-1/3 ")
@@ -51,7 +52,12 @@ export const Navbar: React.FC<NavbarProps> = ( {isBgGreen, loginBtnOn} ) => {
         >
           Crear cuenta
         </Link>
-      </div>
+      </div>}
+      
+
+      {/* User pages nav */}
+      {onUserPage && <div> icon and hamburguer </div>}
+      
 
        {/* Opcional login */}
       <div className={ clsx({
