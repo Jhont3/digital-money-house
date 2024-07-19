@@ -1,12 +1,16 @@
 "use client"
 import { Navbar } from "@/components";
+import { useLogInContext } from "@/context";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export default function SuccessPage() {
 
+  const { setEmailValidated } = useLogInContext();
+
   const router = useRouter();
   const handleGoToLogin = () => {
+    setEmailValidated(false)
     router.push(`/auth/login`);
   };
 

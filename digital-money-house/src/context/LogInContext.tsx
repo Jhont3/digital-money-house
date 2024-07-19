@@ -49,7 +49,7 @@ export const LogInProvider = ({ children }: LogInProviderProps) => {
         password: "",
     }) 
 
-    const [emailValidated, setEmailValidated] = useState(false)
+    const [emailValidated, setEmailValidated] = useState(true)
 
     const convertInfoToken = () => {
         const token = localStorage.getItem("token");

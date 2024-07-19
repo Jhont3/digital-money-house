@@ -29,13 +29,7 @@ export default function EmailValidationPage() {
       const code = formState?.validationCode ?? '';
       const codeValid = validateCode(code);
       setIsValidCode(codeValid);
-      
-      if (code === "000") {
-        setEmailValidated(true);
-      } else {
-        setEmailValidated(false);
-        return;
-      }
+
       if (!codeValid) return;
 
       console.log(finalStateForm, "final state")
@@ -54,6 +48,14 @@ export default function EmailValidationPage() {
    
       if (!response.ok) {
         throw new Error('Login failed');
+      }
+
+            
+      if (code === "000") {
+        setEmailValidated(true);
+      } else {
+        setEmailValidated(false);
+        return;
       }
 
       const data = await response.json();

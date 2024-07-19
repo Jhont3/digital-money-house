@@ -9,9 +9,8 @@ import { FormEvent, useState } from 'react';
 export default function LoginPage() {
   const router = useRouter();
 
-  const { finalStateForm, setFinalForm } = useLogInContext();
+  const { finalStateForm, setFinalForm, emailValidated } = useLogInContext();
   const { formState, onInputChange, onResetForm } = useFormC(finalStateForm);
-
 
   const [isValidEmail, setIsValidEmail] = useState<undefined | boolean>(undefined)
 
@@ -58,17 +57,38 @@ export default function LoginPage() {
                 />
             </div>
 
-            <button type="submit" className='bg-green-1 text-black text-base font-bold rounded-xl p-3'>Continuar</button>
-            
-            <div className=' relative'>
-               <button onClick={handleGoToRegister} className='bg-gray-1 text-black text-base font-bold rounded-xl p-3 w-full'>Crear Cuenta</button>
-               <div className={ clsx({
-                'hidden': isValidEmail !== false
-              },   
-              'text-error-1 italic text-sm text-center absolute left-1/2 -bottom-10 transform -translate-x-1/2 w-full ')}>
-                  <p>Usuario inexistente. Vuelve a intentarlo </p>
-              </div>
-            </div>
+
+            {
+              !emailValidated && <>
+                <div className=' relative'>
+                  <button type="submit" className='bg-green-1 text-black text-base font-bold rounded-xl p-3 w-full'>Ingresar</button>
+                  <div className={ clsx({
+                      'hidden': isValidEmail !== false
+                  },   
+                  'text-error-1 italic text-sm text-center absolute left-1/2 -bottom-10 transform -translate-x-1/2 w-full')}>
+                      <p>Usuario inexistente. Vuelve a intentarlo</p>
+                  </div>
+                </div>
+                <div className='p-3 text-black w-full'>-</div>
+              </>
+            }
+
+            {
+              emailValidated && <>
+                <button type="submit" className='bg-green-1 text-black text-base font-bold rounded-xl p-3'>Continuar</button>
+                <div className=' relative'>
+                  <button onClick={handleGoToRegister} className='bg-gray-1 text-black text-base font-bold rounded-xl p-3 w-full'>Crear Cuenta</button>
+                  <div className={ clsx({
+                    'hidden': isValidEmail !== false
+                  },   
+                  'text-error-1 italic text-sm text-center absolute left-1/2 -bottom-10 transform -translate-x-1/2 w-full ')}>
+                      <p>Usuario inexistente. Vuelve a intentarlo </p>
+                  </div>
+                </div>                 
+              </>
+            }
+
+
 
         </form>
     </>
