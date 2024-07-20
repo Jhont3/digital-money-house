@@ -5,6 +5,7 @@ interface FormState {
     email: string;
     password: string;
     validationCode?: string;
+    textToSearch?: string;
   }
 
 export const useFormC = ( initialForm : FormState ) => {

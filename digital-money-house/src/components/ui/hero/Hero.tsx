@@ -3,30 +3,31 @@ import Image from "next/image";
 export const Hero = () => {
   return (
     <main className="relative flex flex-col justify-between md:justify-around h-full w-full min-h-[86vh] ">
-        
-        <Image
-          src="/imgs/bgMobile3.png "
-          alt="background image women looking phone"
-          width={390}
-          height={780}
-          className="-z-30 absolute object-cover w-full h-full md:hidden "
-        />
+      
+      {/* Resposive background images */}
+      <Image
+        src="/imgs/bgMobile3.png"
+        alt="background image women looking phone"
+        width={390}
+        height={780}
+        className="-z-30 absolute object-cover w-full h-full md:hidden "
+      />
 
-        <Image
-          src="/imgs/bgTablet3.png"
-          alt="background image women looking phone"
-          width={800}
-          height={950}
-          className="-z-40 absolute object-cover w-full h-full lg:hidden "   
-        />
+      <Image
+        src="/imgs/bgTablet3.png"
+        alt="background image women looking phone"
+        width={800}
+        height={950}
+        className="-z-40 absolute object-cover w-full h-full lg:hidden "   
+      />
 
-        <Image
-          src="/imgs/bgDesktop3.png"
-          alt="background image women looking phone"
-          width={1440}
-          height={732}
-          className=" -z-50 absolute object-cover w-full h-full"   
-        />
+      <Image
+        src="/imgs/bgDesktop3.png"
+        alt="background image women looking phone"
+        width={1440}
+        height={732}
+        className=" -z-50 absolute object-cover w-full h-full"   
+      />
 
       {/* Decorative green bar */}
       <div

@@ -66,7 +66,7 @@ export default function RegisterPage() {
 
   return (
     <>
-      <Navbar isBgGreen={true} loginBtnOn={true}/>
+      <Navbar isBgGreen={true} loginBtnOn={true} onUserPage={false}/>
       <div className="w-full min-h-[86vh] bg-dark-1 flex flex-col justify-center">
         <h2 className="text-lg font-semibold text-white text-center py-4 ">
           Crear cuenta

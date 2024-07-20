@@ -56,7 +56,10 @@ export const Navbar: React.FC<NavbarProps> = ( {isBgGreen, loginBtnOn, onUserPag
       
 
       {/* User pages nav */}
-      {onUserPage && <div> icon and hamburguer </div>}
+      {onUserPage && 
+      <div className="text-white"> 
+        icon and hamburguer 
+      </div>}
       
 
        {/* Opcional login */}
