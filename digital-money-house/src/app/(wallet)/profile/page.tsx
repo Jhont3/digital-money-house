@@ -21,7 +21,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <>
+    <div className="flex flex-col gap-4 md:col-span-3 md:p-8 md:py-12 lg:py-8">
       <p className="flex">
         <span className="flex items-center">
           <Image src="/imgs/greyArrow.png" alt="icon" width={12} height={12}/>
@@ -128,6 +128,6 @@ export default function ProfilePage() {
 
       </div>
 
-    </>
+    </div>
   );
 }

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import clsx from 'clsx';
 import { useMemo } from "react";
+import { useSideBarContext } from "@/context";
 
 interface NavbarProps {
   isBgGreen : boolean;
@@ -12,6 +13,8 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ( {isBgGreen, loginBtnOn, onUserPage} ) => {
 
   const logoSrc = useMemo(() => isBgGreen ? '/imgs/simpleLogoBlack.png' : '/imgs/simpleLogoGreen.png', [isBgGreen]);
+
+  const { isSidebarOpen, setIsSidebarOpen } = useSideBarContext() 
 
   return (
     <nav className={ clsx({
@@ -55,14 +58,33 @@ export const Navbar: React.FC<NavbarProps> = ( {isBgGreen, loginBtnOn, onUserPag
       </div>}
       
 
-      {/* User pages nav */}
+      {/* User pages nav - Hamburger */}
       {onUserPage && 
-      <div className="text-white"> 
-        icon and hamburguer 
+      <div className="text-black font-bold flex gap-2 pr-3 "> 
+        
+        <Link href="/profile/account" className="inline-flex bg-green-1 rounded-lg w-[39px] h-8 justify-center items-center ">
+          MB
+        </Link>
+
+        <Image
+            src={'/imgs/hamburguer.png'}
+            alt="logo green digital money house"
+            className="p-1 object-cover md:hidden"
+            width="40"
+            height="40"
+            onClick={()=>{setIsSidebarOpen(true)}}
+        />
+
+        <p className="hidden md:inline-flex text-white font-bold items-center">
+          Hola, Mauricio Brito
+        </p>
+
+        
+        
       </div>}
       
 
-       {/* Opcional login */}
+       {/* Opcional only login */}
       <div className={ clsx({
         'hidden': !loginBtnOn
       },

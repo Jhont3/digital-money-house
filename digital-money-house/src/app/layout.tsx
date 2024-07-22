@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { openSans } from '@/config'
 import "./globals.css";
-import { LogInProvider } from "@/context";
+import { LogInProvider, SidebarProvider } from "@/context";
 
 export const metadata: Metadata = {
   title: "Digital Money House",
@@ -17,7 +17,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={openSans.className}>
         <LogInProvider>
-          {children}
+          <SidebarProvider >
+            {children}
+          </SidebarProvider>  
         </LogInProvider>
       </body>
     </html>
