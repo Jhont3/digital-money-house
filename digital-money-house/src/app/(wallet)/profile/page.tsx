@@ -68,7 +68,7 @@ export default function ProfilePage() {
       </form>
 
       {/* User activity */}
-      <div className="bg-white p-4 rounded-lg flex flex-col gap-4 drop-shadow-md  ">
+      <article className="bg-white p-4 rounded-lg flex flex-col gap-4 drop-shadow-md">
         
         <p className="text-dark-1 font-bold">Tu actividad</p>
         <hr />
@@ -76,7 +76,7 @@ export default function ProfilePage() {
         <div className="flex justify-between">
           <p className="flex items-center text-sm gap-2 text-dark-1 md:text-base">        
             <span className="">
-              <Image src="/imgs/greenCircle.png" alt="icon" width={24} height={24} className="md:w-8 h-8"/>
+              <Image src="/imgs/greenCircle.png" alt="icon" width={24} height={24} className="md:w-8 md:md:h-8"/>
             </span>
             Transferiste a Rodrigo
           </p>
@@ -90,7 +90,7 @@ export default function ProfilePage() {
         <div className="flex justify-between">
           <p className="flex items-center text-sm gap-2 text-dark-1 md:text-base">        
             <span className="">
-              <Image src="/imgs/greenCircle.png" alt="icon" width={24} height={24} className="md:w-8 h-8"/>
+              <Image src="/imgs/greenCircle.png" alt="icon" width={24} height={24} className="md:w-8 md:h-8"/>
             </span>
             Transfereriste a Consorcio
           </p>
@@ -103,8 +103,8 @@ export default function ProfilePage() {
 
         <div className="flex justify-between">
           <p className="flex items-center text-sm gap-2 text-dark-1 md:text-base">        
-            <span className="">
-              <Image src="/imgs/greenCircle.png" alt="icon" width={24} height={24} className="md:w-8 h-8"/>
+            <span>
+              <Image src="/imgs/greenCircle.png" alt="icon" width={24} height={24} className="md:w-8 md:h-8"/>
             </span>
             Ingresaste dinero
           </p>
@@ -115,7 +115,9 @@ export default function ProfilePage() {
         </div>
         <hr />
         
+        {/* TODO add activities from fetch */}
         <p>asd</p>
+
         <hr />
 
         <Link href={'/'} className="text-black font-bold text-[12px] flex justify-between">
@@ -126,7 +128,7 @@ export default function ProfilePage() {
         </Link>
       
 
-      </div>
+      </article>
 
     </div>
   );
