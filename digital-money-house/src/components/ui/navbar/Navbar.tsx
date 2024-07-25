@@ -63,7 +63,7 @@ export const Navbar: React.FC<NavbarProps> = ( {isBgGreen, loginBtnOn, onUserPag
       {onUserPage && 
       <div className="text-black font-bold flex gap-2 pr-3 "> 
         
-        <Link href="/profile/account" className="inline-flex bg-green-1 rounded-lg w-[39px] h-8 justify-center items-center ">
+        <Link href="/account/profile" className="inline-flex bg-green-1 rounded-lg w-[39px] h-8 justify-center items-center ">
           MB
         </Link>
 

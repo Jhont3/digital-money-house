@@ -4,12 +4,12 @@ import clsx from "clsx"
 import { ActiveLink } from "./ActiveLink"
 
 const navItems = [
-    { path: '/profile', text: 'Inicio' },
-    { path: '/profile/my-activity', text: 'Actividad'},
-    { path: '/profile/account', text: 'Tu perfil' },
-    { path: '/profile/deposit', text: 'Cargar dinero'},
-    { path: '/profile/payments', text: 'Pagar Servicios' },
-    { path: '/profile/my-cards', text: 'Tarjetas' },
+    { path: '/account', text: 'Inicio' },
+    { path: '/account/my-activity', text: 'Actividad'},
+    { path: '/account/profile', text: 'Tu perfil' },
+    { path: '/account/deposit', text: 'Cargar dinero'},
+    { path: '/account/payments', text: 'Pagar Servicios' },
+    { path: '/account/my-cards', text: 'Tarjetas' },
   ]
 
   export const SideMenu = () => {
