@@ -5,16 +5,16 @@ import Link from "next/link";
 
 export default function AccountPage() {
     return(
-        <section className="flex flex-col gap-4 md:col-span-3 md:p-8 md:py-12 lg:py-8 ">
-            <div className="flex">
+        <section className="flex flex-col gap-4 md:col-span-9 md:p-12 md:py-12 lg:py-8 md:gap-5 ">
+            <div className="flex md:hidden">
                 <span className="flex items-center">
                     <Image src="/imgs/greyArrow.png" alt="icon" width={12} height={12}/>
                 </span> &nbsp;
-                <h2><span className="underline text-base text-dark-1 font-semibold">Perfil</span></h2>
+                <h2 ><span className="underline text-base text-dark-1 font-semibold">Perfil</span></h2>
             </div>
 
             {/* Your data */}
-            <article className="bg-white px-4 py-6 rounded-lg flex flex-col gap-2 drop-shadow-md">
+            <article className="bg-white px-4 py-6 rounded-lg flex flex-col gap-2 drop-shadow-md md:p-6">
 
                 <h2 className="text-dark-1 font-bold text-xl">Tus datos</h2>
                 <hr />
@@ -83,7 +83,7 @@ export default function AccountPage() {
             </article>
 
 
-            <Link href={'/'} className="flex justify-between bg-green-1 text-center p-4 rounded-lg font-bold drop-shadow-md">
+            <Link href={'/'} className="flex justify-between items-center bg-green-1 text-center p-4 rounded-lg font-bold drop-shadow-md md:min-h-28 md:text-xl">
                 Gestioná los medios de pago 
                 <span className="flex items-center md:justify-end">
                     <ArrowIcon/>
@@ -92,15 +92,17 @@ export default function AccountPage() {
 
             
             {/* CVU & Alias */}
-            <article className="grid grid-cols-4 gap-4 bg-dark-1 px-4 py-6 rounded-lg">
+            <article className="grid grid-cols-4 gap-4 bg-dark-1 px-4 py-6 md:p-8 rounded-lg md:gap-8">
 
-                <p className="text-sm text-gray-1 col-span-4 w-3/4">Copia tu cvu o alias para ingresar o transferir dinero desde otra cuenta</p>
+                <h3 className="text-sm text-gray-1 col-span-4 w-3/4 md:w-full md:font-bold">
+                    Copia tu cvu o alias para ingresar o transferir dinero desde otra cuenta
+                </h3>
 
 
-                <div className="col-span-4">
-                    <div className="flex justify-between md:col-span-2 lg:col-span-3">
+                <div className="col-span-4 md:hidden">
+                    <div className="flex justify-between">
                         <p className=" text-green-1 font-bold text-xl">CVU</p>
-                        <span className="flex items-center md:justify-end">
+                        <span className="flex items-center">
                             <Image src="/imgs/copy.png" alt="icon" width={24} height={24}/>
                         </span>
                     </div>
@@ -108,10 +110,37 @@ export default function AccountPage() {
                     <p className="text-gray-1 md:col-span-1">0000002100075320000000</p>
                 </div>
 
-                <hr className="col-span-4"/>
+                <div className="hidden md:grid col-span-4 grid-cols-4">
+                    <div className="col-span-3 row-span-2">
+                        <p className="text-green-1 font-bold text-xl">CVU</p>
+                        <p className="text-gray-1">0000002100075320000000</p>
+                    </div>
+                    <span className="flex items-center md:row-span-2 md:justify-end">
+                        <Image src="/imgs/copy.png" alt="icon" width={32} height={32}/>
+                    </span>
+                </div>
 
-                <div className="col-span-4 text-gray-50">
-                    asd
+                <hr className="col-span-4 md:hidden"/>
+
+                <div className="col-span-4 md:hidden">
+                    <div className="flex justify-between md:col-span-2 lg:col-span-3">
+                        <p className=" text-green-1 font-bold text-xl">Alias</p>
+                        <span className="flex items-center md:justify-end">
+                            <Image src="/imgs/copy.png" alt="icon" width={24} height={24}/>
+                        </span>
+                    </div>
+
+                    <p className="text-gray-1 md:col-span-1">estealiasnoexiste</p>
+                </div>
+
+                <div className="hidden md:grid col-span-4 grid-cols-4 ">
+                    <div className="col-span-3">
+                        <p className="text-green-1 font-bold text-xl">Alias</p>
+                        <p className="text-gray-1">estealiasnoexiste</p>
+                    </div>
+                    <span className="flex items-center md:row-span-2 md:justify-end">
+                        <Image src="/imgs/copy.png" alt="icon" width={32} height={32}/>
+                    </span>
                 </div>
 
             </article>

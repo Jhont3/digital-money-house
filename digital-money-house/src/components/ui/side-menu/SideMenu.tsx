@@ -22,7 +22,7 @@ const navItems = [
             'p-[3vh]' :  isSidebarOpen,
             'pt-[10vh]' :  isSidebarOpen,
             'hidden' :    !isSidebarOpen,
-             }, "flex flex-col w-full h-full z-30 bg-green-1 gap-4 md:inline-block md:col-span-1 md:p-8")}>
+             }, "flex flex-col w-full h-full z-30 bg-green-1 gap-4 md:inline-block md:col-span-3 md:p-8 md:py-12 lg:py-14 xl:col-span-2")}>
             {
                 navItems.map( navItem => (
                     <ActiveLink key={navItem.path} { ...navItem }  />

@@ -20,6 +20,7 @@ const config: Config = {
         "gray-1": '#EEEAEA',
         "error-1": "#DA0000",
         "error-2": "#EE3838",
+        "select": "#D2FFEC",
       }
     },
   },
