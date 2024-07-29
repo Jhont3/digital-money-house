@@ -18,9 +18,11 @@ const config: Config = {
         "dark-2": '#3A393E',
         "green-1": '#C1FD35',
         "gray-1": '#EEEAEA',
+        "gray-2": '#D9D9D9',
         "error-1": "#DA0000",
         "error-2": "#EE3838",
-        "select": "#D2FFEC",
+        "select-1": "#D2FFEC",
+        "button-1": "#CECECE",
       }
     },
   },

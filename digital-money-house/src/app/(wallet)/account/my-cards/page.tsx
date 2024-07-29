@@ -1,5 +1,6 @@
 "use client"
 import Image from "next/image";
+import Link from "next/link";
 
 export default function MyCardsPage() {
 
@@ -11,7 +12,7 @@ export default function MyCardsPage() {
             <span className="flex items-center">
                 <Image src="/imgs/greyArrow.png" alt="icon" width={12} height={12}/>
             </span> &nbsp;
-            <h2 ><span className="underline text-base text-dark-1 font-semibold">Tarjetas</span></h2>
+            <h2 ><span className="underline decoration-1 decoration-[rgba(0,0,0,0.50)] text-base text-dark-1 font-semibold">Tarjetas</span></h2>
         </div>
         
         {/* Add new card */}
@@ -22,7 +23,7 @@ export default function MyCardsPage() {
             </h3>
 
 
-            <div className="flex justify-between py-4">
+            <Link href={"/account/my-cards/1"}  className="flex justify-between py-4">
                 <div className="flex gap-4">
                     <span className="justify-start">
                         <Image src="/imgs/add.png" alt="add icon" width={34} height={34}/>
@@ -32,7 +33,7 @@ export default function MyCardsPage() {
                 <span className="flex justify-end items-center">
                     <Image src="/imgs/arrow.png" alt="add icon" width={18} height={18}/>
                 </span>
-            </div>
+            </Link>
 
          </article>
 
