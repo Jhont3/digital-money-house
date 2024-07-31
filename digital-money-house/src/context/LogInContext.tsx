@@ -60,7 +60,7 @@ export const LogInProvider = ({ children }: LogInProviderProps) => {
                 email: modUser.email,
                 exp: modUser.exp,
             });
-            // TODO
+            // TODO:
             // localStorage.setItem("rol", modUser.role);
             // localStorage.setItem("uid", modUser.id);
         } else {

@@ -14,7 +14,7 @@ const SidebarContext = createContext<SidebarContextValue | undefined>(undefined)
 
 export const useSideBarContext = () => {
   const context = useContext(SidebarContext);
-  if (!context) throw new Error('useLogInContext must be used within a LogInProvider');
+  if (!context) throw new Error('sideBarContext must be used within a sideBarProvider');
   return context;
 }
 

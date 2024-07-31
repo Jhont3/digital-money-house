@@ -63,7 +63,7 @@ export default function LoginPassPage() {
       // localStorage.setItem("token-init-date", new Date().getTime());
       onResetForm();
 
-      router.push(`/`);
+      router.push(`/account`);
 
     } catch (error) {
       console.error('Error during login:', error);
