@@ -21,7 +21,6 @@ digitalMoneyApi.interceptors.request.use((config) => {
     if (shouldAddAuthHeader && token) {
         config.headers.set('Authorization', `Bearer ${token}`);
     }
-
     return config;
 }, (error) => {
     return Promise.reject(error);
