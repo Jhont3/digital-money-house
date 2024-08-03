@@ -1,5 +1,5 @@
 "use client"
-import { fetchActivities } from "@/lib";
+import {  } from "@/lib";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
@@ -7,7 +7,7 @@ import { useEffect } from "react";
 export default function MyCardsPage() {
 
     useEffect(() => {
-        fetchActivities()
+      
     }, [])
     
 
@@ -30,7 +30,7 @@ export default function MyCardsPage() {
             </h3>
 
 
-            <Link href={"/account/my-cards/1"}  className="flex justify-between py-4">
+            <Link href={"/account/my-cards/new-card"}  className="flex justify-between py-4">
                 <div className="flex gap-4">
                     <span className="justify-start">
                         <Image src="/imgs/add.png" alt="add icon" width={34} height={34}/>
