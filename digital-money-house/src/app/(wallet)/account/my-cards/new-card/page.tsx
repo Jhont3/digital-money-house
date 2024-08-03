@@ -191,15 +191,18 @@
                   />
               </div>
 
-              <button
-                type="submit"
-                className={ clsx({
-                  'bg-button-1': hasErrors,
-                  'bg-green-1': !hasErrors
-              }," transition text-black text-sm font-bold rounded-xl p-3 my-3  min-w-[300px] md:min-w-[360px]")}
-              >
-                  Continuar
-              </button>
+              <div className="lg:grid lg:grid-cols-2 lg:gap-6">
+                  <span className="lg:col-span-1"></span>
+                  <button
+                    type="submit"
+                    className={ clsx({
+                      'bg-button-1': hasErrors,
+                      'bg-green-1': !hasErrors
+                  }," transition text-black text-sm font-bold rounded-xl p-3 my-3 min-w-[300px] lg:min-w-[218px] md:min-w-[360px] lg:col-span-1 xl:w-[360px] md:min-h-16 lg:my-0")}
+                  >
+                      Continuar
+                  </button>
+              </div>
           </form>
 
           </article>
