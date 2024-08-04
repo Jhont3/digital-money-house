@@ -36,6 +36,7 @@
       setError('expirationDate', { type: 'manual', message: 'Initial error message' });
       setError('firstAndSecondName', { type: 'manual', message: 'Initial error message' });
       setError('securityCode', { type: 'manual', message: 'Initial error message' });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const onSubmit: SubmitHandler<Inputs> = async (data)  => {
