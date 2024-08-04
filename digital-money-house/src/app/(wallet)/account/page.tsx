@@ -1,8 +1,9 @@
 "use client"
+import { getAccountInfo } from "@/api";
 import { useFormC } from "@/hooks";
 import Image from "next/image";
 import Link from "next/link";
-import { FormEvent } from "react";
+import { FormEvent, Suspense, useEffect, useState } from "react";
 
 const initialState = {
   email: "",
@@ -13,6 +14,22 @@ const initialState = {
 export default function ProfilePage() {
 
   const { formState, onInputChange, onResetForm } = useFormC(initialState)
+
+  const [userMoney, setUserMoney] = useState('')
+
+  useEffect(() => {
+    const fetchAccountInfo = async () => {
+      try {
+        const response = await getAccountInfo();
+        setUserMoney(response?.available_amount || '0');
+      } catch (error) {
+        console.error('Failed to fetch account information:', error);
+        // Handle the error (e.g., show an error message to the user)
+      }
+    };
+
+    fetchAccountInfo();
+  }, [])
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,9 +53,11 @@ export default function ProfilePage() {
           <span>Ver CVU</span>
         </p>
         <p className="text-white md:pl-2 md:font-bold">Dinero disponible</p>
-        <p className=" text-white py-2 font-bold text-2xl md:text-4xl ">
-          <span className=" rounded-full border border-green-1 py-2 px-4 md:pr-6 md:pl-4 md:border-2 ">$ 6.890.534,17</span>
-        </p>
+        <Suspense fallback={<p> loading ... </p>}>
+          <p className=" text-white py-2 font-bold text-2xl md:text-4xl ">
+            <span className=" rounded-full border border-green-1 py-2 px-4 md:pr-6 md:pl-4 md:border-2 ">{userMoney}</span>
+          </p>
+        </Suspense>
       </div>
 
       <div className="flex flex-col gap-4 md:text-2xl lg:flex-row  ">
