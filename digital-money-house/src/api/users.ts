@@ -2,7 +2,7 @@ import digitalMoneyApi from "./digitalMoneyApi";
 
 export async function createUser( newUser: {} ) {
     try {
-        const response = await digitalMoneyApi.post("/api/users", newUser);
+        const response = await digitalMoneyApi.post("/users", newUser);
         return response.data;
     } catch (error) {
         console.error("Failed to do it!", error);
@@ -12,7 +12,7 @@ export async function createUser( newUser: {} ) {
 
 export async function getUser( userID: number ) {
     try {
-        const response = await digitalMoneyApi.get("/api/users/" + userID);
+        const response = await digitalMoneyApi.get("/users/" + userID);
         return response.data;
     } catch (error) {
         console.error("Failed to do it!", error);
@@ -22,7 +22,7 @@ export async function getUser( userID: number ) {
 
 export async function updateUser(userID: number) {
     try {
-        const response = await digitalMoneyApi.patch("/api/users/" + userID);
+        const response = await digitalMoneyApi.patch("/users/" + userID);
         return response.data;
     } catch (error) {
         console.error("Failed to do it!", error);

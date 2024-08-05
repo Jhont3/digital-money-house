@@ -2,7 +2,7 @@ import { digitalMoneyApi } from "@/api";
 
 export async function createTransaction( accountID: number, newTransaction: string ) {
     try {
-        const response = await digitalMoneyApi.post("/api/accounts/" + accountID + "/transactions"  , newTransaction);
+        const response = await digitalMoneyApi.post("/accounts/" + accountID + "/transactions"  , newTransaction);
         return response.data;
     } catch (error) {
         console.error("Failed to do it!", error);
@@ -12,7 +12,7 @@ export async function createTransaction( accountID: number, newTransaction: stri
 
 export async function getAllTransactions(accountID: number) {
     try {
-        const response = await digitalMoneyApi.get("/api/accounts/" + accountID);
+        const response = await digitalMoneyApi.get("/accounts/" + accountID);
         return response.data;
     } catch (error) {
         console.error("Failed to get all Transactions", error);
@@ -22,7 +22,7 @@ export async function getAllTransactions(accountID: number) {
 
 export async function getTransactionByID(accountID: number, transactionID: number){
     try {
-        const response = await digitalMoneyApi.get("/api/accounts/" + accountID + "/transactions/" + transactionID);
+        const response = await digitalMoneyApi.get("/accounts/" + accountID + "/transactions/" + transactionID);
         return response.data;
     } catch (error) {
         console.error("Failed to get Transaction by ID", error);
@@ -32,7 +32,7 @@ export async function getTransactionByID(accountID: number, transactionID: numbe
 
 export async function deleteTransactionByID(accountID: number, transactionID: number){
     try {
-        const response = await digitalMoneyApi.delete("/api/accounts/" + accountID + "/transactions/" + transactionID);
+        const response = await digitalMoneyApi.delete("/accounts/" + accountID + "/transactions/" + transactionID);
         return response.data;
     } catch (error) {
         console.error("Failed to get Transaction by ID", error);

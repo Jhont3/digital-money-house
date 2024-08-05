@@ -17,7 +17,7 @@ import digitalMoneyApi from "./digitalMoneyApi";
 
 export async function createDeposit( accountID: number, newDeposit: {} ) {
     try {
-        const response = await digitalMoneyApi.post("/api/accounts/" + accountID + "/deposits"  , newDeposit);
+        const response = await digitalMoneyApi.post("/accounts/" + accountID + "/deposits"  , newDeposit);
         return response.data;
     } catch (error) {
         console.error("Failed to do it!", error);
@@ -27,7 +27,7 @@ export async function createDeposit( accountID: number, newDeposit: {} ) {
 
 export async function getAllTransfers(accountID: number) {
     try {
-        const response = await digitalMoneyApi.get("/api/accounts/" + accountID + "transferences");
+        const response = await digitalMoneyApi.get("/accounts/" + accountID + "transferences");
         return response.data;
     } catch (error) {
         console.error("Failed to get all Transactions", error);
@@ -37,7 +37,7 @@ export async function getAllTransfers(accountID: number) {
 
 export async function createTransfer(accountID: number, newTransfer: {}){
     try {
-        const response = await digitalMoneyApi.post("/api/accounts/" + accountID + "/transferences", newTransfer );
+        const response = await digitalMoneyApi.post("/accounts/" + accountID + "/transferences", newTransfer );
         return response.data;
     } catch (error) {
         console.error("Failed to get Transaction by ID", error);
