@@ -2,6 +2,7 @@
 "use client"
 import { useLogInContext } from '@/context';
 import { useFormC } from '@/hooks';
+import useTokenStore from '@/store/token-store';
 import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
@@ -57,7 +58,9 @@ export default function LoginPassPage() {
       const data = await response.json();
       console.log(data);
 
-      localStorage.setItem("token", data.token);
+      useTokenStore.getState().setToken(data.token);
+
+      // localStorage.setItem("token", data.token);
       convertInfoToken();
       // TODO
       // localStorage.setItem("token-init-date", new Date().getTime());

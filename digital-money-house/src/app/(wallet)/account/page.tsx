@@ -1,15 +1,17 @@
+"use client"
 import Image from "next/image";
 import Link from "next/link";
-import {  Suspense,  } from "react";
+import {  Suspense, useEffect,  } from "react";
 import { ActualCash, SearchForm } from "./ui";
-
-const initialState = {
-  email: "",
-  password: "",
-  textToSearch: "",
-};
+import useTokenStore from "@/store/token-store";
 
 export default function ProfilePage() {
+
+  const token = useTokenStore.getState().token;
+
+  useEffect(() => {
+    console.log("Token in component:", token);
+  }, [token]);
 
   return (
     <section className="flex flex-col gap-4 md:col-span-9 md:p-12 md:py-14 lg:px-20 lg:py-14 xl:col-span-10">
@@ -28,7 +30,7 @@ export default function ProfilePage() {
         </p>
         <p className="text-white md:pl-2 md:font-bold">Dinero disponible</p>
         <Suspense fallback={<p> loading ... </p>}>
-          <ActualCash/>
+          {/* <ActualCash/> */}
         </Suspense>
           {/* <p className=" text-white py-2 font-bold text-2xl md:text-4xl ">
             <span className=" rounded-full border border-green-1 py-2 px-4 md:pr-6 md:pl-4 md:border-2 ">{userMoney}</span>
