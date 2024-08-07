@@ -14,9 +14,9 @@ export async function getAccountInfo( ) {
     try {
         // Line to delay 3 seconds fetching information
         await new Promise((resolve) => setTimeout(resolve, 3000));
-        const response = await digitalMoneyApi.get("/account");
-        console.log(response)
-        return response.data;
+        const { data } = await digitalMoneyApi.get("/account");
+        console.log("data", data);
+        return data;
     } catch (error) {
          console.error("Failed to do it!", error);
         // throw new Error('Failed to fetch account information');
