@@ -1,3 +1,4 @@
+"use client"
 import axios from "axios";
 
 function getInfoID() {
@@ -10,7 +11,7 @@ const digitalMoneyApi = axios.create({
 
 digitalMoneyApi.interceptors.request.use((config) => {
     const token = localStorage.getItem("token");
-    console.log(token, "token middleware");
+    
     const urlPatterns = [
         "/account",
         "/accounts",

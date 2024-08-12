@@ -12,7 +12,7 @@ export async function createTransaction( accountID: number, newTransaction: stri
 
 export async function getAllTransactions(accountID: number) {
     try {
-        const response = await digitalMoneyApi.get("/accounts/" + accountID);
+        const response = await digitalMoneyApi.get("/accounts/" + accountID + "/activity");
         return response.data;
     } catch (error) {
         console.error("Failed to get all Transactions", error);

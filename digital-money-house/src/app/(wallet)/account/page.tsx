@@ -1,41 +1,10 @@
-"use client"
-import { getAccountInfo } from "@/api";
-import { useFormC } from "@/hooks";
 import Image from "next/image";
 import Link from "next/link";
-import { FormEvent, Suspense, useEffect, useState } from "react";
-
-const initialState = {
-  email: "",
-  password: "",
-  textToSearch: "",
-};
+import ActualCash from "./ui/ActualCash";
+import { SearchForm } from "./ui";
+import { UserActivity } from "./ui/UserActivity";
 
 export default function ProfilePage() {
-
-  const { formState, onInputChange, onResetForm } = useFormC(initialState)
-
-  const [userMoney, setUserMoney] = useState('')
-
-  useEffect(() => {
-    const fetchAccountInfo = async () => {
-      try {
-        const response = await getAccountInfo();
-        setUserMoney(response?.available_amount || '0');
-      } catch (error) {
-        console.error('Failed to fetch account information:', error);
-        // Handle the error (e.g., show an error message to the user)
-      }
-    };
-
-    fetchAccountInfo();
-  }, [])
-
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    
-    onResetForm()
-  }
 
   return (
     <section className="flex flex-col gap-4 md:col-span-9 md:p-12 md:py-14 lg:px-20 lg:py-14 xl:col-span-10">
@@ -53,11 +22,7 @@ export default function ProfilePage() {
           <span>Ver CVU</span>
         </p>
         <p className="text-white md:pl-2 md:font-bold">Dinero disponible</p>
-        <Suspense fallback={<p> loading ... </p>}>
-          <p className=" text-white py-2 font-bold text-2xl md:text-4xl ">
-            <span className=" rounded-full border border-green-1 py-2 px-4 md:pr-6 md:pl-4 md:border-2 ">{userMoney}</span>
-          </p>
-        </Suspense>
+        <ActualCash/>
       </div>
 
       <div className="flex flex-col gap-4 md:text-2xl lg:flex-row  ">
@@ -74,27 +39,15 @@ export default function ProfilePage() {
         </Link>
       </div>
 
-      {/* Search input*/}
-      <form onSubmit={onSubmit} className="relative w-full">
-        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 z-10">
-          <Image src="/imgs/search.png" alt="icon" width={14.7} height={14.7}/>
-        </span>
-        <input                     
-          id="textToSearch"
-          name="textToSearch"
-          value={formState.textToSearch}
-          onChange={onInputChange}
-          className="text-black text-base w-full py-3 pl-8 px-4 rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.10)] md:min-h-16"
-          placeholder="Buscar en tu actividad"
-          autoComplete="textToSearch"   
-        />
-      </form>
+      <SearchForm/>
 
       {/* User activity */}
       <article className="bg-white p-4 rounded-lg flex flex-col gap-4 shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-8 md:py-10">
         
         <p className="text-dark-1 font-bold">Tu actividad</p>
         <hr className="md:border-t md:border-transparent md:border-black"/>
+
+        <UserActivity/>
 
         <div className="flex justify-between">
           <p className="flex items-center text-sm gap-2 text-dark-1 md:text-base md:gap-3">        
