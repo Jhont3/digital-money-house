@@ -60,10 +60,11 @@ export default function LoginPassPage() {
 
       localStorage.setItem("token", data.token);
 
-      await fetchAccountData()
+      const accountData = await fetchAccountData()
+      localStorage.setItem("account-id", accountData.id);
 
       const userData = await fetchUserData()
-      localStorage.setItem("id", userData.id);
+      localStorage.setItem("user-id", userData.id);
 
       onResetForm();
       router.push(`/account`);

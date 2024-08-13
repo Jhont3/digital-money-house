@@ -2,9 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import clsx from 'clsx';
-import { useEffect, useMemo } from "react";
 import { useSideBarContext } from "@/context";
-import { fetchUserData } from "@/utils";
 import { useUserStore } from "@/store/user-data";
 
 interface NavbarProps {
@@ -64,7 +62,7 @@ export const Navbar: React.FC<NavbarProps> = ( {isBgGreen, loginBtnOn, onUserPag
       {onUserPage && 
       <div className="text-black font-bold flex gap-2 pr-3 "> 
         
-        <Link href="/account/profile" className="inline-flex bg-green-1 rounded-lg w-[39px] h-8 justify-center items-center ">
+        <Link href="/account" className="inline-flex bg-green-1 rounded-lg w-[39px] h-8 justify-center items-center ">
           {userData?.firstname.charAt(0)}{userData?.lastname.charAt(0)}
         </Link>
 
@@ -77,9 +75,11 @@ export const Navbar: React.FC<NavbarProps> = ( {isBgGreen, loginBtnOn, onUserPag
             onClick={()=>{setIsSidebarOpen(true)}}
         />
 
-        <p className="hidden md:inline-flex text-white font-bold items-center">
-          Hola, {userData?.firstname} {userData?.lastname}
-        </p>
+        <Link href={'/account'}>
+          <p className="hidden md:inline-flex text-white font-bold items-center h-full">
+            Hola, {userData?.firstname} {userData?.lastname}
+          </p>
+        </Link>
 
       </div>}
       
