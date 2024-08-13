@@ -9,7 +9,7 @@ import { FormEvent, useState } from 'react';
 
 export default function EmailValidationPage() {
 
-  const { finalStateForm, setFinalForm, convertInfoToken, setEmailValidated } = useLogInContext();
+  const { finalStateForm, setFinalForm, setEmailValidated } = useLogInContext();
   const { formState, onInputChange, onResetForm } = useFormC(finalStateForm);
   
   const [isValidCode, setIsValidCode] = useState<undefined | boolean>(undefined)
@@ -62,7 +62,6 @@ export default function EmailValidationPage() {
       console.log(data);
 
       localStorage.setItem("token", data.token);
-      convertInfoToken();
       // TODO
       // localStorage.setItem("token-init-date", new Date().getTime());
       onResetForm();

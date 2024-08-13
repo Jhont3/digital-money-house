@@ -13,7 +13,7 @@ export async function updateAccountAlias( userAlias: string, accountID: number )
 export async function getAccountInfo( ) {
     try {
         // Line to delay 3 seconds fetching information
-        await new Promise((resolve) => setTimeout(resolve, 3000));
+        // await new Promise((resolve) => setTimeout(resolve, 3000));
         const response = await digitalMoneyApi.get("/account");
         return response.data;
     } catch (error) {

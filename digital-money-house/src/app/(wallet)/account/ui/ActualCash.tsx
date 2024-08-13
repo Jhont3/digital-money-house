@@ -1,16 +1,17 @@
 "use client";
 import { getAccountInfo } from "@/api";
 import { useAccountStore } from "@/store";
+import { formatNumberToARS } from "@/utils";
 import { useState, useEffect } from "react";
 
 export default function ActualCash() {
-  const { userData, setAccountInfo } = useAccountStore();
-  console.log(userData, "userData outside actualcash");
+  const { accountData, setAccountInfo } = useAccountStore();
+  console.log(accountData, "accountData outside actualcash");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchAccountInfo = async () => {
-      if (userData.id === 0 ) {
+      if (accountData.id === 0 ) {
         try {
           const data = await getAccountInfo();
           setAccountInfo(data);
@@ -22,7 +23,7 @@ export default function ActualCash() {
     };
 
     fetchAccountInfo();
-  }, [userData, setAccountInfo]);
+  }, [accountData, setAccountInfo]);
 
   if (loading) {
     return <p className="text-white">Loading...</p>;
@@ -31,7 +32,7 @@ export default function ActualCash() {
   return (
     <p className="text-white py-2 font-bold text-2xl md:text-4xl">
       <span className="rounded-full border border-green-1 py-2 px-4 md:pr-6 md:pl-4 md:border-2">
-        {userData.available_amount || "No data available"}
+        {formatNumberToARS(accountData.available_amount)  || "No data available"}
       </span>
     </p>
   );

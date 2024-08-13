@@ -1,18 +1,18 @@
 import { create } from 'zustand';
 
 interface AccountState {
-  userData: {
+  accountData: {
     id: number;
     user_id: number;
     cvu: string;
     alias: string;
     available_amount: number;
   };
-  setAccountInfo: (data: Partial<AccountState['userData']>) => void;
+  setAccountInfo: (data: Partial<AccountState['accountData']>) => void;
   clearAccountInfo: () => void;
 }
 
-const initialState: AccountState['userData'] = {
+const initialState: AccountState['accountData'] = {
   id: 0,
   user_id: 0,
   cvu: '',
@@ -21,12 +21,12 @@ const initialState: AccountState['userData'] = {
 };
 
 export const useAccountStore = create<AccountState>((set) => ({
-  userData: initialState,
+  accountData: initialState,
   setAccountInfo: (data) => set((state) => ({
-    userData: { ...state.userData, ...data },
+    accountData: { ...state.accountData, ...data },
   })),
   clearAccountInfo: () => set(() => ({
-    userData: initialState,
+    accountData: initialState,
   })),
 }));
 

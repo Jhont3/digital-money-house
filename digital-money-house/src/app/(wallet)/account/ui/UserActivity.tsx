@@ -7,14 +7,14 @@ import { useAccountStore } from "@/store";
 import { getDayOfWeek } from '../../../../utils/getDay';
 
 export function UserActivity() {
-    const { userData, setAccountInfo } = useAccountStore();
+    const { accountData, setAccountInfo } = useAccountStore();
     const [userActivities, setUserActivities] = useState(null);
 	const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const loadUserActivities = async () => {
             try {
-                if (userData.id === 0) {
+                if (accountData.id === 0) {
                     try {
                     const data = await fetchAccountData()
                       setAccountInfo(data);
@@ -22,7 +22,7 @@ export function UserActivity() {
                       console.error("Error fetching account info:", error);
                     }
                 }
-                const activities = await fetchUserActivities(userData.id);
+                const activities = await fetchUserActivities(accountData.id);
                 console.log(activities,"activities here")
                 setUserActivities(activities);
             } catch (error) {
@@ -33,7 +33,7 @@ export function UserActivity() {
         };
 
         loadUserActivities();
-	}, [userData, setAccountInfo]);
+	}, [accountData, setAccountInfo]);
 
 	if (loading) {
 		return <p className="">Loading...</p>;

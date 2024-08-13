@@ -1,9 +1,6 @@
 "use client"
 import axios from "axios";
 
-function getInfoID() {
-    return localStorage.getItem("uid") ? localStorage.getItem("uid") : undefined;
-}
 
 const digitalMoneyApi = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -15,7 +12,7 @@ digitalMoneyApi.interceptors.request.use((config) => {
     const urlPatterns = [
         "/account",
         "/accounts",
-        `/users/${getInfoID()}`
+        `/users`
     ];
 
     const shouldAddAuthHeader = urlPatterns.some(pattern => config.url?.startsWith(pattern));

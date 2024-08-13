@@ -2,6 +2,7 @@
 "use client"
 import { useLogInContext } from '@/context';
 import { useFormC } from '@/hooks';
+import { fetchAccountData, fetchUserData } from '@/utils';
 import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
@@ -9,7 +10,7 @@ import { FormEvent, useState } from 'react';
 
 export default function LoginPassPage() {
 
-  const { finalStateForm, setFinalForm, convertInfoToken, emailValidated } = useLogInContext();
+  const { finalStateForm, setFinalForm, emailValidated } = useLogInContext();
   const { formState, onInputChange, onResetForm } = useFormC(finalStateForm);
   
   const [isValidPass, setIsValidPass] = useState<undefined | boolean>(undefined)
@@ -58,11 +59,13 @@ export default function LoginPassPage() {
       console.log(data);
 
       localStorage.setItem("token", data.token);
-      convertInfoToken();
-      // TODO
-      // localStorage.setItem("token-init-date", new Date().getTime());
-      onResetForm();
 
+      await fetchAccountData()
+
+      const userData = await fetchUserData()
+      localStorage.setItem("id", userData.id);
+
+      onResetForm();
       router.push(`/account`);
 
     } catch (error) {

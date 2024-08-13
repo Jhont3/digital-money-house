@@ -8,7 +8,6 @@ interface LogInContextType {
       password: string;
     };
     setFinalForm: React.Dispatch<React.SetStateAction<{ email: string; password: string }>>;
-    convertInfoToken: () => void;
     dataUser: {
         username: string;
         email: string;
@@ -51,26 +50,8 @@ export const LogInProvider = ({ children }: LogInProviderProps) => {
 
     const [emailValidated, setEmailValidated] = useState(true)
 
-    const convertInfoToken = () => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            const modUser = parseToken(token);
-            setDataUser({
-                username: modUser.username,
-                email: modUser.email,
-                exp: modUser.exp,
-            });
-            // TODO:
-            // localStorage.setItem("rol", modUser.role);
-            // localStorage.setItem("uid", modUser.id);
-        } else {
-            console.warn('No token found in localStorage');
-        }
-    };
-
-
     return (
-        <LogInContext.Provider value={{finalStateForm, setFinalForm, convertInfoToken, dataUser, emailValidated, setEmailValidated }}>
+        <LogInContext.Provider value={{finalStateForm, setFinalForm, dataUser, emailValidated, setEmailValidated }}>
             {children}
         </LogInContext.Provider>
     )

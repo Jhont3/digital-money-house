@@ -3,15 +3,14 @@ import { getAccountInfo, getAllTransactions } from "@/api";
 import { useAccountStore } from "@/store";
 
 export const fetchAccountData = async () => {
-    const { userData, setAccountInfo } = useAccountStore.getState();
+    const { accountData, setAccountInfo } = useAccountStore.getState();
 
-    if (userData.id === 0 || !userData) {
+    if (accountData.id === 0 || !accountData) {
         const accountInfo = await getAccountInfo();
         setAccountInfo(accountInfo);
         return accountInfo;
     }
-    
-    return userData;
+    return accountData;
 };
 
 export const fetchUserActivities = async (accountID: number) => {

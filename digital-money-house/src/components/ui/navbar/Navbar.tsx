@@ -2,8 +2,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import clsx from 'clsx';
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useSideBarContext } from "@/context";
+import { fetchUserData } from "@/utils";
+import { useUserStore } from "@/store/user-data";
 
 interface NavbarProps {
   isBgGreen : boolean;
@@ -15,7 +17,8 @@ export const Navbar: React.FC<NavbarProps> = ( {isBgGreen, loginBtnOn, onUserPag
 
   const logoSrc = useMemo(() => isBgGreen ? '/imgs/simpleLogoBlack.png' : '/imgs/simpleLogoGreen.png', [isBgGreen]);
 
-  const { isSidebarOpen, setIsSidebarOpen } = useSideBarContext() 
+  const { setIsSidebarOpen } = useSideBarContext() 
+  const { userData } = useUserStore()
 
   return (
     <nav className={ clsx({
@@ -64,7 +67,7 @@ export const Navbar: React.FC<NavbarProps> = ( {isBgGreen, loginBtnOn, onUserPag
       <div className="text-black font-bold flex gap-2 pr-3 "> 
         
         <Link href="/account/profile" className="inline-flex bg-green-1 rounded-lg w-[39px] h-8 justify-center items-center ">
-          MB
+          {userData?.firstname.charAt(0)}{userData?.lastname.charAt(0)}
         </Link>
 
         <Image
@@ -77,15 +80,13 @@ export const Navbar: React.FC<NavbarProps> = ( {isBgGreen, loginBtnOn, onUserPag
         />
 
         <p className="hidden md:inline-flex text-white font-bold items-center">
-          Hola, Mauricio Brito
+          Hola, {userData?.firstname} {userData?.lastname}
         </p>
 
-        
-        
       </div>}
       
 
-       {/* Opcional only login */}
+      {/* Opcional only login */}
       <div className={ clsx({
         'hidden': !loginBtnOn
       },
