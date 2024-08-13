@@ -4,9 +4,7 @@ export default function Home() {
   return (
     <>
       <Navbar isBgGreen={false} onUserPage={false}/>
-      
-        <Hero/>
-     
+      <Hero/>     
     </>
   );
 }

@@ -8,8 +8,8 @@ import { getDayOfWeek } from '../../../../utils/getDay';
 
 export function UserActivity() {
     const { accountData, setAccountInfo } = useAccountStore();
-    const [userActivities, setUserActivities] = useState(null);
-	const [loading, setLoading] = useState(true);
+    const [ userActivities, setUserActivities ] = useState(null);
+	const [ loading, setLoading ] = useState(true);
 
     useEffect(() => {
         const loadUserActivities = async () => {
@@ -41,9 +41,9 @@ export function UserActivity() {
 
     return (        
         <>
-            {userActivities && userActivities.map(activity => (
+            {userActivities && userActivities.map((activity, i) => (
                 <>
-                <div className="flex justify-between" key={activity.id}>
+                <div className="flex justify-between" key={`${activity.id}${i}`}>
                     <p className="flex items-center text-sm gap-2 text-dark-1 md:text-base md:gap-3">        
                         <span className="">
                             <Image src="/imgs/greenCircle.png" alt="icon" width={24} height={24} className="md:w-8 md:h-8"/>

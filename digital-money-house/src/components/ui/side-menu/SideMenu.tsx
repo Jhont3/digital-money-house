@@ -2,6 +2,8 @@
 import { useSideBarContext } from "@/context"
 import clsx from "clsx"
 import { ActiveLink } from "./ActiveLink"
+import { logOut } from "@/utils"
+import { useRouter } from "next/navigation"
 
 const navItems = [
     { path: '/account', text: 'Inicio' },
@@ -15,6 +17,12 @@ const navItems = [
   export const SideMenu = () => {
 
     const { isSidebarOpen } = useSideBarContext() 
+    const router = useRouter();
+
+    const closeSession = () => {
+        logOut()
+        router.push('/')
+    }
 
     return (
         <aside className={clsx({
@@ -28,7 +36,7 @@ const navItems = [
                     <ActiveLink key={navItem.path} { ...navItem }  />
                 ))
             }
-            <p className="text-black">Cerrar sesión</p>
+            <button className="text-black" onClick={closeSession}>Cerrar sesión</button>
         </aside>
     )
 }

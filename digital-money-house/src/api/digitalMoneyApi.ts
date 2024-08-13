@@ -12,7 +12,8 @@ digitalMoneyApi.interceptors.request.use((config) => {
     const urlPatterns = [
         "/account",
         "/accounts",
-        `/users`
+        `/users`,
+        "logout",
     ];
 
     const shouldAddAuthHeader = urlPatterns.some(pattern => config.url?.startsWith(pattern));

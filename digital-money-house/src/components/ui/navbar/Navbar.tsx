@@ -15,8 +15,6 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ( {isBgGreen, loginBtnOn, onUserPage} ) => {
 
-  const logoSrc = useMemo(() => isBgGreen ? '/imgs/simpleLogoBlack.png' : '/imgs/simpleLogoGreen.png', [isBgGreen]);
-
   const { setIsSidebarOpen } = useSideBarContext() 
   const { userData } = useUserStore()
 
@@ -24,7 +22,7 @@ export const Navbar: React.FC<NavbarProps> = ( {isBgGreen, loginBtnOn, onUserPag
     <nav className={ clsx({
       'bg-dark-1': !isBgGreen,
       'bg-green-1': isBgGreen,
-      'text-white': isBgGreen
+      'text-white': isBgGreen,
     }, 
     "flex justify-between items-center w-full h-[7vh] lg:max-h-[7vh] ")}>
 
@@ -32,9 +30,9 @@ export const Navbar: React.FC<NavbarProps> = ( {isBgGreen, loginBtnOn, onUserPag
       <div className="p-2" >
         <Link href="/" >
           <Image
-            src={logoSrc}
+            src={'/imgs/simpleLogoGreen.png'}
             alt="logo green digital money house"
-            className="p-2"
+            className={clsx("p-2", { 'filter brightness-0 saturate-100': isBgGreen })}
             width="80"
             height="80"
           />
