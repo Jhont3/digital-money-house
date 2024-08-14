@@ -1,4 +1,5 @@
 "use client"
+import { Subtitle } from "@/components";
 import {  } from "@/lib";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,13 +15,7 @@ export default function MyCardsPage() {
     return(
         <section className="flex flex-col gap-4 md:col-span-9 md:p-12 md:py-12 lg:py-8 md:gap-5">
 
-        {/* Title */}
-        <div className="flex md:hidden">
-            <span className="flex items-center">
-                <Image src="/imgs/greyArrow.png" alt="icon" width={12} height={12}/>
-            </span> &nbsp;
-            <h2 ><span className="underline decoration-1 decoration-[rgba(0,0,0,0.50)] text-base text-dark-1 font-semibold">Tarjetas</span></h2>
-        </div>
+        <Subtitle text="Tarjetas"/>
         
         {/* Add new card */}
         <article className="flex flex-col justify-between bg-dark-1 p-6 min-h-[147px] md:p-8 rounded-lg md:gap-8">

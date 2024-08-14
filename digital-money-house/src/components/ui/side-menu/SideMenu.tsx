@@ -36,7 +36,7 @@ const navItems = [
                     <ActiveLink key={navItem.path} { ...navItem }  />
                 ))
             }
-            <button className="text-black" onClick={closeSession}>Cerrar sesión</button>
+            <button className="text-black text-left" onClick={closeSession}>Cerrar sesión</button>
         </aside>
     )
 }

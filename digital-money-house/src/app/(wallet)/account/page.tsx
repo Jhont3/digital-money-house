@@ -3,19 +3,14 @@ import Link from "next/link";
 import ActualCash from "./ui/ActualCash";
 import { SearchForm } from "./ui";
 import { UserActivity } from "./ui/UserActivity";
+import { Subtitle } from "@/components";
 
 export default function ProfilePage() {
 
-  
-
   return (
     <section className="flex flex-col gap-4 md:col-span-9 md:p-12 md:py-14 lg:px-20 lg:py-14 xl:col-span-10">
-      <p className="flex md:hidden">
-        <span className="flex items-center">
-          <Image src="/imgs/greyArrow.png" alt="icon" width={12} height={12}/>
-        </span> &nbsp;
-        <span className="underline text-base text-dark-1">Inicio</span>
-      </p>
+      
+      <Subtitle text="Inicio"/>
 
       {/* User money */}
       <div className="bg-dark-1 p-4 pb-6 rounded-lg flex flex-col gap-4 shadow-[0_4px_4px_rgba(0,0,0,0.10)] md:px-6 md:pb-12 ">
@@ -46,10 +41,10 @@ export default function ProfilePage() {
       {/* User activity */}
       <article className="bg-white p-4 rounded-lg flex flex-col gap-4 shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-8 md:py-10">
         
-        <Link href={'/account/my-activity'}><p className="text-dark-1 font-bold">Tu actividad</p></Link>
+        <p className="text-dark-1 font-bold">Tu actividad</p>
         <hr className="md:border-t md:border-transparent md:border-black"/>
 
-        <UserActivity itemsPerPage={1} showPagination={false}/>
+        <UserActivity itemsPerPage={4} showPagination={false}/>
 
         <Link href={'/account/my-activity'} className="text-black font-bold text-[12px] flex justify-between md:text-base">
           <span className="">Ver toda tu actividad</span>
