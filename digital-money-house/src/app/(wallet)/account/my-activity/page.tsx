@@ -1,4 +1,3 @@
-"use client"
 import { Subtitle } from "@/components";
 import { UserActivity } from "../ui/UserActivity";
 import Image from "next/image";
@@ -29,8 +28,7 @@ export default function MyActivityPage() {
             <UserActivity itemsPerPage={9} showPagination/>
 
         </article>
-
-        
+     
     </section>
     )
 }

@@ -8,6 +8,7 @@ interface UserState {
     firstname: string;
     lastname: string;
     phone: string;
+    password: string;
   };
   setUserInfo: (data: Partial<UserState['userData']>) => void;
   clearUserInfo: () => void;
@@ -19,7 +20,8 @@ const initialState: UserState['userData'] = {
     email: "",
     firstname: "",
     lastname: "",
-    phone: ""      
+    phone: "",
+    password: "",      
 };
 
 export const useUserStore = create<UserState>((set) => ({

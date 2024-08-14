@@ -1,20 +1,78 @@
 "use client"
+import { Subtitle } from "@/components";
 import ArrowIcon from "@/components/ui/svg/ArrowIcon";
+import { useUserStore } from "@/store/user-data";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
+import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
+
+type UserInputs = {
+    dni: number;
+    email: string;
+    firstname: string;
+    lastname: string;
+    password?: string;
+    phone: string;
+};
+
+const initialUserInputs: UserInputs = {
+    dni: 0,
+    email: "",
+    firstname: "",
+    lastname: "",
+    password: "******",
+    phone: ""
+};
 
 export default function AccountPage() {
+
+    const { userData } = useUserStore()
+    console.log({userData}, "user data zustand")
+
+    const { register, handleSubmit, reset, formState: { errors}, setValue, trigger, setError, control  } = 
+    useForm<UserInputs>( {defaultValues: userData || initialUserInputs, mode: 'onChange', } );
+
+    const hasErrors = Object.values(errors).some(error => error);
+
+    const handleFullnameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const fullname = e.target.value;
+        const [firstname, lastname] = fullname.split(" ");
+        
+        setValue("firstname", firstname || "");
+        setValue("lastname", lastname || "");
+    };
+  
+
+    const onSubmit: SubmitHandler<UserInputs> = async (data)  => {
+        const { password, ...restData } = data;
+    
+        // Check if password should be excluded
+        const submitData = password === "******" || password === "" 
+            ? restData 
+            : data;
+    
+        console.log(submitData, "data del submit");
+    
+        // Your submit logic here
+        try {
+            // Submit the data, excluding password if necessary
+        } catch (error) {
+            console.error(error, "form error");
+        }
+    }
+
+    useEffect(() => {
+        
+    }, [])
+
     return(
         <section className="flex flex-col gap-4 md:col-span-9 md:p-12 md:py-12 lg:py-8 md:gap-5 ">
-            <div className="flex md:hidden">
-                <span className="flex items-center">
-                    <Image src="/imgs/greyArrow.png" alt="icon" width={12} height={12}/>
-                </span> &nbsp;
-                <h2 ><span className="underline text-base text-dark-1 font-semibold">Perfil</span></h2>
-            </div>
+
+            <Subtitle text="Perfil"/>
 
             {/* Your data */}
-            <article className="bg-white px-4 py-6 rounded-lg flex flex-col gap-2 drop-shadow-md md:p-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="bg-white px-4 py-6 rounded-lg flex flex-col gap-2 drop-shadow-md md:p-6">
 
                 <h2 className="text-dark-1 font-bold text-xl">Tus datos</h2>
                 <hr />
@@ -23,7 +81,15 @@ export default function AccountPage() {
                     <p className="text-dark-1 md:col-span-1">Email</p>
 
                     <div className="flex justify-between md:col-span-2 lg:col-span-3">
-                        <p className="opacity-50">mauriciobrito@digitalhouse.com</p>
+                        <input 
+                            id="email"
+                            className="opacity-50 focus:border-select-1 focus:ring-0"
+                            type="text"
+                            {...register("email", { required: true })}                                                    
+                            autoComplete="securityCode"
+                            defaultValue={userData.email}
+                            readOnly
+                        />
                     </div>  
                 </div>
                 <hr />
@@ -32,8 +98,18 @@ export default function AccountPage() {
                     <p className="text-dark-1 md:col-span-1">Nombre y Apellido</p>
 
                     <div className="flex justify-between md:col-span-2 lg:col-span-3">
-                        <p className="opacity-50">Mauricio Brito</p>
-                        <span className="flex items-center md:justify-end">
+                        <input 
+                                id="fullname"
+                                className="opacity-50"
+                                type="text"
+                                autoComplete="fullname"
+                                defaultValue={`${userData.firstname} ${userData.lastname}`} 
+                                onChange={handleFullnameChange}                               
+                        />
+                        <span 
+                            onClick={() => {handleSubmit(onSubmit)();}}  
+                            className="flex items-center md:justify-end"
+                        >
                             <Image src="/imgs/edit.png" className="grayscale" alt="icon" width={22} height={22}/>
                         </span>
                     </div>
@@ -80,7 +156,7 @@ export default function AccountPage() {
                 </div>
                 <hr />
 
-            </article>
+            </form>
 
 
             <Link href={'/'} className="flex justify-between items-center bg-green-1 text-center p-4 rounded-lg font-bold drop-shadow-md md:min-h-28 md:text-xl">
