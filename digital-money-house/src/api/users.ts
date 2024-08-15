@@ -20,9 +20,9 @@ export async function getUser( userID: number ) {
     }
 }
 
-export async function updateUser(userID: number) {
+export async function updateUser(userID: number, newUserParameter: any) {
     try {
-        const response = await digitalMoneyApi.patch("/users/" + userID);
+        const response = await digitalMoneyApi.patch("/users/" + userID, newUserParameter);
         return response.data;
     } catch (error) {
         console.error("Failed to do it!", error);

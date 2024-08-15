@@ -21,7 +21,7 @@ const initialState: UserState['userData'] = {
     firstname: "",
     lastname: "",
     phone: "",
-    password: "",      
+    password: "******",     
 };
 
 export const useUserStore = create<UserState>((set) => ({

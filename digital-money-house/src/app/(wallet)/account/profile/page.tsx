@@ -1,4 +1,5 @@
 "use client"
+import { updateUser } from "@/api";
 import { Subtitle } from "@/components";
 import ArrowIcon from "@/components/ui/svg/ArrowIcon";
 import { useUserStore } from "@/store/user-data";
@@ -12,26 +13,19 @@ type UserInputs = {
     email: string;
     firstname: string;
     lastname: string;
-    password?: string;
+    password: string;
     phone: string;
 };
 
-const initialUserInputs: UserInputs = {
-    dni: 0,
-    email: "",
-    firstname: "",
-    lastname: "",
-    password: "******",
-    phone: ""
-};
 
 export default function AccountPage() {
 
     const { userData } = useUserStore()
+
     console.log({userData}, "user data zustand")
 
     const { register, handleSubmit, reset, formState: { errors}, setValue, trigger, setError, control  } = 
-    useForm<UserInputs>( {defaultValues: userData || initialUserInputs, mode: 'onChange', } );
+    useForm<UserInputs>( {defaultValues: userData , mode: 'onChange', } );
 
     const hasErrors = Object.values(errors).some(error => error);
 
@@ -41,29 +35,26 @@ export default function AccountPage() {
         
         setValue("firstname", firstname || "");
         setValue("lastname", lastname || "");
-    };
-  
+    };  
 
     const onSubmit: SubmitHandler<UserInputs> = async (data)  => {
         const { password, ...restData } = data;
     
         // Check if password should be excluded
-        const submitData = password === "******" || password === "" 
-            ? restData 
-            : data;
+        const submitData = password === "******" || password === "" ? restData : data;
     
         console.log(submitData, "data del submit");
     
-        // Your submit logic here
         try {
-            // Submit the data, excluding password if necessary
+            // updateUser(userData.id, submitData)
+            
         } catch (error) {
             console.error(error, "form error");
         }
     }
 
     useEffect(() => {
-        
+        setValue("password", "******")
     }, [])
 
     return(
@@ -134,8 +125,18 @@ export default function AccountPage() {
                     </p>
 
                     <div className="flex justify-between md:col-span-2 lg:col-span-3">
-                        <p className="opacity-50">1146730989</p>
-                        <span className="flex items-center md:justify-end">
+                        <input 
+                                id="phone"
+                                className="opacity-50"
+                                type="text"
+                                autoComplete="phone"
+                                {...register("phone")}
+                                defaultValue={`${userData.phone}`}                                                                
+                        />
+                        <span 
+                            className="flex items-center md:justify-end"
+                            onClick={() => {handleSubmit(onSubmit)();}}
+                        >
                             <Image src="/imgs/edit.png" className="grayscale" alt="icon" width={22} height={22}/>
                         </span>
                     </div>
@@ -148,8 +149,18 @@ export default function AccountPage() {
                     </p>
 
                     <div className="flex justify-between md:col-span-2 lg:col-span-3">
-                        <p className="opacity-50">******</p>
-                        <span className="flex items-center md:justify-end">
+                        <input 
+                                id="password"
+                                className="opacity-50"
+                                type="text"
+                                autoComplete="password"
+                                {...register("password")}
+                                defaultValue={`${userData.password}`}                            
+                        />
+                        <span 
+                            className="flex items-center md:justify-end"
+                            onClick={() => {handleSubmit(onSubmit)();}}                            
+                        >
                             <Image src="/imgs/edit.png" className="grayscale" alt="icon" width={22} height={22}/>
                         </span>
                     </div>
