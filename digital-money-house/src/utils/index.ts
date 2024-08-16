@@ -4,3 +4,5 @@ export * from "./formatNumberToARS";
 export * from "./getDay";
 export * from "./fetchUserInfo";
 export * from "./closeSession"
+export * from "./errorAlert"
+export * from "./successAlert"

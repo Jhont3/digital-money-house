@@ -3,6 +3,7 @@ import { updateUser } from "@/api";
 import { Subtitle } from "@/components";
 import ArrowIcon from "@/components/ui/svg/ArrowIcon";
 import { useUserStore } from "@/store/user-data";
+import { Alert, errorAlert, successAlert } from "@/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
@@ -39,16 +40,20 @@ export default function AccountPage() {
 
     const onSubmit: SubmitHandler<UserInputs> = async (data)  => {
         const { password, ...restData } = data;
-    
         // Check if password should be excluded
         const submitData = password === "******" || password === "" ? restData : data;
-    
+
+        
         console.log(submitData, "data del submit");
-    
+        
         try {
             // updateUser(userData.id, submitData)
+            console.log("entro acaaaaaaaaaaaaaa" );
+            
+            successAlert()
             
         } catch (error) {
+            errorAlert()
             console.error(error, "form error");
         }
     }
