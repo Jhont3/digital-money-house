@@ -8,7 +8,7 @@ import { getCookie } from "cookies-next";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 type UserInputs = {
     dni: number;
@@ -24,24 +24,8 @@ export default function AccountPage() {
 
     const [userDataFromCookie, setUserDataFromCookie] = useState<UserInputs | null>(null);
 
-    const { register, handleSubmit, reset, formState: { errors}, setValue, } = 
+    const { register, handleSubmit, reset, formState: { errors }, setValue, } = 
     useForm<UserInputs>( {defaultValues: userDataFromCookie ?? {} , mode: 'onChange', } );
-
-    useEffect(() => {
-        const userDataCookie = getCookie('userData');
-        if (userDataCookie) {
-            const parsedUserData = JSON.parse(userDataCookie);
-            setUserDataFromCookie(parsedUserData);
-            
-            reset(parsedUserData);
-        }
-    }, [reset]);
-    
-
-    // const { userData } = useUserStore()
-    // console.log({userData}, "user data zustand")
-
-    // const hasErrors = Object.values(errors).some(error => error);
 
     const handleFullnameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const fullname = e.target.value;
@@ -51,16 +35,36 @@ export default function AccountPage() {
         setValue("lastname", lastname || "");
     };  
 
+    
+
+
+    useEffect(() => {
+        const userDataCookie = getCookie('userData');
+        if (userDataCookie) {
+            const parsedUserData = JSON.parse(userDataCookie);
+            setUserDataFromCookie(parsedUserData);
+            
+            reset(parsedUserData);
+        }
+        
+    }, [reset]);
+    
+
+    // const { userData } = useUserStore()
+    // console.log({userData}, "user data zustand")
+
+    // const hasErrors = Object.values(errors).some(error => error);
+
+
     const onSubmit: SubmitHandler<UserInputs> = async (data)  => {
         const { password, ...restData } = data;
         // Check if password should be excluded
         const submitData = password === "******" || password === "" ? restData : data;    
         console.log(submitData, "data del submit");
-        
+        reset()
         try {
             // updateUser(userData.id, submitData)
-            console.log("entro acaaaaaaaaaaaaaa" );
-            
+            console.log("entro acaaaaaaaaaaaaaa" );            
             successAlert()
             
         } catch (error) {
@@ -69,6 +73,10 @@ export default function AccountPage() {
         }
     }
     
+    if (!userDataFromCookie) {
+        return <div>Cargando...</div>;
+    }
+
     return(
         <section className="flex flex-col gap-4 md:col-span-9 md:p-12 md:py-12 lg:py-8 md:gap-5 ">
 
