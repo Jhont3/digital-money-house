@@ -2,8 +2,8 @@
 import { updateUser } from "@/api";
 import { Subtitle } from "@/components";
 import ArrowIcon from "@/components/ui/svg/ArrowIcon";
-import { useUserStore } from "@/store/user-data";
-import { errorAlert, successAlert } from "@/utils";
+import { mockAlias, mockCVU } from "@/lib";
+import { errorAlert, handleCopyClipboard, successAlert } from "@/utils";
 import { getCookie } from "cookies-next";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,9 +35,6 @@ export default function AccountPage() {
         setValue("lastname", lastname || "");
     };  
 
-    
-
-
     useEffect(() => {
         const userDataCookie = getCookie('userData');
         if (userDataCookie) {
@@ -47,14 +44,9 @@ export default function AccountPage() {
             reset(parsedUserData);
         }
         
-    }, [reset]);
-    
-
-    // const { userData } = useUserStore()
-    // console.log({userData}, "user data zustand")
+    }, [reset]);    
 
     // const hasErrors = Object.values(errors).some(error => error);
-
 
     const onSubmit: SubmitHandler<UserInputs> = async (data)  => {
         const { password, ...restData } = data;
@@ -213,16 +205,16 @@ export default function AccountPage() {
                         </span>
                     </div>
 
-                    <p className="text-gray-1 md:col-span-1">0000002100075320000000</p>
+                    <p className="text-gray-1 md:col-span-1">{mockCVU}</p>
                 </div>
 
                 <div className="hidden md:grid col-span-4 grid-cols-4">
                     <div className="col-span-3 row-span-2">
                         <p className="text-green-1 font-bold text-xl">CVU</p>
-                        <p className="text-gray-1">0000002100075320000000</p>
+                        <p className="text-gray-1">{mockCVU}</p>
                     </div>
                     <span className="flex items-center md:row-span-2 md:justify-end">
-                        <Image src="/imgs/copy.png" alt="icon" width={32} height={32}/>
+                        <Image src="/imgs/copy.png" alt="icon" width={32} height={32} onClick={() => {handleCopyClipboard(mockCVU)}}/>
                     </span>
                 </div>
 
@@ -236,23 +228,20 @@ export default function AccountPage() {
                         </span>
                     </div>
 
-                    <p className="text-gray-1 md:col-span-1">estealiasnoexiste</p>
+                    <p className="text-gray-1 md:col-span-1">{mockAlias}</p>
                 </div>
 
                 <div className="hidden md:grid col-span-4 grid-cols-4 ">
                     <div className="col-span-3">
                         <p className="text-green-1 font-bold text-xl">Alias</p>
-                        <p className="text-gray-1">estealiasnoexiste</p>
+                        <p className="text-gray-1">{mockAlias}</p>
                     </div>
                     <span className="flex items-center md:row-span-2 md:justify-end">
-                        <Image src="/imgs/copy.png" alt="icon" width={32} height={32}/>
+                        <Image src="/imgs/copy.png" alt="icon" width={32} height={32} onClick={() => {handleCopyClipboard(mockAlias)}}/>
                     </span>
                 </div>
 
             </article>
-
         </section>
     )
-
 }
-

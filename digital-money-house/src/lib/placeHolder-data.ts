@@ -7,3 +7,6 @@ export const users: User[]  = [
     },
 ]
 
+export const mockCVU = "0000002100075320000000"
+
+export const mockAlias = "estealiasnoexiste"

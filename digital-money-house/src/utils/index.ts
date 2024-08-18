@@ -6,3 +6,4 @@ export * from "./fetchUserInfo";
 export * from "./closeSession"
 export * from "./errorAlert"
 export * from "./successAlert"
+export * from "./copyToClipboard"

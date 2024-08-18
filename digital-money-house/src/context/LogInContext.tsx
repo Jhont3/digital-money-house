@@ -1,5 +1,4 @@
 "use client"
-import { parseToken } from "@/utils";
 import { ReactNode, createContext, useContext, useState } from "react"
 
 interface LogInContextType {
