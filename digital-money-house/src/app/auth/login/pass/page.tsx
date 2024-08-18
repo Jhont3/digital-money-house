@@ -6,6 +6,7 @@ import { fetchAccountData, fetchUserData } from '@/utils';
 import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
+import { setCookie } from 'cookies-next';
 
 
 export default function LoginPassPage() {
@@ -25,7 +26,7 @@ export default function LoginPassPage() {
     e.preventDefault();
 
     try {
-         
+
       const passValid = validatePassword(formState.password);
       setIsValidPass(passValid);
 
@@ -65,6 +66,10 @@ export default function LoginPassPage() {
 
       const userData = await fetchUserData()
       localStorage.setItem("user-id", userData.id);
+
+      setCookie('userData', JSON.stringify(userData), {
+        expires: new Date(Date.now() + 86400 * 1000),
+      });
 
       onResetForm();
       router.push(`/account`);

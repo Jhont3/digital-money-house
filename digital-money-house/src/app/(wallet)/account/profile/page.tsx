@@ -3,11 +3,12 @@ import { updateUser } from "@/api";
 import { Subtitle } from "@/components";
 import ArrowIcon from "@/components/ui/svg/ArrowIcon";
 import { useUserStore } from "@/store/user-data";
-import { Alert, errorAlert, successAlert } from "@/utils";
+import { errorAlert, successAlert } from "@/utils";
+import { getCookie } from "cookies-next";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
-import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
+import { useEffect, useState } from "react";
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 type UserInputs = {
     dni: number;
@@ -21,14 +22,10 @@ type UserInputs = {
 
 export default function AccountPage() {
 
-    const { userData } = useUserStore()
+    const [userDataFromCookie, setUserDataFromCookie] = useState<UserInputs | null>(null);
 
-    console.log({userData}, "user data zustand")
-
-    const { register, handleSubmit, reset, formState: { errors}, setValue, trigger, setError, control  } = 
-    useForm<UserInputs>( {defaultValues: userData , mode: 'onChange', } );
-
-    const hasErrors = Object.values(errors).some(error => error);
+    const { register, handleSubmit, reset, formState: { errors }, setValue, } = 
+    useForm<UserInputs>( {defaultValues: userDataFromCookie ?? {} , mode: 'onChange', } );
 
     const handleFullnameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const fullname = e.target.value;
@@ -38,18 +35,36 @@ export default function AccountPage() {
         setValue("lastname", lastname || "");
     };  
 
+    
+
+
+    useEffect(() => {
+        const userDataCookie = getCookie('userData');
+        if (userDataCookie) {
+            const parsedUserData = JSON.parse(userDataCookie);
+            setUserDataFromCookie(parsedUserData);
+            
+            reset(parsedUserData);
+        }
+        
+    }, [reset]);
+    
+
+    // const { userData } = useUserStore()
+    // console.log({userData}, "user data zustand")
+
+    // const hasErrors = Object.values(errors).some(error => error);
+
+
     const onSubmit: SubmitHandler<UserInputs> = async (data)  => {
         const { password, ...restData } = data;
         // Check if password should be excluded
-        const submitData = password === "******" || password === "" ? restData : data;
-
-        
+        const submitData = password === "******" || password === "" ? restData : data;    
         console.log(submitData, "data del submit");
-        
+        reset()
         try {
             // updateUser(userData.id, submitData)
-            console.log("entro acaaaaaaaaaaaaaa" );
-            
+            console.log("entro acaaaaaaaaaaaaaa" );            
             successAlert()
             
         } catch (error) {
@@ -57,10 +72,10 @@ export default function AccountPage() {
             console.error(error, "form error");
         }
     }
-
-    useEffect(() => {
-        setValue("password", "******")
-    }, [])
+    
+    if (!userDataFromCookie) {
+        return <div>Cargando...</div>;
+    }
 
     return(
         <section className="flex flex-col gap-4 md:col-span-9 md:p-12 md:py-12 lg:py-8 md:gap-5 ">
@@ -79,12 +94,12 @@ export default function AccountPage() {
                     <div className="flex justify-between md:col-span-2 lg:col-span-3">
                         <input 
                             id="email"
-                            className="opacity-50 focus:border-select-1 focus:ring-0"
-                            type="text"
+                            className="opacity-50 focus:border-select-1 focus:ring-0"                            
                             {...register("email", { required: true })}                                                    
                             autoComplete="securityCode"
-                            defaultValue={userData.email}
+                            defaultValue={userDataFromCookie?.email}
                             readOnly
+                            disabled
                         />
                     </div>  
                 </div>
@@ -96,10 +111,9 @@ export default function AccountPage() {
                     <div className="flex justify-between md:col-span-2 lg:col-span-3">
                         <input 
                                 id="fullname"
-                                className="opacity-50"
-                                type="text"
+                                className="opacity-50"                                
                                 autoComplete="fullname"
-                                defaultValue={`${userData.firstname} ${userData.lastname}`} 
+                                defaultValue={`${userDataFromCookie?.firstname} ${userDataFromCookie?.lastname}`} 
                                 onChange={handleFullnameChange}                               
                         />
                         <span 
@@ -136,7 +150,7 @@ export default function AccountPage() {
                                 type="text"
                                 autoComplete="phone"
                                 {...register("phone")}
-                                defaultValue={`${userData.phone}`}                                                                
+                                defaultValue={`${userDataFromCookie?.phone}`}                                                               
                         />
                         <span 
                             className="flex items-center md:justify-end"
@@ -157,10 +171,10 @@ export default function AccountPage() {
                         <input 
                                 id="password"
                                 className="opacity-50"
-                                type="text"
+                                type="password"
                                 autoComplete="password"
                                 {...register("password")}
-                                defaultValue={`${userData.password}`}                            
+                                defaultValue="******"                           
                         />
                         <span 
                             className="flex items-center md:justify-end"
