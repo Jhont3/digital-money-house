@@ -23,13 +23,13 @@ export default function ProfilePage() {
       </div>
 
       <div className="flex flex-col gap-4 md:text-2xl lg:flex-row  ">
-        <Link href={'/account/deposit'} className="flex items-center justify-center bg-green-1 text-center p-4 rounded-lg font-bold shadow-[0_4px_4px_rgba(0,0,0,0.10)] md:min-h-20 lg:flex-1">
+        <Link href={'/account/payment-methods'} className="flex items-center justify-center bg-green-1 text-center p-4 rounded-lg font-bold shadow-[0_4px_4px_rgba(0,0,0,0.10)] md:min-h-20 lg:flex-1">
           <span className="block md:hidden">Ingresar dinero</span>
           <span className="hidden md:block lg:hidden">Transferir dinero</span>
           <span className="hidden lg:block">Cargar dinero</span>
         </Link>
 
-        <Link href={'/account/payments'} className="flex items-center justify-center bg-green-1 text-center p-4 rounded-lg font-bold shadow-[0_4px_4px_rgba(0,0,0,0.10)] md:min-h-20 lg:flex-1">
+        <Link href={'/account/payment-for-services'} className="flex items-center justify-center bg-green-1 text-center p-4 rounded-lg font-bold shadow-[0_4px_4px_rgba(0,0,0,0.10)] md:min-h-20 lg:flex-1">
           <span className="block md:hidden">Pago servicios</span>
           <span className="hidden md:block lg:hidden">Pagar servicios</span>
           <span className="hidden lg:block">Pago de servicios</span>

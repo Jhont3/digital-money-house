@@ -4,20 +4,7 @@ import Image from "next/image";
 import { fetchAccountData, fetchUserActivities, formatNumberToARS } from "@/utils";
 import { useAccountStore } from "@/store";
 import { getDayOfWeek } from '../../../../utils/getDay';
-interface Activity {
-    id: number;
-    account_id: number;
-    type: string;
-    description: string;
-    origin: string;
-    destination: string;
-    amount: number;
-    dated: string;
-}
-interface UserActivityProps {
-    itemsPerPage: number;
-    showPagination: boolean;
-}
+import { Activity, UserActivityProps } from "@/interfaces";
 
 export function UserActivity({ itemsPerPage, showPagination }: UserActivityProps) {
   const { accountData, setAccountInfo } = useAccountStore();

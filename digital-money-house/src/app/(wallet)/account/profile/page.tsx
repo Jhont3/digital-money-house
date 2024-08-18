@@ -181,7 +181,7 @@ export default function AccountPage() {
             </form>
 
 
-            <Link href={'/'} className="flex justify-between items-center bg-green-1 text-center p-4 rounded-lg font-bold drop-shadow-md md:min-h-28 md:text-xl">
+            <Link href={'/account/payment-methods'} className="flex justify-between items-center bg-green-1 text-center p-4 rounded-lg font-bold drop-shadow-md md:min-h-28 md:text-xl">
                 Gestioná los medios de pago 
                 <span className="flex items-center md:justify-end">
                     <ArrowIcon/>
