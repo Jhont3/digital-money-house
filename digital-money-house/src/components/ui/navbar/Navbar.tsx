@@ -4,6 +4,8 @@ import Link from "next/link";
 import clsx from 'clsx';
 import { useSideBarContext } from "@/context";
 import { useUserStore } from "@/store/user-data";
+import { useEffect } from "react";
+import { getCookie } from "cookies-next";
 
 interface NavbarProps {
   isBgGreen : boolean;
@@ -14,7 +16,16 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ( {isBgGreen, loginBtnOn, onUserPage} ) => {
 
   const { setIsSidebarOpen } = useSideBarContext() 
-  const { userData } = useUserStore()
+  const { userData, setUserInfo } = useUserStore()
+
+  useEffect(() => {
+    const userDataCookie = getCookie('userData');
+    if (userDataCookie) {
+        const parsedUserData = JSON.parse(userDataCookie);
+        setUserInfo(parsedUserData);
+    }
+  }, [onUserPage, setUserInfo])
+  
 
   return (
     <nav className={ clsx({

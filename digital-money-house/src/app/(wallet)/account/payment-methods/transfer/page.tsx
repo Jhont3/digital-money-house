@@ -1,3 +1,5 @@
 export default function TransferPage() {
-    <div>sger</div>
+    return (
+        <div>sger</div>
+    )
 }

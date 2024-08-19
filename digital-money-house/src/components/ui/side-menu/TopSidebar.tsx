@@ -18,12 +18,12 @@ export const TopSidebar = () => {
   return (
     <>
       {isSidebarOpen && (
-            <div
-            onClick={() => setIsSidebarOpen(false)} 
-            className={clsx({
-            'fixed inset-0 z-30 transition-all duration-500 ease-out': true,
-            'bg-black bg-opacity-50': isSidebarOpen,
-            'hidden': !isSidebarOpen,
+        <div
+          onClick={() => setIsSidebarOpen(false)} 
+          className={clsx({
+          'fixed inset-0 z-30 transition-all duration-500 ease-out': true,
+          'bg-black bg-opacity-50': isSidebarOpen,
+          'hidden': !isSidebarOpen,
         })}>
             <div className="flex flex-col justify-evenly pl-8 py-4 pr-4 bg-dark-2 text-green-1 h-[14vh] w-[60%] absolute right-0 z-40 ">
             
@@ -39,9 +39,7 @@ export const TopSidebar = () => {
                 <p>Hola,</p>
                 <p> Mauricio Brito</p>
             </div>
-
-            
-
+          
             </div>
             <aside 
                 onClick={(e) => e.stopPropagation()}

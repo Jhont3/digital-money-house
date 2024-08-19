@@ -2,23 +2,14 @@
 import { updateUser } from "@/api";
 import { Subtitle } from "@/components";
 import ArrowIcon from "@/components/ui/svg/ArrowIcon";
+import { UserInputs } from "@/interfaces";
 import { mockAlias, mockCVU } from "@/lib";
-import { errorAlert, handleCopyClipboard, successAlert } from "@/utils";
-import { getCookie } from "cookies-next";
+import { errorAlert, fetchUserData, handleCopyClipboard, successAlert } from "@/utils";
+import { getCookie, setCookie } from "cookies-next";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from 'react-hook-form';
-
-type UserInputs = {
-    dni: number;
-    email: string;
-    firstname: string;
-    lastname: string;
-    password: string;
-    phone: string;
-};
-
 
 export default function AccountPage() {
 
@@ -39,31 +30,54 @@ export default function AccountPage() {
         const userDataCookie = getCookie('userData');
         if (userDataCookie) {
             const parsedUserData = JSON.parse(userDataCookie);
-            setUserDataFromCookie(parsedUserData);
-            
+            setUserDataFromCookie(parsedUserData);            
             reset(parsedUserData);
-        }
-        
+        }        
     }, [reset]);    
 
     // const hasErrors = Object.values(errors).some(error => error);
 
     const onSubmit: SubmitHandler<UserInputs> = async (data)  => {
-        const { password, ...restData } = data;
+
         // Check if password should be excluded
+        const { password, ...restData } = data;
         const submitData = password === "******" || password === "" ? restData : data;    
         console.log(submitData, "data del submit");
-        reset()
+
         try {
-            // updateUser(userData.id, submitData)
+            if (userDataFromCookie) {
+                updateUser(userDataFromCookie.id, submitData)        
+            }
             console.log("entro acaaaaaaaaaaaaaa" );            
+            
+            setCookie('userData', JSON.stringify(submitData), {
+                expires: new Date(Date.now() + 86400 * 1000),
+            });
+            setUserDataFromCookie(submitData)
+            reset()
             successAlert()
             
         } catch (error) {
             errorAlert()
             console.error(error, "form error");
         }
+        reset()
     }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const userData = await fetchUserData();                
+                console.log(userData);
+                setUserDataFromCookie(userData)
+            } catch (error) {                
+                console.error('Error fetching user data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+    
     
     if (!userDataFromCookie) {
         return <div>Cargando...</div>;

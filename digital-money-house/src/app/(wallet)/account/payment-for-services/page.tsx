@@ -1,3 +1,5 @@
 export default function ServicePaymentsPage() {
-    <div>sger</div>
+    return(
+        <div>sger</div>
+    )
 }
