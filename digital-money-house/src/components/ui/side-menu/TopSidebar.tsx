@@ -7,7 +7,7 @@ export const TopSidebar = () => {
   return (
     <>
       {isSidebarOpen && (
-        <div className="flex flex-col p-[3vh] pb-[7vh] bg-dark-2 text-green-1 h-[14vh] w-full absolute z-40 ">
+        <div className="flex flex-col justify-evenly pl-8 py-4 pr-4 bg-dark-2 text-green-1 h-[14vh] w-[60%] absolute right-0 z-40 ">
           
           <button className="flex w-full justify-end right-[3vh] z-50" onClick={()=>setIsSidebarOpen(false)}>
             <Image            
