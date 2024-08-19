@@ -23,7 +23,7 @@ const config: Config = {
         "error-2": "#EE3838",
         "select-1": "#D2FFEC",
         "button-1": "#CECECE",
-      }
+      },
     },
   },
   plugins: [],

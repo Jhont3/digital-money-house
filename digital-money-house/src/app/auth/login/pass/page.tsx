@@ -71,6 +71,10 @@ export default function LoginPassPage() {
         expires: new Date(Date.now() + 86400 * 1000),
       });
 
+      setCookie('authToken', data.token, {
+        expires: new Date(Date.now() + 86400 * 1000),
+      });
+
       onResetForm();
       router.push(`/account`);
 

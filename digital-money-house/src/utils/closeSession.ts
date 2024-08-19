@@ -5,4 +5,5 @@ export function logOut() {
     digitalMoneyApi.post("/logout")
     localStorage.clear();
     deleteCookie('userData');
+    deleteCookie("authToken");
 }

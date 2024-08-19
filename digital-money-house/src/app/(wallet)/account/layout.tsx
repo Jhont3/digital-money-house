@@ -8,12 +8,9 @@ export default function WalletLayout( {children} : { children: React.ReactNode} 
 
   return (
     <>  
-        <TopSidebar/>
         <Navbar isBgGreen={false} onUserPage={true} />
-        <main className={ clsx({
-          'p-0': isSidebarOpen,
-          'p-4' : !isSidebarOpen,
-        },"min-h-[86vh] bg-gray-1 md:p-0 md:grid md:grid-cols-12 md:gap-0 ")}>
+        <main className={"p-4 min-h-[86vh] bg-gray-1 md:p-0 md:grid md:grid-cols-12 md:gap-0 "}>
+          <TopSidebar/>
           <SideMenu/>
           {children}
         </main>
