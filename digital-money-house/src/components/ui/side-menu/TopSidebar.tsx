@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useSideBarContext } from "@/context";
 import clsx from "clsx";
 import Image from "next/image";
@@ -6,57 +6,83 @@ import { ActiveLink } from "./ActiveLink";
 import { navItems } from "@/lib";
 import { useRouter } from "next/navigation";
 import { logOut } from "@/utils";
+import { useUserStore } from "@/store";
+import { useEffect } from "react";
+import { getCookie } from "cookies-next";
 
 export const TopSidebar = () => {
   const { isSidebarOpen, setIsSidebarOpen } = useSideBarContext();
   const router = useRouter();
 
   const closeSessionAndRedirect = () => {
-    logOut()
-    router.push('/')
-  }
+    logOut();
+    router.push("/");
+  };
+
+  const { userData, setUserInfo } = useUserStore()
+
+  useEffect(() => {
+    const userDataCookie = getCookie('userData');
+    if (userDataCookie) {
+        const parsedUserData = JSON.parse(userDataCookie);
+        setUserInfo(parsedUserData);
+    }
+  }, [isSidebarOpen, setUserInfo])
+
   return (
-    <>
+    <>      
       {isSidebarOpen && (
         <div
-          onClick={() => setIsSidebarOpen(false)} 
-          className={clsx({
-          'fixed inset-0 z-30 transition-all duration-500 ease-out': true,
-          'bg-black bg-opacity-50': isSidebarOpen,
-          'hidden': !isSidebarOpen,
-        })}>
-            <div className="flex flex-col justify-evenly pl-8 py-4 pr-4 bg-dark-2 text-green-1 h-[14vh] w-[60%] absolute right-0 z-40 ">
+          onClick={() => setIsSidebarOpen(false)}
+          className={clsx(
+            "fixed inset-0 z-20 bg-black transition-opacity duration-500",
+            {
+              "opacity-50": isSidebarOpen,
+              "opacity-0": !isSidebarOpen,
+            }
             
-            <button className="flex w-full justify-end right-[3vh] z-50" onClick={()=>setIsSidebarOpen(false)}>
-                <Image            
-                src="/imgs/close.png"
-                alt="close icon"
-                width={14}
-                height={14}
-                />
-            </button>
-            <div className="text-green-1 font-bold">
-                <p>Hola,</p>
-                <p> Mauricio Brito</p>
-            </div>
-          
-            </div>
-            <aside 
-                onClick={(e) => e.stopPropagation()}
-                className={clsx({
-                'absolute right-0 p-8 mt-[14vh]': true,
-                'w-[60%]': isSidebarOpen,
-                'w-full': !isSidebarOpen,
-                }, "flex flex-col h-full bg-green-1 gap-4 md:col-span-3 md:p-8 md:py-12 lg:py-14 xl:col-span-2")}>
-                {
-                    navItems.map( navItem => (
-                        <ActiveLink key={navItem.path} { ...navItem }  />
-                    ))
-                }
-                <button className="text-black text-left" onClick={closeSessionAndRedirect}>Cerrar sesión</button>
-            </aside>
-        </div>
+          )}
+        />
       )}
+      
+      <div
+        className={clsx(
+          "fixed top-0 right-0 z-30 h-full w-[60%] bg-green-1 transition-transform duration-500 ease-out",
+          {
+            "translate-x-0": isSidebarOpen,
+            "translate-x-full": !isSidebarOpen,
+          }
+        )}
+      >
+        <div className="flex flex-col justify-evenly pl-8 py-4 pr-4 bg-dark-2 text-green-1 h-[14vh] w-full">
+          <button
+            className="flex w-full justify-end z-50"
+            onClick={() => setIsSidebarOpen(false)}
+          >
+            <Image
+              src="/imgs/close.png"
+              alt="close icon"
+              width={14}
+              height={14}
+            />
+          </button>
+          <div className="text-green-1 font-bold">
+            <p>Hola,</p>
+            <p>{userData.firstname} {userData.lastname}</p>
+          </div>
+        </div>
+        <aside className="flex flex-col h-full p-8 gap-4">
+          {navItems.map((navItem) => (
+            <ActiveLink key={navItem.path} {...navItem} />
+          ))}
+          <button
+            className="text-black text-left"
+            onClick={closeSessionAndRedirect}
+          >
+            Cerrar sesión
+          </button>
+        </aside>
+      </div>
     </>
   );
 };
