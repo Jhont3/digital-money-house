@@ -23,7 +23,17 @@ export async function createCard( accountID: number, newCard: {}) {
 
 export async function getCardByID( accountID: number, cardID: number ) {
     try {
-        const response = await digitalMoneyApi.get("/accounts/" + accountID + "/cards" + cardID);
+        const response = await digitalMoneyApi.get("/accounts/" + accountID + "/cards/" + cardID);
+        return response.data;
+    } catch (error) {
+        console.error("Failed to do it!", error);
+        throw new Error('Failed to get card by card ID');
+    }
+}
+
+export async function deleteCardByID( accountID: number, cardID: number ) {
+    try {
+        const response = await digitalMoneyApi.delete("/accounts/" + accountID + "/cards/" + cardID);
         return response.data;
     } catch (error) {
         console.error("Failed to do it!", error);

@@ -215,7 +215,7 @@ export default function AccountPage() {
                     <div className="flex justify-between">
                         <p className=" text-green-1 font-bold text-xl">CVU</p>
                         <span className="flex items-center">
-                            <Image src="/imgs/copy.png" alt="icon" width={24} height={24}/>
+                            <Image src="/imgs/copy.png" alt="icon" width={24} height={24} onClick={() => {handleCopyClipboard(mockCVU)}}/>
                         </span>
                     </div>
 
@@ -238,7 +238,7 @@ export default function AccountPage() {
                     <div className="flex justify-between md:col-span-2 lg:col-span-3">
                         <p className=" text-green-1 font-bold text-xl">Alias</p>
                         <span className="flex items-center md:justify-end">
-                            <Image src="/imgs/copy.png" alt="icon" width={24} height={24}/>
+                            <Image src="/imgs/copy.png" alt="icon" width={24} height={24} onClick={() => {handleCopyClipboard(mockAlias)}}/>
                         </span>
                     </div>
 

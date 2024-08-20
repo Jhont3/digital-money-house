@@ -1,16 +1,47 @@
 "use client"
-import { Subtitle } from "@/components";
-import {  } from "@/lib";
+import { getAllCardsByAccount } from "@/api";
+import { CreditCard, Subtitle } from "@/components";
+import { useAccountCardsStore } from "@/store";
+import { getCookie, setCookie } from "cookies-next";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
 
 export default function MyCardsPage() {
 
+    const { cards, setCards } = useAccountCardsStore() 
+
     useEffect(() => {
-      
-    }, [])
+        const fetchCards = async () => {
+          try {
+            const accountId = Number(localStorage.getItem("account-id"));
+            const cardsByAccount = await getAllCardsByAccount(accountId);
     
+            if (cardsByAccount) {
+              setCookie("cardsData", JSON.stringify(cardsByAccount), {
+                expires: new Date(Date.now() + 86400 * 1000),
+              });
+              setCards(cardsByAccount);
+            }
+          } catch (error) {
+            console.error("Failed to fetch cards", error);
+          }
+        };
+    
+        fetchCards();
+      }, [setCards]); 
+  
+    useEffect(() => {
+        const cardsDataCookie = getCookie("cardsData");
+        if (cardsDataCookie) {
+          const parsedCardsData = JSON.parse(cardsDataCookie as string);
+          setCards(parsedCardsData);
+        }
+    }, [setCards]);
+    
+    if (!cards) {
+        return <div>Cargando...</div>;
+    }
 
     return(
         <section className="flex flex-col gap-4 md:col-span-9 md:p-12 md:py-12 lg:py-8 md:gap-5">
@@ -44,44 +75,7 @@ export default function MyCardsPage() {
             <p className="text-dark-1 font-bold">Tus tarjetas</p>
             <hr className="md:border-t md:border-transparent md:border-black"/>
 
-            <div className="flex justify-between py-4">
-                <p className="flex items-center text-sm gap-2  text-dark-1 md:text-base md:gap-3">        
-                    <span className="">
-                        <Image src="/imgs/greenCircle.png" alt="icon" width={24} height={24} className="md:w-8 md:md:h-8"/>
-                    </span>
-                    Terminada en 4067
-                </p>
-                <button onClick={()=>{}} className="flex items-start">
-                    <span className="text-xs text-black font-bold text-end md:text-base">Eliminar</span>
-                </button>
-            </div>            
-            <hr className="md:border-t md:border-transparent md:border-black"/>
-
-            <div className="flex justify-between py-4">
-                <p className="flex items-center text-sm gap-2  text-dark-1 md:text-base md:gap-3">        
-                    <span className="">
-                        <Image src="/imgs/greenCircle.png" alt="icon" width={24} height={24} className="md:w-8 md:md:h-8"/>
-                    </span>
-                    Terminada en 4067
-                </p>
-                <button onClick={()=>{}} className="flex items-start">
-                    <span className="text-xs text-black font-bold text-end md:text-base">Eliminar</span>
-                </button>
-            </div>            
-            <hr className="md:border-t md:border-transparent md:border-black"/>
-
-            <div className="flex justify-between py-4">
-                <p className="flex items-center text-sm gap-2  text-dark-1 md:text-base md:gap-3">        
-                    <span className="">
-                        <Image src="/imgs/greenCircle.png" alt="icon" width={24} height={24} className="md:w-8 md:md:h-8"/>
-                    </span>
-                    Terminada en 4067
-                </p>
-                <button onClick={()=>{}} className="flex items-start">
-                    <span className="text-xs text-black font-bold text-end md:text-base">Eliminar</span>
-                </button>
-            </div>            
-            <hr className="md:border-t md:border-transparent md:border-black"/>
+            <CreditCard/>
 
         </article>
 
