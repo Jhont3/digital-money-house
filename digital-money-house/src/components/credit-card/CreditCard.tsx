@@ -7,7 +7,7 @@ export const CreditCard = () => {
   const { cards, removeCard } = useAccountCardsStore();
   const accountId = Number(localStorage.getItem("account-id"));
 
-  console.log(cards, "cards in store")
+  // console.log(cards, "cards in store")
 
   const handleDeleteCard = async (cardId: number) => {
     try {

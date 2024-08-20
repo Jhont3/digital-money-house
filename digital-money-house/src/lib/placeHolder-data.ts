@@ -19,3 +19,11 @@ export const navItems = [
     { path: '/account/payment-for-services', text: 'Pagar Servicios' },
     { path: '/account/my-cards', text: 'Tarjetas' },
 ]
+
+export const initialCreditCardForm = {
+    fullCardNumber: "",
+    firstAndSecondName: "",
+    expirationDate: "",
+    securityCode: "",
+}
+  
