@@ -6,7 +6,7 @@ interface SubtitleProps {
 
 export const Subtitle = ({ text }: SubtitleProps) => {
     return (
-        <p className="flex md:hidden">
+      <p className="flex md:hidden">
         <span className="flex items-center">
           <Image src="/imgs/greyArrow.png" alt="icon" width={12} height={12}/>
         </span> &nbsp;

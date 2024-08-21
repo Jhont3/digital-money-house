@@ -9,3 +9,4 @@ export * from './ui/svg/ArrowIcon';
 export * from './ui/subtitle/Subtitle';
 
 export * from './credit-card/CreditCard';
+export * from './cvu-alias/CvuAndAlias';
