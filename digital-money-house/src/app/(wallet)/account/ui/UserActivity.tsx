@@ -1,70 +1,19 @@
-"use client"
-import { useEffect, useMemo, useState } from "react";
+
 import Image from "next/image";
-import { fetchAccountData, fetchUserActivities, formatNumberToARS } from "@/utils";
+import { formatNumberToARS } from "@/utils";
 import { useAccountStore } from "@/store";
 import { getDayOfWeek } from '../../../../utils/getDay';
 import { Activity, UserActivityProps } from "@/interfaces";
 
-export function UserActivity({ itemsPerPage, showPagination }: UserActivityProps) {
-  const { accountData, setAccountInfo } = useAccountStore();
-  const [ userActivities, setUserActivities ] = useState<Activity[] | null>(null);
-  const [ currentPage, setCurrentPage ] = useState(1);
-  const [ loading, setLoading ] = useState(true);
+export function UserActivity({ itemsPerPage, showPagination, allActivities, sortedTenActivities }: UserActivityProps) {
 
-  useEffect(() => {
-    const loadUserActivities = async () => {
-      try {
-        let accountId = 0
-        if (accountData.id === 0) {
-            const data = await fetchAccountData();
-            setAccountInfo(data);
-            accountId = data.accountData.id
-        }
-
-        if (accountId === 0) {
-            const accountIdFromStorage = localStorage.getItem('account-id');
-            if (accountIdFromStorage) {
-                accountId = parseInt(accountIdFromStorage);
-            }
-        }
-
-        const activities = await fetchUserActivities(accountId);
-        setUserActivities(activities);
-      } catch (error) {
-        console.error("Error fetching user activities:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadUserActivities();
-  }, [accountData, setAccountInfo]);
-
-  // Sort and paginate activities
-  const paginatedActivities = useMemo(() => {
-    if (!userActivities) return [];
-
-    const sortedActivities = userActivities.toSorted((a, b) => new Date(b.dated).getTime() - new Date(a.dated).getTime());
-
-    const start = (currentPage - 1) * itemsPerPage;
-    const end = start + itemsPerPage;
-    return sortedActivities.slice(start, end);
-  }, [userActivities, currentPage, itemsPerPage]);
-
-  // Calculate total pages
-  const totalPages = useMemo(() => {
-    if (!userActivities) return 0;
-    return Math.ceil(userActivities.length / itemsPerPage);
-  }, [userActivities, itemsPerPage]);
-
-  if (loading) {
-    return <p>Loading...</p>;
+  if (!allActivities) {
+    return <div>Cargando...</div>
   }
 
   return (
     <>
-      {paginatedActivities.map((activity, i) => (
+      {allActivities.map((activity, i) => (
         <div className="flex justify-between" key={`${activity.id}${i}`}>
           <p className="flex items-center text-sm gap-2 text-dark-1 md:text-base md:gap-3">
             <span>
@@ -85,7 +34,7 @@ export function UserActivity({ itemsPerPage, showPagination }: UserActivityProps
 
       <hr className="md:border-t md:border-transparent md:border-black" />
 
-      {showPagination && (
+      {/* {showPagination && (
         <div className="flex justify-center gap-2 mt-4">
           {Array.from({ length: totalPages }, (_, i) => (
             <button
@@ -96,8 +45,8 @@ export function UserActivity({ itemsPerPage, showPagination }: UserActivityProps
               {i + 1}
             </button>
           ))}
-        </div>
-      )}
+        </div> */}
+      {/* )} */}
     </>
   );
 }

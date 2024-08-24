@@ -10,6 +10,8 @@ export interface Activity {
 }
 
 export interface UserActivityProps {
-    itemsPerPage: number;
-    showPagination: boolean;
+    itemsPerPage?: number;
+    showPagination?: boolean;
+    allActivities?: Activity[]; 
+    sortedTenActivities?: Activity[]
 }

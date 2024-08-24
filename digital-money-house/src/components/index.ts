@@ -10,3 +10,4 @@ export * from './ui/subtitle/Subtitle';
 
 export * from './credit-card/CreditCard';
 export * from './cvu-alias/CvuAndAlias';
+export * from './profile/ProfileForm';

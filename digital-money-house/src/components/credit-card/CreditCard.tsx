@@ -1,30 +1,31 @@
-import { deleteCardByID } from "@/api";
+
 import { CardData } from "@/interfaces";
 import { useAccountCardsStore } from "@/store";
 import Image from "next/image";
 
 export const CreditCard = () => {
-  const { cards, removeCard } = useAccountCardsStore();
-  const accountId = Number(localStorage.getItem("account-id"));
+  // const { cards, removeCard } = useAccountCardsStore();
+  // const accountId = Number(localStorage.getItem("account-id"));
 
   // console.log(cards, "cards in store")
 
-  const handleDeleteCard = async (cardId: number) => {
-    try {
-      await deleteCardByID(accountId, cardId);
-      removeCard(cardId);
-    } catch (error) {
-      console.error("Failed to delete the card:", error);      
-    }
-  };
+  // const handleDeleteCard = async (cardId: number) => {
+  //   try {
+     
+  //     removeCard(cardId);
+  //   } catch (error) {
+  //     console.error("Failed to delete the card:", error);      
+  //   }
+  // };
 
-  if (cards.length < 1) {
-    return ( <p> No tienes tarjetas asociadas </p> )
-  }
+  // if (cards.length < 1) {
+  //   return ( <p> No tienes tarjetas asociadas </p> )
+  // }
 
   return (
     <>
-      {cards.map((card: CardData) => (
+    <div>CreditCard</div>
+      {/* {cards.map((card: CardData) => (
         <>
         <div key={card.id} className="flex justify-between py-4">
           <p className="flex items-center text-sm gap-2 text-dark-1 md:text-base md:gap-3">
@@ -47,7 +48,7 @@ export const CreditCard = () => {
         </div>
         <hr className="md:border-t md:border-transparent md:border-black" />
         </>
-      ))}
+      ))} */}
     </>
   );
 };

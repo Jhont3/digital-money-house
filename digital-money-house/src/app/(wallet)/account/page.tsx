@@ -4,8 +4,17 @@ import ActualCash from "./ui/ActualCash";
 import { SearchForm } from "./ui";
 import { UserActivity } from "./ui/UserActivity";
 import { Subtitle } from "@/components";
+import { getAcountInfo, getActivity } from "@/services";
+import { cookies } from "next/headers";
 
-export default function ProfilePage() {
+export default async function AccountPage() {
+
+  const token = cookies().get('authToken')?.value || '';
+	const accountInfo = await getAcountInfo(token);
+	const activities = await getActivity(accountInfo.id, token);
+
+	// Mostar solo las primeras 10 primeras actividades
+	const activitiesShowByOrder = activities.toReversed().slice(0, 10);
 
   return (
     <section className="flex flex-col gap-4 md:col-span-9 md:p-12 md:py-14 lg:px-20 lg:py-14 xl:col-span-10">
@@ -19,7 +28,7 @@ export default function ProfilePage() {
           <Link href={'/account/profile'}><span>Ver CVU</span></Link>
         </p>
         <p className="text-white md:pl-2 md:font-bold">Dinero disponible</p>
-        <ActualCash/>
+        <ActualCash amount={accountInfo.available_amount} />
       </div>
 
       <div className="flex flex-col gap-4 md:text-2xl lg:flex-row  ">
@@ -44,7 +53,7 @@ export default function ProfilePage() {
         <p className="text-dark-1 font-bold">Tu actividad</p>
         <hr className="md:border-t md:border-transparent md:border-black"/>
 
-        <UserActivity itemsPerPage={4} showPagination={false}/>
+        <UserActivity itemsPerPage={4} showPagination={false} allActivities={activities}/>
 
         <Link href={'/account/my-activity'} className="text-black font-bold text-[12px] flex justify-between md:text-base">
           <span className="">Ver toda tu actividad</span>

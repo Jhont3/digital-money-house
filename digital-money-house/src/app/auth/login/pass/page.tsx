@@ -2,7 +2,6 @@
 "use client"
 import { useLogInContext } from '@/context';
 import { useFormC } from '@/hooks';
-import { fetchAccountData, fetchUserData } from '@/utils';
 import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
@@ -61,15 +60,6 @@ export default function LoginPassPage() {
 
       localStorage.setItem("token", data.token);
 
-      const accountData = await fetchAccountData()
-      localStorage.setItem("account-id", accountData.id);
-
-      const userData = await fetchUserData()
-      localStorage.setItem("user-id", userData.id);
-
-      setCookie('userData', JSON.stringify(userData), {
-        expires: new Date(Date.now() + 86400 * 1000),
-      });
 
       setCookie('authToken', data.token, {
         expires: new Date(Date.now() + 86400 * 1000),

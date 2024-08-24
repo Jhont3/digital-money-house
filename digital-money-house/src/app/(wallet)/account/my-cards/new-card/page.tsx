@@ -1,5 +1,5 @@
 "use client"
-import { createCard } from "@/api";
+
 import { CardForm, CreditCardSubmit } from "@/interfaces";
 import { initialCreditCardForm } from "@/lib";
 import { useAccountCardsStore } from "@/store";
@@ -37,11 +37,7 @@ export default function NewCardPage() {
   const createCreditCard = async ( newCard: CreditCardSubmit ) => {
     try {
       const accountId = Number(localStorage.getItem("account-id"));
-      const cardCreated = await createCard(accountId, newCard);
 
-      if (cardCreated) {
-        addCard(cardCreated);
-      }
       successAlert("Nueva tarjeta de crédito guardada satisfactoriamente")
 
     } catch (error) {
