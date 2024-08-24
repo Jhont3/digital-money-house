@@ -1,6 +1,6 @@
 import { CvuAndAlias, ProfileForm, Subtitle } from "@/components";
 import ArrowIcon from "@/components/ui/svg/ArrowIcon";
-import { getAcountInfo, getUserInfo } from "@/services";
+import { getAccountInfo, getUserInfo } from "@/services";
 import { errorAlert, successAlert } from "@/utils";
 import { cookies } from "next/headers";
 import Link from "next/link";
@@ -8,7 +8,7 @@ import Link from "next/link";
 export default async function ProfilePage() {
 
     const token = cookies().get('authToken')?.value || '';
-    const accountInfo = await getAcountInfo(token);
+    const accountInfo = await getAccountInfo(token);
 	const profileInfo = await getUserInfo(accountInfo.user_id, token, "user-info");
 
     return(

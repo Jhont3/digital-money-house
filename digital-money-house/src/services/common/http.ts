@@ -26,6 +26,7 @@ export class HttpError extends Error {
  */
 const handleResponse = async (response: Response): Promise<unknown> => {
   if (!response.ok) {
+    console.error(`HTTP error! Status: ${response.status}, URL: ${response.url}`);
     throw new HttpError(response);
   }
   return response.json();

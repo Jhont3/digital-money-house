@@ -4,13 +4,13 @@ import ActualCash from "./ui/ActualCash";
 import { SearchForm } from "./ui";
 import { UserActivity } from "./ui/UserActivity";
 import { Subtitle } from "@/components";
-import { getAcountInfo, getActivity } from "@/services";
+import { getAccountInfo, getActivity } from "@/services";
 import { cookies } from "next/headers";
 
 export default async function AccountPage() {
 
   const token = cookies().get('authToken')?.value || '';
-	const accountInfo = await getAcountInfo(token);
+	const accountInfo = await getAccountInfo(token);
 	const activities = await getActivity(accountInfo.id, token);
 
 	// Mostar solo las primeras 10 primeras actividades

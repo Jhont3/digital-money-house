@@ -1,9 +1,15 @@
 import { CreditCard, Subtitle } from "@/components";
+import { getAccountInfo, getCards } from "@/services";
+import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function MyCardsPage() {
+export default async function MyCardsPage() {
 
+    const token = cookies().get('authToken')?.value || '';
+    const accountInfo = await getAccountInfo(token);
+    const cardsUser = await getCards(accountInfo.user_id, token);
+    
     return(
 
         <section className="flex flex-col gap-4 md:col-span-9 md:p-12 md:py-12 lg:py-8 md:gap-5">
@@ -37,7 +43,7 @@ export default function MyCardsPage() {
             <p className="text-dark-1 font-bold">Tus tarjetas</p>
             <hr className="md:border-t md:border-transparent md:border-black"/>
 
-            <CreditCard/>
+            <CreditCard cardsUser={cardsUser}/>
 
         </article>
 
