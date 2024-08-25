@@ -1,43 +1,45 @@
-"use client"
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import clsx from 'clsx';
-import { useSideBarContext } from "@/context";
-import { useUserStore } from "@/store/user-data";
-import { useEffect } from "react";
-import { getCookie } from "cookies-next";
+import { useEffect, useState } from "react";
+import { getCookie } from 'cookies-next';
+import { getAccountInfo, getUserInfo } from "@/services";
+import { NavInUserPage } from "./NavInUserPage";
 
 interface NavbarProps {
-  isBgGreen : boolean;
+  isBgGreen: boolean;
   loginBtnOn?: boolean;
   onUserPage: boolean;
 }
 
-export const Navbar: React.FC<NavbarProps> = ( {isBgGreen, loginBtnOn, onUserPage} ) => {
-
-  const { setIsSidebarOpen } = useSideBarContext() 
-  const { userData, setUserInfo } = useUserStore()
-
-  useEffect(() => {
-    const userDataCookie = getCookie('userData');
-    if (userDataCookie) {
-        const parsedUserData = JSON.parse(userDataCookie);
-        setUserInfo(parsedUserData);
-    }
-  }, [onUserPage, setUserInfo])
+export const Navbar: React.FC<NavbarProps> = ({ isBgGreen, loginBtnOn, onUserPage }) => {
+  const [profileInfo, setProfileInfo] = useState<any>(null);
+  console.log(profileInfo);
   
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const token = getCookie('authToken') as string || '';
+      const accountInfo = await getAccountInfo(token);
+      const profileInfo = await getUserInfo(accountInfo.user_id, token);
+      setProfileInfo(profileInfo);
+    };
+
+    fetchData();
+  }, []);
+
   return (
-    <nav className={ clsx({
+    <nav className={clsx({
       'bg-dark-1': !isBgGreen,
       'bg-green-1': isBgGreen,
       'text-white': isBgGreen,
-    }, 
-    "flex justify-between items-center w-full h-[7vh] lg:max-h-[7vh] ")}>
-
+    },
+      "flex justify-between items-center w-full h-[7vh] lg:max-h-[7vh]"
+    )}>
       {/* Page logo */}
-      <div className="p-2" >
-        <Link href="/" >
+      <div className="p-2">
+        <Link href="/">
           <Image
             src={'/imgs/simpleLogoGreen.png'}
             alt="logo green digital money house"
@@ -49,66 +51,38 @@ export const Navbar: React.FC<NavbarProps> = ( {isBgGreen, loginBtnOn, onUserPag
       </div>
 
       {/* Normal login/register links */}
-      {!onUserPage && <div className={ clsx({
-        'hidden': isBgGreen,
-      },
-       "flex justify-end gap-2 p-2 w-[70%] md:w-1/3 ")
-       }>
-        <Link
-          className="bg-dark-1 text-green-1 font-bold text-xs border border-green-1 py-2 px-6 rounded text-center align-middle w-1/2 md:w-auto "
-          href="/auth/login"
-        >
-          Ingresar
-        </Link>
-        <Link
-          className="bg-green-1  text-dark-2 font-bold text-xs border-green-1 py-2 px-1 rounded text-center w-1/2 lg:max-w-28"
-          href="/auth/new-account"
-        >
-          Crear cuenta
-        </Link>
-      </div>}
-      
+      {!onUserPage && (
+        <div className={clsx({
+          'hidden': isBgGreen,
+        }, "flex justify-end gap-2 p-2 w-[70%] md:w-1/3")}>
+          <Link
+            className="bg-dark-1 text-green-1 font-bold text-xs border border-green-1 py-2 px-6 rounded text-center align-middle w-1/2 md:w-auto"
+            href="/auth/login"
+          >
+            Ingresar
+          </Link>
+          <Link
+            className="bg-green-1 text-dark-2 font-bold text-xs border-green-1 py-2 px-1 rounded text-center w-1/2 lg:max-w-28"
+            href="/auth/new-account"
+          >
+            Crear cuenta
+          </Link>
+        </div>
+      )}
 
-      {/* User pages nav - Hamburger */}
-      {onUserPage && 
-      <div className="text-black font-bold flex gap-2 pr-3 "> 
-        
-        <Link href="/account" className="inline-flex bg-green-1 rounded-lg w-[39px] h-8 justify-center items-center ">
-          {userData?.firstname.charAt(0)}{userData?.lastname.charAt(0)}
-        </Link>
+      {onUserPage && profileInfo && <NavInUserPage profileInfo={profileInfo} />}
 
-        <Image
-            src={'/imgs/hamburguer.png'}
-            alt="logo green digital money house"
-            className="p-1 object-cover md:hidden"
-            width="40"
-            height="40"
-            onClick={()=>{setIsSidebarOpen(true)}}
-        />
-
-        <Link href={'/account'}>
-          <p className="hidden md:inline-flex text-white font-bold items-center h-full">
-            Hola, {userData?.firstname} {userData?.lastname}
-          </p>
-        </Link>
-
-      </div>}
-      
-
-      {/* Opcional only login */}
-      <div className={ clsx({
+      {/* Optional only login */}
+      <div className={clsx({
         'hidden': !loginBtnOn
-      },
-       "flex justify-end gap-2 p-2 w-[70%] md:w-1/3 ")
-       }>
+      }, "flex justify-end gap-2 p-2 w-[70%] md:w-1/3")}>
         <Link
-          className="bg-dark-1 text-white font-bold text-xs border border-green-1 py-2 px-4 rounded text-center align-middle md:w-auto "
+          className="bg-dark-1 text-white font-bold text-xs border border-green-1 py-2 px-4 rounded text-center align-middle md:w-auto"
           href="/auth/login"
         >
-          Iniciar sesion
+          Iniciar sesión
         </Link>
       </div>
-
     </nav>
   );
 };

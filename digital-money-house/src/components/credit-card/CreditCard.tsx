@@ -5,9 +5,6 @@
 
   export const CreditCard = ({cardsUser}:any) => {
 
-    console.log(cardsUser, "cards in store")
-
-
     if (cardsUser.length < 1) {
       return ( <p> No tienes tarjetas asociadas </p> )
     }
@@ -29,7 +26,7 @@
               </span>
               Terminada en {card.number_id.toString().slice(-4)}
             </p>
-            <button onClick={() => {}} className="flex items-start">
+            <button className="flex items-start">
               <span className="text-xs text-black font-bold text-end md:text-base">
                 Eliminar
               </span>

@@ -7,6 +7,7 @@ import { Activity, UserActivityProps } from "@/interfaces";
 
 export function UserActivity({ itemsPerPage, showPagination, allActivities, sortedTenActivities }: UserActivityProps) {
 
+
   if (!allActivities) {
     return <div>Cargando...</div>
   }

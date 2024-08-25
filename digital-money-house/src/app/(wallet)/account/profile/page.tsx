@@ -9,7 +9,7 @@ export default async function ProfilePage() {
 
     const token = cookies().get('authToken')?.value || '';
     const accountInfo = await getAccountInfo(token);
-	const profileInfo = await getUserInfo(accountInfo.user_id, token, "user-info");
+	const profileInfo = await getUserInfo(accountInfo.user_id, token);
 
     return(
         <section className="flex flex-col gap-4 md:col-span-9 md:p-12 md:py-12 lg:py-8 md:gap-5">
