@@ -9,7 +9,9 @@ export default async function MyCardsPage() {
     const token = cookies().get('authToken')?.value || '';
     const accountInfo = await getAccountInfo(token);
     console.log(accountInfo,"accountinfo en cards")
-    const cardsUser = await getCards(accountInfo.id, token, "user-info");
+
+    const cardsUser = await getCards(accountInfo.id, token);
+    console.log(cardsUser, "cards en cards")
     
     return(
 

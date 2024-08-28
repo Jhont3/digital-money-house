@@ -17,6 +17,8 @@ export async function getCards(id: number, token: string, options = {}): Promise
 }
 
 export async function postCards(id: number, body: any, options = {}): Promise<any> {
+	console.log( body, "body en post");
+	
 	return httpPost(`/accounts/${id}/cards`, body, {
 		headers: {
 			"Content-Type": "application/json",

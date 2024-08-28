@@ -186,9 +186,9 @@ export const httpPatch = async (endpoint: string, body: object, options: HttpGet
 const getUserConfigHeaders = (): HeadersInit => {
   const headers: HeadersInit = {};
   if (typeof window !== 'undefined' && !headers.Authorization) {
-    const token = localStorage.getItem('acc_token');
+    const token = localStorage.getItem('token');
     if (token) {
-      headers.Authorization = JSON.parse(token);
+      headers.Authorization = token;
     }
   }
 
