@@ -25,7 +25,7 @@ export default async function ProfilePage() {
                 </span> 
             </Link>
 
-            <CvuAndAlias/>
+            <CvuAndAlias accountInfo={accountInfo}/>
         </section>
     )
 }
