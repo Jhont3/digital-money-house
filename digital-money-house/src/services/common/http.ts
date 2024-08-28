@@ -54,7 +54,10 @@ export const httpGet = async (endpoint: string, token: string , options: HttpGet
   const response = await fetch(`${API_URL}${endpoint}`, {
     ...options,
     method: 'GET',
-    headers
+    headers,
+    next: {
+      tags: ["revalidate-all"],
+    }
   });
   return handleResponse(response);
 };
