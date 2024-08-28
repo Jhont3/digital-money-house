@@ -19,15 +19,16 @@ export const Navbar: React.FC<NavbarProps> = ({ isBgGreen, loginBtnOn, onUserPag
   
 
   useEffect(() => {
-    const fetchData = async () => {
-      const token = getCookie('authToken') as string || '';
-      const accountInfo = await getAccountInfo(token);
-      const profileInfo = await getUserInfo(accountInfo.user_id, token);
-      setProfileInfo(profileInfo);
+    if (onUserPage) {
+      const fetchData = async () => {
+        const token = getCookie('authToken') as string || '';
+        const accountInfo = await getAccountInfo(token);
+        const profileInfo = await getUserInfo(accountInfo.user_id, token);
+        setProfileInfo(profileInfo);
+      }
+      fetchData();
     };
-
-    fetchData();
-  }, []);
+  }, [onUserPage]);
 
   return (
     <nav className={clsx({

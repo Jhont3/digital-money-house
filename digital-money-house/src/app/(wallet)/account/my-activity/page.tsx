@@ -2,8 +2,15 @@ import { Subtitle } from "@/components";
 import { UserActivity } from "../ui/UserActivity";
 import Image from "next/image";
 import { SearchForm } from "../ui";
+import { cookies } from "next/headers";
+import { getAccountInfo, getActivity } from "@/services";
 
-export default function MyActivityPage() {
+export default async function MyActivityPage() {
+
+    const token = cookies().get('authToken')?.value || '';
+	const accountInfo = await getAccountInfo(token);
+	const activities = await getActivity(accountInfo.id, token);
+
     return (
     <section className="flex flex-col gap-4 md:col-span-9 md:p-12 md:py-12 lg:py-8 md:gap-5">
 
@@ -25,7 +32,7 @@ export default function MyActivityPage() {
 
             <hr className="md:border-t md:border-transparent md:border-black"/>
 
-            <UserActivity itemsPerPage={9} showPagination/>
+            <UserActivity itemsPerPage={10} showPagination allActivities={activities}/>
 
         </article>
      
