@@ -4,6 +4,6 @@ export function errorAlert (text?: string) {
     Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: text || "Wrong data!"          
+        text: text || "Something went wrong"          
     });
 }

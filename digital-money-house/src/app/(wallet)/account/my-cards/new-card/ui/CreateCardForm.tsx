@@ -4,20 +4,19 @@ import { initialCreditCardForm } from "@/lib";
 import { postCards } from "@/services";
 import { errorAlert, successAlert } from "@/utils";
 import clsx from "clsx";
-import { revalidateTag } from "next/cache";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { SubmitHandler, useForm, useWatch } from "react-hook-form";
 
-export function CreateCardForm( { AccountID }: any ) {
+export function CreateCardForm( { accountID, cardsUser }: any ) {
     
     const { register, handleSubmit, reset, formState: { errors}, setError, control  } = 
     useForm<CardForm>( {defaultValues: initialCreditCardForm, mode: 'onChange', } );
     
     const firstAndSecondName = useWatch({ control, name: 'firstAndSecondName' });
     const expirationDate = useWatch({ control, name: 'expirationDate' });
-    const fullCardNumber = useWatch({ control, name: 'fullCardNumber' });
+    const fullCardNumber = useWatch({ control, name: 'fullCardNumber' });;
     
     const hasErrors = Object.values(errors).some(error => error);
 
@@ -30,7 +29,6 @@ export function CreateCardForm( { AccountID }: any ) {
         setError('securityCode', { type: 'manual', message: 'Initial error message' });
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, []);
-
 
       const getCardNumberDisplay = () => {
         if (fullCardNumber) {          
@@ -58,37 +56,36 @@ export function CreateCardForm( { AccountID }: any ) {
         );
     };
 
-  const onSubmit: SubmitHandler<CardForm> = async (data)  => {
-    
-    try {      
-      console.log(data, "1 - data");
-      // if (hasErrors) return;  
-      let normalizedData = { 
-        number_id: Number(data.fullCardNumber),
-        first_last_name: data.firstAndSecondName,
-        expiration_date: data.expirationDate,
-        cod: Number(data.securityCode)
-      }
-      console.log(normalizedData, "normalized data credit card");
+    const onSubmit: SubmitHandler<CardForm> = async (data)  => {
       
-      await postCards(AccountID, normalizedData)
+      try {
+        
+        if (cardsUser.length > 9) {
+          errorAlert("Puedes tener maximo 10 tarjetas de credito")
+          return;
+        }
+        
+        let normalizedData = { 
+          number_id: Number(data.fullCardNumber),
+          first_last_name: data.firstAndSecondName,
+          expiration_date: data.expirationDate,
+          cod: Number(data.securityCode)
+        }
+        
+        await postCards(accountID, normalizedData)
+        await fetch('/api/revalidate?tag=revalidate-cards');   
+        successAlert("Nueva tarjeta de crédito guardada satisfactoriamente")
+        
+        reset()
+        router.push(`/account/my-cards/`);
+        router.refresh();
 
-      await fetch('/api/revalidate');
-
-      successAlert("Nueva tarjeta de crédito guardada satisfactoriamente")
-
+      } catch (error) {
+        console.error('Error adding a card:', error);
+        errorAlert("Algo falló en la creación de la tarjeta de crédito")
+      }
       reset()
-      router.push(`/account/my-cards/`);
-
-    } catch (error) {
-      console.error('Error adding a card:', error);
-      errorAlert("Algo falló en la creación de la tarjeta de crédito")
     }
-    console.log("final")
-    reset()
-  }
-    
-    console.log(errors, "errores form")
 
     return (
         <section className="flex flex-col gap-4 md:col-span-9 md:p-12 md:py-12 lg:py-8 md:gap-5">
@@ -134,7 +131,7 @@ export function CreateCardForm( { AccountID }: any ) {
           {/* form card area */}
           <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-6 items-center md:gap-4 lg:gap-6">
               <div className="flex flex-col gap-6 min-w-[300px] md:min-w-[360px] md:gap-4 lg:flex-row lg:gap-6">
-                <input                                                                            
+                <input                                                                                               
                     id="fullCardNumber"                    
                     {...register("fullCardNumber", {required: true, pattern: { value: /^[+]?(\d.*){6,}$/, message: "El teléfono debe contener al menos 6 números" }})}
                     className="p-4 border-[1.6px] outline-none focus:border-select-1 text-black opacity-50 w-full rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.10)]
