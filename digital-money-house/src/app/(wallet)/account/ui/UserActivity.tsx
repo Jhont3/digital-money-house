@@ -10,9 +10,9 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
   const searchParams = useSearchParams();
   const searchQuery = searchParams.get('search')?.toLowerCase() || '';
 
-  const [filteredActivities, setFilteredActivities] = useState(allActivities);
+  const [filteredActivities, setFilteredActivities] = useState(allActivities || []);
   const [currentPage, setCurrentPage] = useState(1);
-  const [ loading, setLoading ] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   // Handle pagination
   const paginatedActivities = useMemo(() => {
@@ -23,7 +23,7 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
 
     const start = (currentPage - 1) * itemsPerPage;
     const end = start + itemsPerPage;
-    return filteredActivities?.slice(start, end);
+    return filteredActivities.slice(start, end);
   }, [filteredActivities, currentPage, itemsPerPage, showPagination]);
 
   // Calculate total pages if pagination is enabled
@@ -36,13 +36,13 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
   useEffect(() => {
     try {
       if (searchQuery) {
-        setFilteredActivities(allActivities.filter(activity => 
+        setFilteredActivities(allActivities?.filter(activity => 
           activity.type.toLowerCase().includes(searchQuery) || 
           activity.origin.toLowerCase().includes(searchQuery) ||
           activity.destination.toLowerCase().includes(searchQuery)
-        ));
+        ) || []);
       } else {
-        setFilteredActivities(allActivities);
+        setFilteredActivities(allActivities || []);
       }
     } catch (error) {
       console.error("Error fetching user activities:", error);
@@ -51,18 +51,17 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
     }
   }, [searchQuery, allActivities]);
 
-
-  if (!filteredActivities?.length) {
-    return <div>No activities found</div>;
-  }
-
   if (loading) {
     return <p>Loading...</p>;
   }
 
+  if (filteredActivities.length === 0) {
+    return <div>No activities found</div>;
+  }
+
   return (
     <>
-      {paginatedActivities?.map((activity, i) => (
+      {paginatedActivities.map((activity, i) => (
         <div className="flex justify-between" key={`${activity.id}${i}`}>
           <p className="flex items-center text-sm gap-2 text-dark-1 md:text-base md:gap-3">
             <span>

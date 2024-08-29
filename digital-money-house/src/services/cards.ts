@@ -1,9 +1,9 @@
 
 import { CardData } from "@/interfaces/cards_";
-import { httpDelete, httpGet, httpPost } from "./common/http";
+import { httpDelete, httpGetRevalidateCards, httpPost } from "./common/http";
 
-export async function getCards(id: number, token: string, options = {}): Promise<CardData[]> {
-	return httpGet(`/accounts/${id}/cards`, token, {
+export async function getCards(id: number, token: string, revalidateTag = "", options = {}): Promise<CardData[]> {
+	return httpGetRevalidateCards(`/accounts/${id}/cards`, token, revalidateTag, {
 		headers: {
 			"Content-Type": "application/json",
 		},
@@ -17,7 +17,7 @@ export async function getCards(id: number, token: string, options = {}): Promise
 }
 
 export async function postCards(id: number, body: any, options = {}): Promise<any> {
-	console.log( body, "body en post");
+
 	
 	return httpPost(`/accounts/${id}/cards`, body, {
 		headers: {

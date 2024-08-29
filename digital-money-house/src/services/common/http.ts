@@ -55,12 +55,29 @@ export const httpGet = async (endpoint: string, token: string , options: HttpGet
     ...options,
     method: 'GET',
     headers,
+  });
+  return handleResponse(response);
+};
+
+export const httpGetRevalidateCards = async (endpoint: string, token: string, revalidateTag: string, options: HttpGetOptions = {}): Promise<unknown> => {
+  const headers = {
+    Authorization: token,
+    ...defaultHeaders,
+    ...getUserConfigHeaders(),
+    ...options.headers,
+  };
+
+  const response = await fetch(`${API_URL}${endpoint}`, {
+    ...options,
+    method: 'GET',
+    headers,
     next: {
-      tags: ["revalidate-all"],
+      tags: ["revalidate-cards"],
     }
   });
   return handleResponse(response);
 };
+
 
 export const httpGetRevalidate = async (endpoint: string, token: string, revalidateTag: string, options: HttpGetOptions = {}): Promise<unknown> => {
   const headers = {
