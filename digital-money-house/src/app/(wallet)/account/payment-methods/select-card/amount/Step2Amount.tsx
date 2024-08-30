@@ -84,7 +84,7 @@ export function Step2Amount( {}: any ) {
 
             <div className="pt-3">
                 <h2 className="font-bold text-xl text-green-1 pb-7 md:text-2xl">
-                    ¿Cuánto quieres ingresar a la cuenta?
+                     Revisá que está  todo bien
                 </h2>
 
                 <hr className="border-t  border-gray-[#cecece]] "/>
