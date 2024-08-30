@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 import { setCookie } from 'cookies-next';
+import { getAccountInfo } from '@/services';
 
 
 export default function LoginPassPage() {
@@ -60,10 +61,12 @@ export default function LoginPassPage() {
 
       localStorage.setItem("token", data.token);
 
-
       setCookie('authToken', data.token, {
         expires: new Date(Date.now() + 86400 * 1000),
       });
+
+      const accountData = await getAccountInfo(data.token)
+      localStorage.setItem("account-id", accountData.id.toString());
 
       onResetForm();
       router.push(`/account`);

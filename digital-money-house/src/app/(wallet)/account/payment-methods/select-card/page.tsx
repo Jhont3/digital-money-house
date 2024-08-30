@@ -1,4 +1,4 @@
-import { CreditCard } from "@/components";
+import { CreditCard, Subtitle } from "@/components";
 import { getAccountInfo, getCards } from "@/services";
 import { cookies } from "next/headers";
 import Image from "next/image";
@@ -12,6 +12,8 @@ export default async function SelectCardPage() {
 
     return (
         <section className="flex flex-col gap-4 md:col-span-9 md:p-12 md:py-12 md:gap-5 lg:px-20">
+
+            <Subtitle text="Cargar dinero"/>
             
             <div className="bg-dark-1 rounded-lg px-5 py-4 md:px-14 md:py-12">
 

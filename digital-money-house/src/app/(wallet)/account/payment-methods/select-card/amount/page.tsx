@@ -1,7 +1,108 @@
-export default async function AmountPage() {
-    return (
-        <>
-            Amount
-        </>
-    )
+"use client";
+import { UsePaymentStore } from "@/store";
+import { useRouter } from "next/navigation";
+import { FormEvent, useState } from "react";
+import { Step1Amount } from "./Step1Amount";
+import { Step2Amount } from "./Step2Amount";
+import { Subtitle } from "@/components";
+import { postDeposit } from "@/services";
+
+interface NormalizedData {
+  amount: number;
+  dated: string;
+  destination: string;
+  origin: string;
+}
+
+export default function AmountPage() {
+  const router = useRouter();
+
+  const [ step, setStep ] = useState(1);
+  const [ amount, setAmount ] = useState<string>("");
+  console.log(amount);
+  
+  const { paymentData, setPaymentInfo, clearPaymentInfo } = UsePaymentStore();
+  console.log(paymentData);
+  
+  const [ isValidAmount, setIsValidAmount ] = useState<undefined | boolean>(undefined);
+
+  const validateAmount = (amount: string): boolean => {
+    const amountNumber = Number(amount);
+    return /^\d+$/.test(amount) && amountNumber > 0 && amountNumber < 1000000;
+  };
+
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setAmount(value);
+    setIsValidAmount(validateAmount(value));
+  };
+
+  // const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   if (isValidAmount) {
+  //       Number(amount)
+  //       setPaymentInfo({ ...paymentData, totalAmount: amount });
+  //       clearPaymentInfo();
+  //       router.push(`/auth/login/pass`);
+  //   }
+  // };
+
+  const handleAmountSubmit = (amount:string) => {
+    setAmount(amount);
+    setPaymentInfo({ totalAmount: amount });
+    setStep(2);
+  };
+
+  const handleConfirmationSubmit = async () => {
+
+    const newDate = new Date().toISOString();
+    const accountId = localStorage.getItem('account-id');
+
+    const normalizedData = {   
+        amount: paymentData.totalAmount,
+        dated: newDate.toString(),
+        destination: "My account",
+        origin: "My account",
+    }
+
+		try {
+			const resp = await postDeposit( Number(accountId), normalizedData);
+			
+      if ( !resp.error) {
+				router.push("/dashboard");
+			}
+
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+  const handleGoToRegister = () => {
+    router.push(`/auth/new-account`);
+  };
+
+  return (
+    <section className="flex flex-col gap-4 md:col-span-9 md:p-12 md:py-12 md:gap-5 lg:px-20">
+      
+      <Subtitle text="Cargar dinero"/>
+
+      {step === 1 && (
+				<Step1Amount
+          handleAmountSubmit={handleAmountSubmit}
+          onChangeInput={onChangeInput}
+          amount={amount}
+          isValidAmount={isValidAmount}
+				/>
+			)}
+
+			{step === 2 && (
+        <Step2Amount 
+          onSubmit={handleConfirmationSubmit} 
+          onChangeInput={onChangeInput} 
+          isValidAmount={isValidAmount}
+        />
+      )}
+     
+    </section>
+  );
 }

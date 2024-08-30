@@ -2,18 +2,20 @@ import { create } from "zustand";
 
 interface PaymentInfoState {
     paymentData: {
-      id: number;
+      origin: string;
+      destination: string;
       selectedCardId: number;
-      totalAmount: number;
+      totalAmount: string;
     };
     setPaymentInfo: (data: Partial<PaymentInfoState['paymentData']>) => void;
     clearPaymentInfo: () => void;
 }
 
 const initialState: PaymentInfoState['paymentData'] = {
-    id: 0,
+    origin: '',
+    destination: '',
     selectedCardId: 0,
-    totalAmount: 0,
+    totalAmount: "",
   };  
 
 export const UsePaymentStore = create<PaymentInfoState>((set) => ({
