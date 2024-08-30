@@ -37,23 +37,11 @@ export default function AmountPage() {
     setIsValidAmount(validateAmount(value));
   };
 
-  // const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   if (isValidAmount) {
-  //       Number(amount)
-  //       setPaymentInfo({ ...paymentData, totalAmount: amount });
-  //       clearPaymentInfo();
-  //       router.push(`/auth/login/pass`);
-  //   }
-  // };
-
   const handleAmountSubmit = (amount:string) => {
     setAmount(amount);
     setPaymentInfo({ totalAmount: amount });
     setStep(2);
   };
-
-
 
   return (
     <section className="flex flex-col gap-4 md:col-span-9 md:p-12 md:py-12 md:gap-5 lg:px-20">

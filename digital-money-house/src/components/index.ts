@@ -8,6 +8,10 @@ export * from './ui/side-menu/TopSidebar';
 export * from './ui/svg/ArrowIcon';
 export * from './common/icons/EditPencil';
 export * from './common/icons/Check';
+export * from './common/icons/Search';
+export * from './common/icons/Cablevision';
+export * from './common/icons/Claro';
+export * from './common/icons/Personal';
 export * from './ui/subtitle/Subtitle';
 
 export * from './credit-card/CreditCard';
