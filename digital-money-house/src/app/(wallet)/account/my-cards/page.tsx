@@ -43,8 +43,7 @@ export default async function MyCardsPage() {
             <p className="text-dark-1 font-bold">Tus tarjetas</p>
             <hr className="md:border-t md:border-transparent md:border-black"/>
 
-            <CreditCard cardsUser={cardsUser} accountId={accountInfo.id}/>
-
+            <CreditCard cardsUser={cardsUser} accountId={accountInfo.id} onSelectCardPg={false}/>
         </article>
 
     </section>

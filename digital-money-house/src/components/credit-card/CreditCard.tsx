@@ -1,62 +1,85 @@
-
 "use client"
 import { CardData } from "@/interfaces";
 import { deleteCard } from "@/services";
+import { UsePaymentStore } from "@/store";
 import { errorAlert, successAlert } from "@/utils";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-export const CreditCard = ({cardsUser, accountId}:any) => {
-
+export const CreditCard = ({ cardsUser, accountId, onSelectCardPg }: any) => {
   const router = useRouter();
 
-  if (cardsUser.length < 1) return ( <p> No tienes tarjetas asociadas </p> )
+  const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
+  const { setPaymentInfo } = UsePaymentStore();
 
-  let cardsToShow = []
-  if (cardsUser) cardsToShow = cardsUser.toReversed()
+  const handleSelect = (cardId: number) => {
+    setSelectedCardId(cardId);
+    setPaymentInfo({ selectedCardId: cardId });
+  };
 
-  const handleDelete = async(id: number) => {
+  if (cardsUser.length < 1) return <p>No tienes tarjetas asociadas</p>;
+
+  const cardsToShow = cardsUser.toReversed();
+
+  const handleDelete = async (id: number) => {
     try {
       await deleteCard(accountId, id);
 
-      await fetch('/api/revalidate?tag=revalidate-cards');   
+      await fetch("/api/revalidate?tag=revalidate-cards");
       router.refresh();
 
-      successAlert()
-
+      successAlert();
     } catch (error) {
-      console.error(error)
-      errorAlert()
+      console.error(error);
+      errorAlert();
     }
-    
   };
 
   return (
     <>
       {cardsToShow.map((card: CardData) => (
-        <div key={card.id} >
-        <div className="flex justify-between py-4">
-          <p className="flex items-center text-sm gap-2 text-dark-1 md:text-base md:gap-3">
-            <span>
-              <Image
-                src="/imgs/greenCircle.png"
-                alt="icon"
-                width={24}
-                height={24}
-                className="md:w-8 md:h-8"
-              />
-            </span>
-            Terminada en {card.number_id.toString().slice(-4)}
-          </p>
-          <button className="flex items-start" onClick={()=> handleDelete(card.id)}>
-            <span className="text-xs text-black font-bold text-end md:text-base">
-              Eliminar
-            </span>
-          </button>
+        <div key={card.id}>
+          <div className="flex justify-between py-4">
+            <p className="flex items-center text-sm gap-2 text-dark-1 md:text-base md:gap-3">
+              <span>
+                <Image
+                  src="/imgs/greenCircle.png"
+                  alt="icon"
+                  width={24}
+                  height={24}
+                  className="md:w-8 md:h-8"
+                />
+              </span>
+              Terminada en {card.number_id.toString().slice(-4)}
+            </p>
+
+            {!onSelectCardPg && (
+              <button className="flex items-start" onClick={() => handleDelete(card.id)}>
+                <span className="text-xs text-black font-bold text-end md:text-base">
+                  Eliminar
+                </span>
+              </button>
+            )}
+
+            {onSelectCardPg && (
+              <div className="mt-4 flex items-center">
+                <input
+                  type="radio"
+                  name="selectedCard"
+                  value={card.number_id}
+                  checked={selectedCardId === card.number_id}
+                  onChange={() => handleSelect(card.number_id)}
+                  className="w-[18px] h-[18px] cursor-pointer appearance-none border-[1.6px] border-dark-1 checked:bg-green-1 
+                  rounded-full"
+                />
+              </div>
+            )}
+          </div>
+
+          <hr className="md:border-t md:border-transparent md:border-black" />
         </div>
-        <hr key={`${card.id}${card.id}`} className="md:border-t md:border-transparent md:border-black" />
-        </div>
-      ))} 
+      ))}
     </>
   );
 };

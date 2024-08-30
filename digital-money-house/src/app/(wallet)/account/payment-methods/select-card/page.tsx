@@ -1,5 +1,52 @@
-export default function SelectCardPage() {
+import { CreditCard } from "@/components";
+import { getAccountInfo, getCards } from "@/services";
+import { cookies } from "next/headers";
+import Image from "next/image";
+import Link from "next/link";
+
+export default async function SelectCardPage() {
+
+    const token = cookies().get('authToken')?.value || '';
+    const accountInfo = await getAccountInfo(token);
+    const cardsUser = await getCards(accountInfo.id, token);
+
     return (
-        <div>erfer</div>
+        <section className="flex flex-col gap-4 md:col-span-9 md:p-12 md:py-12 md:gap-5 lg:px-20">
+            
+            <div className="bg-dark-1 rounded-lg px-5 py-4 md:px-14 md:py-12">
+
+                <h2 className="font-bold text-xl text-green-1 pb-4 md:text-2xl">Seleccionar tarjeta</h2>
+
+                <article className="bg-white p-5 rounded-lg flex flex-col gap-4 md:p-8 md:py-10">
+
+                    <CreditCard cardsUser={cardsUser} accountId={accountInfo.id} onSelectCardPg/>
+                    
+                </article>
+
+                <div>
+                    <Link href={"/account/my-cards/new-card"}  className="flex justify-between pt-4 pb-2">
+                        <div className="flex items-center gap-4 md:pt-2 md:pb-3">
+                            <span className="justify-start">
+                                <Image src="/imgs/add.png" alt="add icon" width={27} height={27} className="md:w-8 md:h-8"/>
+                            </span>
+                            <p className=" text-green-1 font-bold md:text-xl">Nueva tarjeta</p>
+                        </div>
+    
+                    </Link>
+                    <Link href={'/account/payment-methods/select-card/amount'}>
+                        <span className="hidden md:flex items-center justify-center bg-green-1 w-full h-16 text-dark-1 rounded-lg font-bold"> 
+                            Continuar
+                        </span>
+                    </Link>
+                </div>
+
+
+            </div>
+            
+            <Link href={'/account/payment-methods/select-card/amount'} className="flex justify-end">
+                <span className="bg-green-1 md:hidden w-40 h-12 text-dark-1 rounded-lg font-bold"> Continuar</span>
+            </Link>
+
+        </section>
     )
 }
