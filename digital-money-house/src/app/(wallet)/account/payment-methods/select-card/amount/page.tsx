@@ -53,33 +53,7 @@ export default function AmountPage() {
     setStep(2);
   };
 
-  const handleConfirmationSubmit = async () => {
 
-    const newDate = new Date().toISOString();
-    const accountId = localStorage.getItem('account-id');
-
-    const normalizedData = {   
-        amount: paymentData.totalAmount,
-        dated: newDate.toString(),
-        destination: "My account",
-        origin: "My account",
-    }
-
-		try {
-			const resp = await postDeposit( Number(accountId), normalizedData);
-			
-      if ( !resp.error) {
-				router.push("/dashboard");
-			}
-
-		} catch (error) {
-			console.error(error);
-		}
-	};
-
-  const handleGoToRegister = () => {
-    router.push(`/auth/new-account`);
-  };
 
   return (
     <section className="flex flex-col gap-4 md:col-span-9 md:p-12 md:py-12 md:gap-5 lg:px-20">
@@ -97,9 +71,7 @@ export default function AmountPage() {
 
 			{step === 2 && (
         <Step2Amount 
-          onSubmit={handleConfirmationSubmit} 
-          onChangeInput={onChangeInput} 
-          isValidAmount={isValidAmount}
+          
         />
       )}
      

@@ -10,7 +10,7 @@ import { useState } from "react";
 export const CreditCard = ({ cardsUser, accountId, onSelectCardPg }: any) => {
   const router = useRouter();
 
-  const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
+  const [ selectedCardId, setSelectedCardId ] = useState<number | null>(null);
   const { setPaymentInfo } = UsePaymentStore();
 
   const handleSelect = (cardId: number) => {

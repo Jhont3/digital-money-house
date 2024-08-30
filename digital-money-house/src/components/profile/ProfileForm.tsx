@@ -51,6 +51,8 @@ export const ProfileForm = ({ profileInfo, token }: any) => {
     }));
   };
 
+
+
   const onSubmit: SubmitHandler<UserInputs> = async (data) => {
     const { password, ...restData } = data;
     const submitData = password === "******" || password === "" ? restData : data;

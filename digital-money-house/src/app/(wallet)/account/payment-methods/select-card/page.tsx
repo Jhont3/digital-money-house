@@ -1,4 +1,4 @@
-import { CreditCard, Subtitle } from "@/components";
+import { CreditCard, GoToAmountBtn, Subtitle } from "@/components";
 import { getAccountInfo, getCards } from "@/services";
 import { cookies } from "next/headers";
 import Image from "next/image";
@@ -35,19 +35,11 @@ export default async function SelectCardPage() {
                         </div>
     
                     </Link>
-                    <Link href={'/account/payment-methods/select-card/amount'}>
-                        <span className="hidden md:flex items-center justify-center bg-green-1 w-full h-16 text-dark-1 rounded-lg font-bold"> 
-                            Continuar
-                        </span>
-                    </Link>
+                    <GoToAmountBtn displayButtonFull={false} displayButtonMobile/>
                 </div>
-
-
             </div>
             
-            <Link href={'/account/payment-methods/select-card/amount'} className="flex justify-end">
-                <span className="bg-green-1 md:hidden w-40 h-12 text-dark-1 rounded-lg font-bold"> Continuar</span>
-            </Link>
+            <GoToAmountBtn displayButtonFull displayButtonMobile={false}/>
 
         </section>
     )
