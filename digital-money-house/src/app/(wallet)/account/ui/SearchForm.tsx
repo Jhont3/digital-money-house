@@ -3,12 +3,6 @@ import Image from "next/image"
 import { useRouter } from "next/navigation";
 import { useState, KeyboardEvent, ChangeEvent } from "react";
 
-// const initialState = {
-//     email: "",
-//     password: "",
-//     textToSearch: "",
-//   };
-
 export function SearchForm () {
     
     const [searchInput, setSearchInput] = useState<string>("");
