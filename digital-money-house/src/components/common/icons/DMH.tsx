@@ -2,7 +2,6 @@ import clsx from "clsx";
 import Link from "next/link";
 
 interface HeaderLogoProps {
-    // className: string;
     href: string | "/";
     isBgGreen: boolean;
 }

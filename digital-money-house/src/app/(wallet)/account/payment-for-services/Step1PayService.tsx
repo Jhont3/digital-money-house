@@ -5,9 +5,9 @@ import { ChangeEvent, KeyboardEvent, useState } from "react";
 
 export function Step1PayService( {setStep}: any ) {
 
-    const [companies, setCompanies] = useState<string[]> (["Claro", "Personal", "Cablevisión"]);
-    const [searchInput, setSearchInput] = useState<string>("");
-    const [filteredCompanies, setFilteredCompanies] = useState(companies || []);
+    const [ companies, setCompanies ] = useState<string[]> (["Claro", "Personal", "Cablevisión"]);
+    const [ searchInput, setSearchInput ] = useState<string>("");
+    const [ filteredCompanies, setFilteredCompanies ] = useState(companies || []);
     const { setPaymentInfo } = UsePaymentStore();
 
     const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {

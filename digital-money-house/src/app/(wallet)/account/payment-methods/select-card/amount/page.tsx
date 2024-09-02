@@ -1,28 +1,18 @@
 "use client";
 import { UsePaymentStore } from "@/store";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { Step1Amount } from "./Step1Amount";
 import { Step2Amount } from "./Step2Amount";
 import { Subtitle } from "@/components";
-import { postDeposit } from "@/services";
-
-interface NormalizedData {
-  amount: number;
-  dated: string;
-  destination: string;
-  origin: string;
-}
 
 export default function AmountPage() {
   const router = useRouter();
 
   const [ step, setStep ] = useState(1);
   const [ amount, setAmount ] = useState<string>("");
-  console.log(amount);
   
-  const { paymentData, setPaymentInfo, clearPaymentInfo } = UsePaymentStore();
-  console.log(paymentData);
+  const { setPaymentInfo } = UsePaymentStore();
   
   const [ isValidAmount, setIsValidAmount ] = useState<undefined | boolean>(undefined);
 
@@ -58,8 +48,7 @@ export default function AmountPage() {
 			)}
 
 			{step === 2 && (
-        <Step2Amount 
-          
+        <Step2Amount           
         />
       )}
      

@@ -45,7 +45,7 @@ export default async function AccountPage() {
         </Link>
       </div>
 
-      <SearchForm/>
+      <SearchForm allActivities={activities}/>
 
       {/* User activity */}
       <article className="bg-white p-4 rounded-lg flex flex-col gap-4 shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-8 md:py-10">

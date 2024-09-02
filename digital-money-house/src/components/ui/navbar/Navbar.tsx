@@ -42,16 +42,7 @@ export const Navbar: React.FC<NavbarProps> = ({ isBgGreen, loginBtnOn, onUserPag
     )}>
       {/* Page logo */}
       <div className="p-2">
-        {/* <Link href="/"> */}
-          {/* <Image
-            src={'/imgs/simpleLogoGreen.png'}
-            alt="logo green digital money house"
-            className={clsx("p-2", { 'filter brightness-0 saturate-100': isBgGreen })}
-            width="80"
-            height="80"
-          /> */}
           <DMH href="/" isBgGreen={isBgGreen}/>
-        {/* </Link> */}
       </div>
 
       {/* Normal login/register links */}
