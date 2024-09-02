@@ -1,14 +1,15 @@
 "use client"
-import { postTransference } from "@/services";
+import { Transaction } from "@/interfaces";
+import { postTransaction, postTransference } from "@/services";
 import { UsePaymentStore } from "@/store";
-import Image from "next/image"
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export function PayServiceButton ( {accountId}: any ) {
     
-    const [ cardsUser, setCardsUser ] = useState<any>();
     const { paymentData } = UsePaymentStore();
+    console.log(paymentData);
+    
     const router = useRouter();
 
     const handleConfirmationSubmit = async (event: any) => {
@@ -16,15 +17,16 @@ export function PayServiceButton ( {accountId}: any ) {
         const newDate = new Date().toISOString();
         const accountId = localStorage.getItem('account-id');
 
-        const normalizedData = {   
-            amount: Number(paymentData.totalAmount),
+        const normalizedData: Transaction = {   
+            amount: -2000,
             dated: newDate.toString(),
-            destination: paymentData.destination,
-            origin: paymentData.origin,
+            description: `Pago a ${paymentData.destination}`,
         };
 
+        console.log(normalizedData);
+        
         try {
-            const resp = await postTransference(Number(accountId), normalizedData);
+            const resp = await postTransaction(Number(accountId), normalizedData);
 
             if (!resp.error) {
                 router.push(`/account/payment-for-services/confirmation`);
@@ -41,25 +43,17 @@ export function PayServiceButton ( {accountId}: any ) {
 	// };
 
     return (
-    <>
-        {/* Search input*/}
-        <div className="relative w-full">
-            <span className="absolute left-3 top-1/2 transform -translate-y-1/2 z-10">
-                <Image src="/imgs/search.png" alt="icon" width={14.7} height={14.7}/>
-            </span>
-
-            <input                     
-            id="textToSearch"
-            name="textToSearch"
-            // value={searchInput}
-            // onKeyDown={handleSearchInputKeyDown}
-            // onChange={handleSearchInputChange}
-            className="text-black text-base w-full py-3 pl-8 px-4 rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.10)] 
-                         border-[1.6px] outline-none border-gray-1 focus:border-select-1 focus:ring-0 md:min-h-16 "
-            placeholder="Buscar en tu actividad"
-            autoComplete="textToSearch"   
-            />
-        </div>
-    </>
+        <button
+            onClick={handleConfirmationSubmit}
+            // disabled={!isValidAccountNumber}
+            // className= {clsx({                
+            //     "bg-[#cecece]": !isValidAccountNumber,
+            //     "bg-green-1": isValidAccountNumber,
+            // },
+            // "mt-4  text-white py-2 px-4 rounded-lg")}    
+            className= {"bg-green-1 text-white py-2 px-4 rounded-lg"}         
+        >
+            Continuar
+        </button>
     )
 }

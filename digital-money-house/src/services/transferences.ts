@@ -23,7 +23,7 @@ export async function postDeposit(id: number, body: Transference, options = {}):
 
 export async function postTransference(id: number, body: Transference, options = {}): Promise<any> {
 	
-	return httpPost(`/accounts/${id}/tra`, body, {
+	return httpPost(`/accounts/${id}/transferences`, body, {
 		headers: {
 			"Content-Type": "application/json",
 		},

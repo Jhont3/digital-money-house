@@ -11,8 +11,8 @@ export const Search = () => (
         cy="6.39988"
         r="5.64988"
         stroke="#828282"
-        stroke-width="1.5"
+        strokeWidth="1.5"
         />
-        <path d="M10.1914 10L14.5149 14.7045" stroke="#828282" stroke-width="1.5" />
+        <path d="M10.1914 10L14.5149 14.7045" stroke="#828282" strokeWidth="1.5" />
     </svg>
 );
