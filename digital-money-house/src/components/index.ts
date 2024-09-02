@@ -12,10 +12,12 @@ export * from './common/icons/Search';
 export * from './common/icons/Cablevision';
 export * from './common/icons/Claro';
 export * from './common/icons/Personal';
+export * from './common/icons/DMH';
 export * from './ui/subtitle/Subtitle';
 
 export * from './credit-card/CreditCard';
 export * from './cvu-alias/CvuAndAlias';
 export * from './profile/ProfileForm';
 export * from './payment-method/GoToAmountBtn';
+export * from './confirmation/Confirmation';
 

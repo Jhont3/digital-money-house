@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { getCookie } from 'cookies-next';
 import { getAccountInfo, getUserInfo } from "@/services";
 import { NavInUserPage } from "./NavInUserPage";
+import { DMH } from "@/components/common/icons/DMH";
+
 
 interface NavbarProps {
   isBgGreen: boolean;
@@ -40,15 +42,16 @@ export const Navbar: React.FC<NavbarProps> = ({ isBgGreen, loginBtnOn, onUserPag
     )}>
       {/* Page logo */}
       <div className="p-2">
-        <Link href="/">
-          <Image
+        {/* <Link href="/"> */}
+          {/* <Image
             src={'/imgs/simpleLogoGreen.png'}
             alt="logo green digital money house"
             className={clsx("p-2", { 'filter brightness-0 saturate-100': isBgGreen })}
             width="80"
             height="80"
-          />
-        </Link>
+          /> */}
+          <DMH href="/" isBgGreen={isBgGreen}/>
+        {/* </Link> */}
       </div>
 
       {/* Normal login/register links */}
