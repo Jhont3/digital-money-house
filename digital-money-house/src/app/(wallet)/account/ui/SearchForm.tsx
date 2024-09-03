@@ -6,7 +6,7 @@ import { useActivitiesManagement } from "@/store";
 import clsx from "clsx";
 import Image from "next/image"
 import { useRouter } from "next/navigation";
-import { KeyboardEvent, ChangeEvent } from "react";
+import { KeyboardEvent, ChangeEvent, useEffect } from "react";
 interface SearchFormProps {
     allActivities: Activity[];
     onDashboard: boolean
@@ -17,15 +17,9 @@ export function SearchForm ( {allActivities, onDashboard}:SearchFormProps ) {
     const { activities, setActivities, inputSearch, setInputSearch } = useActivitiesManagement()
     const { isFilterModalOpen, setIsFilterModalOpen } = useFilterModalContext()
     console.log(activities);
-    
-    const router = useRouter();
 
-    const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setInputSearch(e.target.value);
-	};
-    
-    const handleSearchInputKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-		if (e.key === "Enter") {
+    useEffect(() => {
+        if(!inputSearch ) {
             setActivities(allActivities?.filter(activity => 
                 activity.type?.toLowerCase().includes(inputSearch) || 
                 activity.origin?.toLowerCase().includes(inputSearch) ||
@@ -33,7 +27,29 @@ export function SearchForm ( {allActivities, onDashboard}:SearchFormProps ) {
                 activity.description?.toLowerCase().includes(inputSearch) ||
                 activity.amount?.toString().includes(inputSearch)
                 ) || [])
-			redirectToActivityPage();
+        }
+    }, [inputSearch, setActivities, allActivities])
+
+    useEffect(() => {
+        setActivities(allActivities)
+    }, [])
+    
+    const router = useRouter();
+
+    const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setInputSearch(e.target.value.toLowerCase());
+	};
+    
+    const handleSearchInputKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === "Enter") {           
+            setActivities(allActivities?.filter(activity => 
+                activity.type?.toLowerCase().includes(inputSearch) || 
+                activity.origin?.toLowerCase().includes(inputSearch) ||
+                activity.destination?.toLowerCase().includes(inputSearch) || 
+                activity.description?.toLowerCase().includes(inputSearch) ||
+                activity.amount?.toString().includes(inputSearch)
+                ) || [])
+            redirectToActivityPage();
 		}
 	};
 
@@ -83,7 +99,7 @@ export function SearchForm ( {allActivities, onDashboard}:SearchFormProps ) {
                 </div>
                 }
                 
-                <FilterModalActivities allActivities={activities}/>
+                <FilterModalActivities allActivities={allActivities}/>
 
             </div>
         </div>

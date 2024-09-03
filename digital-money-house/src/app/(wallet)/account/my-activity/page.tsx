@@ -1,6 +1,5 @@
 import { Subtitle } from "@/components";
 import { UserActivity } from "../ui/UserActivity";
-import Image from "next/image";
 import { SearchForm } from "../ui";
 import { cookies } from "next/headers";
 import { getAccountInfo, getActivity } from "@/services";

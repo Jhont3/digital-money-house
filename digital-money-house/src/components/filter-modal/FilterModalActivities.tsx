@@ -2,7 +2,6 @@
 import { useFilterModalContext } from "@/context";
 import { Activity } from "@/interfaces";
 import { useActivitiesManagement } from "@/store";
-import clsx from "clsx";
 import React, { useState } from "react";
 
 interface FilterModalProps {
@@ -11,6 +10,9 @@ interface FilterModalProps {
 
 export const FilterModalActivities = ({ allActivities }: FilterModalProps) => {
   const [ selectedFilter, setSelectedFilter ] = useState<string>("");
+
+  console.log(allActivities);
+  
 
   const filters = [
     "Hoy",
@@ -23,8 +25,7 @@ export const FilterModalActivities = ({ allActivities }: FilterModalProps) => {
   ];
 
   
-  const {isFilterModalOpen,setIsFilterModalOpen} = useFilterModalContext()
-  console.log(isFilterModalOpen);
+  const { isFilterModalOpen, setIsFilterModalOpen } = useFilterModalContext()
 
   const { activities, setActivities } = useActivitiesManagement();
   console.log(activities);
@@ -92,7 +93,7 @@ export const FilterModalActivities = ({ allActivities }: FilterModalProps) => {
         <>
           {/* Contenido del modal */}
           <div
-            onClick={(event) => event.stopPropagation()} // <-- Detén la propagación del evento de clic
+            onClick={(event) => event.stopPropagation()} 
             className="absolute right-0 top-16 bg-white shadow-lg rounded-lg p-4 z-50"
             style={{ minWidth: "280px" }}
           >

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { formatNumberToARS, getDayOfWeek } from "@/utils";
 import { UserActivityProps } from "@/interfaces";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useState, useEffect } from "react";
 import { useActivitiesManagement } from "@/store";
 
@@ -11,7 +11,7 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
   const searchParams = useSearchParams();
   const searchQuery = searchParams.get('search')?.toLowerCase() || '';
   
-  const { activities, setActivities } = useActivitiesManagement()
+  const { activities, setActivities, inputSearch, setInputSearch } = useActivitiesManagement()
   console.log(activities);
 
   const [ currentPage, setCurrentPage ] = useState(1);
@@ -21,13 +21,13 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
   const paginatedActivities = useMemo(() => {
     if (!showPagination) {
       // Show only the 10 most recent activities if pagination is not required
-      return activities.toReversed().slice(0, 10);
+      return allActivities?.slice(0, 10);
     }
 
     const start = (currentPage - 1) * itemsPerPage;
     const end = start + itemsPerPage;
     return activities.slice(start, end);
-  }, [activities, currentPage, itemsPerPage, showPagination]);
+  }, [activities, currentPage, itemsPerPage, showPagination, allActivities]);
 
   // Calculate total pages if pagination is enabled
   const totalPages = useMemo(() => {
@@ -39,23 +39,15 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
   useEffect(() => {
     try {
       if (searchQuery) {
-        setActivities(allActivities?.filter(activity => 
-          activity.type.toLowerCase().includes(searchQuery) || 
-          activity.origin.toLowerCase().includes(searchQuery) ||
-          activity.destination.toLowerCase().includes(searchQuery) || 
-          activity.dated.toLowerCase().includes(searchQuery) ||
-          activity.description.toLowerCase().includes(searchQuery) ||
-          activity.amount.toString().includes(searchQuery)
-        ) || []);
-      } else {
-        setActivities(allActivities || []);
-      }
+        setActivities(activities)
+      } 
+
     } catch (error) {
       console.error("Error fetching user activities:", error);
     }  finally {
       setLoading(false);
     }
-  }, [setActivities, searchQuery, allActivities]);
+  }, [searchQuery, setInputSearch, inputSearch, showPagination, activities, setActivities]);
   
 
   if (loading) {
@@ -68,7 +60,7 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
 
   return (
     <>
-      {paginatedActivities.map((activity, i) => (
+      {paginatedActivities?.map((activity, i) => (
         <div className="flex justify-between" key={`${activity.id}${i}`}>
           <p className="flex items-center text-sm gap-2 text-dark-1 md:text-base md:gap-3">
               <span>
