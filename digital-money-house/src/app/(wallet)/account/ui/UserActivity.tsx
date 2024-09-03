@@ -56,6 +56,7 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
       setLoading(false);
     }
   }, [setActivities, searchQuery, allActivities]);
+  
 
   if (loading) {
     return <p>Loading...</p>;
@@ -73,7 +74,7 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
               <span>
                   <Image src="/imgs/greenCircle.png" alt="icon" width={24} height={24} className="md:w-8 md:h-8" />
               </span>
-            {activity.origin === activity.destination ? 'Ingresaste dinero' : `${activity.type} a ${activity.destination}`}
+            {activity.destination === "My account" ? 'Ingresaste dinero' : `${activity.description}`}
           </p>
           <div className="flex flex-col">
               <span className="text-sm text-dark-2 text-end md:text-base">
@@ -86,7 +87,7 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
         </div>
       ))}
 
-      <hr className="md:border-t md:border-transparent md:border-black" />
+      <hr className="md:border-t md:border-black" />
 
       {showPagination && (
         <div className="flex justify-center gap-2 mt-4">

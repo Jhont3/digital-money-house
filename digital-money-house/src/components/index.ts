@@ -20,4 +20,6 @@ export * from './cvu-alias/CvuAndAlias';
 export * from './profile/ProfileForm';
 export * from './payment-method/GoToAmountBtn';
 export * from './confirmation/Confirmation';
+export * from './filter-modal/FilterModalActivities';
+
 
