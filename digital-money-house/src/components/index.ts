@@ -13,6 +13,7 @@ export * from './common/icons/Cablevision';
 export * from './common/icons/Claro';
 export * from './common/icons/Personal';
 export * from './common/icons/DMH';
+export * from './common/icons/Filter';
 export * from './ui/subtitle/Subtitle';
 
 export * from './credit-card/CreditCard';
@@ -21,5 +22,6 @@ export * from './profile/ProfileForm';
 export * from './payment-method/GoToAmountBtn';
 export * from './confirmation/Confirmation';
 export * from './filter-modal/FilterModalActivities';
+export * from './my-activity/ActivityTittleFilter';
 
 
