@@ -6,11 +6,9 @@ import { ActiveLink } from "./ActiveLink";
 import { navItems } from "@/lib";
 import { useRouter } from "next/navigation";
 import { logOut } from "@/utils";
-import { useUserStore } from "@/store";
-import { useEffect } from "react";
-import { getCookie } from "cookies-next";
 
-export const TopSidebar = () => {
+
+export const TopSidebar = ({profileInfo}:any) => {
   const { isSidebarOpen, setIsSidebarOpen } = useSideBarContext();
   const router = useRouter();
 
@@ -18,16 +16,6 @@ export const TopSidebar = () => {
     logOut();
     router.push("/");
   };
-
-  const { userData, setUserInfo } = useUserStore()
-
-  useEffect(() => {
-    const userDataCookie = getCookie('userData');
-    if (userDataCookie) {
-        const parsedUserData = JSON.parse(userDataCookie);
-        setUserInfo(parsedUserData);
-    }
-  }, [isSidebarOpen, setUserInfo])
 
   return (
     <>      
@@ -68,7 +56,7 @@ export const TopSidebar = () => {
           </button>
           <div className="text-green-1 font-bold">
             <p>Hola,</p>
-            <p>{userData.firstname} {userData.lastname}</p>
+            <p>{profileInfo.firstname} {profileInfo.lastname}</p>
           </div>
         </div>
         <aside className="flex flex-col h-full p-8 gap-4">
