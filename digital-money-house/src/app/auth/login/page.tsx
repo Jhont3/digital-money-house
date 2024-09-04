@@ -51,7 +51,7 @@ export default function LoginPage() {
                       'border-dark-1' : isValidEmail || isValidEmail == undefined, 
                       'border-error-2' : isValidEmail == false,
                     },
-                      'text-black text-base w-full py-3 px-4 rounded-lg border-[1.6px] border-dark-1 focus:border-dark-1')}
+                      'text-black text-base w-full py-3 px-4 rounded-lg border-[1.6px] border-dark-1 outline-none focus:border-select-1 focus:ring-0')}
                     placeholder='Correo electrónico'
                     autoComplete='email'                    
                 />

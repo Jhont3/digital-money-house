@@ -87,7 +87,7 @@ export function Step2Amount( {}: any ) {
                      Revisá que está  todo bien
                 </h2>
 
-                <hr className="border-t  border-gray-[#cecece]] "/>
+                <hr className="border-t  border-gray-[#cecece]] md:border-transparent"/>
             </div>
             
             <div>
@@ -110,8 +110,8 @@ export function Step2Amount( {}: any ) {
             </div>
 
             <div className="text-white">
-                <p>Para</p>
-                <p className="font-bold">Cuenta propia</p>
+                <p className="text-xs">Para</p>
+                <p className="font-bold text-xl">Cuenta propia</p>
             </div>
 
             <div className="text-white pb-9">
@@ -119,8 +119,8 @@ export function Step2Amount( {}: any ) {
                 <p className="text-xs">CVU {mockCVU}</p>
             </div>
 
-            <button type="submit" className="hidden md:flex items-center justify-center" >
-                <span className="bg-green-1 w-full h-16 text-dark-1 rounded-lg font-bold"> 
+            <button type="submit" className="hidden md:flex items-center justify-center lg:w-full lg:justify-end" >
+                <span className="bg-green-1 w-full h-16 text-dark-1 rounded-lg font-bold flex justify-center items-center lg:w-64 "> 
                     Continuar
                 </span>
             </button>

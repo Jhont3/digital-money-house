@@ -94,7 +94,7 @@ export default function LoginPassPage() {
                     'border-dark-1' : isValidPass || isValidPass == undefined, 
                     'border-error-2' : isValidPass == false,
                   },
-                  'text-black text-base w-full py-3 px-4 rounded-lg border-[1.6px] border-dark-1 focus:border-dark-1 ')} 
+                  'text-black text-base w-full py-3 px-4 rounded-lg border-[1.6px] border-dark-1 outline-none focus:border-select-1 focus:ring-0 ')} 
                   placeholder='Contraseña'
                   autoComplete='current-password'
               />
