@@ -3,6 +3,9 @@ import { useFilterModalContext } from "@/context";
 import { Activity } from "@/interfaces";
 import { useActivitiesManagement } from "@/store";
 import React, { useState } from "react";
+import { DownArrow } from "../common/icons/DownArrow";
+import clsx from "clsx";
+import { RightArrow } from "../common/icons/RightArrow";
 
 interface FilterModalProps {
   allActivities: Activity[];
@@ -91,15 +94,17 @@ export const FilterModalActivities = ({ allActivities }: FilterModalProps) => {
     <>
       {isFilterModalOpen && (
         <>
-          {/* Contenido del modal */}
           <div
             onClick={(event) => event.stopPropagation()} 
-            className="absolute right-0 top-16 bg-white shadow-lg rounded-lg p-4 z-50"
+            className="absolute right-0 top-16 bg-white shadow-lg rounded-lg p-4 z-50 "
             style={{ minWidth: "280px" }}
           >
-            <div className="flex justify-between items-center pb-3">
-              <h3 className="font-semibold">Período</h3>
-              <hr />
+            <div className="flex justify-between items-center pb-1">
+              <div className="flex gap-2">
+                <h3 className="font-semibold">Período</h3>
+                <span className="flex items-center pt-1"><DownArrow/></span>
+              </div>
+              
               <button
                 onClick={() => setActivities(allActivities)}
                 className="text-gray-500 text-sm"
@@ -107,11 +112,15 @@ export const FilterModalActivities = ({ allActivities }: FilterModalProps) => {
                 Borrar filtros
               </button>
             </div>
+            <hr className="md:border-t md:border-black mb-3 "/>
 
             <div className="space-y-2">
               {filters.map((filter) => (
                 <div key={filter} className="flex justify-between items-center ">
-                  <label htmlFor={filter} className="text-sm">
+                  <label htmlFor={filter} className={clsx({
+                    "font-bold": selectedFilter === filter,
+                    "opacity-50": selectedFilter !== filter
+                  },"text-sm ")}>
                     {filter}
                   </label>
                   <input
@@ -121,16 +130,19 @@ export const FilterModalActivities = ({ allActivities }: FilterModalProps) => {
                     value={filter}
                     checked={selectedFilter === filter}
                     onChange={() => handleFilterChange(filter)}
-                    className="w-[18px] h-[18px] cursor-pointer appearance-none border-[1.6px] border-dark-1 checked:bg-green-1 
-                      rounded-full relative "
-                  />                                    
+                    className={clsx({
+                      "hidden": filter === "Otro período",
+                    },
+                      "w-4 h-4 cursor-pointer appearance-none border-[1.6px] border-dark-1 border-opacity-50 checked:bg-green-1 rounded-full relative")}
+                  />
+                  {filter === "Otro período" && <span className="w-4 h-4 flex justify-center items-center"><RightArrow/></span>}                                    
                 </div>
               ))}
             </div>
 
             <button
               onClick={handleApplyFilter}
-              className="mt-4 w-full bg-lime-500 text-white py-2 rounded"
+              className="mt-4 w-full bg-green-1 text-black py-2 font-bold rounded-lg md:w-36"
             >
               Aplicar
             </button>

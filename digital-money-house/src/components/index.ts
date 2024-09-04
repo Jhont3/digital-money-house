@@ -16,8 +16,10 @@ export * from './common/icons/DMH';
 export * from './common/icons/Filter';
 export * from './common/icons/Visa';
 export * from './common/icons/Chip';
+export * from './common/icons/DownArrow';
 export * from './common/icons/AmericanExpress';
 export * from './common/icons/Mastercard';
+export * from './common/icons/RightArrow';
 export * from './ui/subtitle/Subtitle';
 
 export * from './credit-card/CreditCard';
