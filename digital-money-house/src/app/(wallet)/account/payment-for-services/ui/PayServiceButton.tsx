@@ -18,7 +18,7 @@ export function PayServiceButton ( {accountId}: any ) {
         const accountId = localStorage.getItem('account-id');
 
         const normalizedData: Transaction = {   
-            amount: -2000,
+            amount: -1153.73,
             dated: newDate.toString(),
             description: `Pago a ${paymentData.destination}`,
         };

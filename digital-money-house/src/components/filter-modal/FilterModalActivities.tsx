@@ -110,7 +110,7 @@ export const FilterModalActivities = ({ allActivities }: FilterModalProps) => {
 
             <div className="space-y-2">
               {filters.map((filter) => (
-                <div key={filter} className="flex justify-between items-center">
+                <div key={filter} className="flex justify-between items-center ">
                   <label htmlFor={filter} className="text-sm">
                     {filter}
                   </label>
@@ -122,8 +122,8 @@ export const FilterModalActivities = ({ allActivities }: FilterModalProps) => {
                     checked={selectedFilter === filter}
                     onChange={() => handleFilterChange(filter)}
                     className="w-[18px] h-[18px] cursor-pointer appearance-none border-[1.6px] border-dark-1 checked:bg-green-1 
-                      rounded-full"
-                  />
+                      rounded-full relative "
+                  />                                    
                 </div>
               ))}
             </div>

@@ -9,6 +9,7 @@ export function Step1PayService( {setStep}: any ) {
     const [ searchInput, setSearchInput ] = useState<string>("");
     const [ filteredCompanies, setFilteredCompanies ] = useState(companies || []);
     const { setPaymentInfo } = UsePaymentStore();
+    
 
     const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;

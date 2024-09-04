@@ -42,7 +42,7 @@ export const Confirmation = ( { onDepositPg, onPayServicesPg } : any ) => {
                     <p className="text-xs pb-1">{formatDate(new Date().toISOString())}</p>
                     <p className="text-green-1 font-bold text-xl">
                         {onDepositPg && <span>${paymentData.totalAmount || "Cargando..."}</span>}
-                        {onPayServicesPg && <span>$2000.00</span>}                        
+                        {onPayServicesPg && <span>$1.153,75</span>}                        
                     </p>
                 </div>
 

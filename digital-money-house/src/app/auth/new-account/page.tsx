@@ -82,7 +82,7 @@ export default function RegisterPage() {
               className={clsx ({
                       'border-dark-1' :  !errors?.firstName,  
                       'border-error-2' : errors?.firstName,
-                    },"border-dark-1 text-black text-sm w-full py-3 px-4 rounded-lg border-[1.6px]")}
+                    },"border-dark-1 text-black text-sm w-full py-3 px-4 rounded-lg border-[1.6px] outline-none focus:border-select-1 focus:ring-0")}
               placeholder="Nombre*"
               autoComplete="firstName"
             />
@@ -94,7 +94,7 @@ export default function RegisterPage() {
               className={clsx ({
                       'border-dark-1' :  !errors?.lastName,  
                       'border-error-2' : errors?.lastName,
-                    },"border-dark-1 text-black text-sm w-full py-3 px-4 rounded-lg border-[1.6px]")}
+                    },"border-dark-1 text-black text-sm w-full py-3 px-4 rounded-lg border-[1.6px] outline-none focus:border-select-1 focus:ring-0")}
               placeholder="Apellido*"
               autoComplete="lastName"
             />
@@ -107,7 +107,7 @@ export default function RegisterPage() {
               className={clsx ({
                       'border-dark-1' :  !errors?.dni,  
                       'border-error-2' : errors?.dni,
-                    },"border-dark-1 text-black text-sm w-full py-3 px-4 rounded-lg border-[1.6px]")}
+                    },"border-dark-1 text-black text-sm w-full py-3 px-4 rounded-lg border-[1.6px] outline-none focus:border-select-1 focus:ring-0")}
               placeholder="DNI*"
               autoComplete="dni"
             />
@@ -120,7 +120,7 @@ export default function RegisterPage() {
               className={clsx ({
                       'border-dark-1' :  !errors?.email,  
                       'border-error-2' : errors?.email,
-                    },"border-dark-1 text-black text-sm w-full py-3 px-4 rounded-lg border-[1.6px]")}
+                    },"border-dark-1 text-black text-sm w-full py-3 px-4 rounded-lg border-[1.6px] outline-none focus:border-select-1 focus:ring-0")}
               placeholder="Correo electrónico*"
               autoComplete="email"
             />
@@ -134,7 +134,7 @@ export default function RegisterPage() {
               className={clsx ({
                       'border-dark-1' :  !errors?.pass,  
                       'border-error-2' : errors?.pass,
-                    },"border-dark-1 text-black text-sm w-full py-3 px-4 rounded-lg border-[1.6px]")}
+                    },"border-dark-1 text-black text-sm w-full py-3 px-4 rounded-lg border-[1.6px] outline-none focus:border-select-1 focus:ring-0")}
               placeholder="Contraseña*"
               autoComplete="pass"
             />
@@ -147,7 +147,7 @@ export default function RegisterPage() {
               className={clsx ({
                       'border-dark-1' :  !errors?.againPass,  
                       'border-error-2' : errors?.againPass,
-                    },"border-dark-1 text-black text-sm w-full py-3 px-4 rounded-lg border-[1.6px]")}
+                    },"border-dark-1 text-black text-sm w-full py-3 px-4 rounded-lg border-[1.6px] outline-none focus:border-select-1 focus:ring-0")}
               placeholder="Confirmar contraseña*"
               autoComplete="againPass"
             />
@@ -160,7 +160,7 @@ export default function RegisterPage() {
               className={clsx ({
                       'border-dark-1' :  !errors?.phone,  
                       'border-error-2' : errors?.phone,
-                    },"border-dark-1 text-black text-sm w-full py-3 px-4 rounded-lg border-[1.6px]")}
+                    },"border-dark-1 text-black text-sm w-full py-3 px-4 rounded-lg border-[1.6px] outline-none focus:border-select-1 focus:ring-0")}
               placeholder="Telefono*"
               autoComplete="phone"
             />

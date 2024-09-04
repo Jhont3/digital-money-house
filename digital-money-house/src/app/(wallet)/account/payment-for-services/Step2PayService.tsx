@@ -46,7 +46,7 @@ export function Step2PayService( {setStep}: any ) {
                     name="accountNumber"
                     value={accountNumber}
                     onChange={onChangeInput}
-                    className={"text-black border-[1.6px] border-select-1 text-base w-full py-3 px-4 rounded-lg"}
+                    className={"text-black border-[1.6px] outline-none border-gray-1 focus:border-select-1 focus:ring-0 text-base w-full py-3 px-4 rounded-lg"}
                     placeholder="Ingresa el numero de cuenta"
                     autoComplete="off"
                     />

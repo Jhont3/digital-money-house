@@ -74,7 +74,7 @@ export const ProfileForm = ({ profileInfo, token }: any) => {
         <div className="flex justify-between md:col-span-2 lg:col-span-3">
           <input
             id="email"
-            className="opacity-50 focus:border-select-1 focus:ring-0"
+            className="opacity-50 outline-none border-gray-1 focus:border-select-1 focus:ring-0"
             {...register("email", { required: true })}
             autoComplete="securityCode"
             defaultValue={profileInfo?.email}
@@ -91,7 +91,7 @@ export const ProfileForm = ({ profileInfo, token }: any) => {
         <div className="flex justify-between md:col-span-2 lg:col-span-3">
           <input
             id="fullname"
-            className="opacity-50"
+            className="opacity-50 outline-none border-gray-1 focus:border-select-1 focus:ring-0"
             autoComplete="fullname"
             defaultValue={`${profileInfo?.firstname} ${profileInfo?.lastname}`}
             onChange={handleFullnameChange}
@@ -120,7 +120,7 @@ export const ProfileForm = ({ profileInfo, token }: any) => {
         <div className="flex justify-between md:col-span-2 lg:col-span-3">
           <input
             id="dni"
-            className="opacity-50"
+            className="opacity-50 outline-none border-gray-1 focus:border-select-1 focus:ring-0"
             type="text"
             autoComplete="dni"
             {...register("dni")}
@@ -150,7 +150,7 @@ export const ProfileForm = ({ profileInfo, token }: any) => {
         <div className="flex justify-between md:col-span-2 lg:col-span-3">
           <input
             id="phone"
-            className="opacity-50"
+            className="opacity-50 outline-none border-gray-1 focus:border-select-1 focus:ring-0"
             type="text"
             autoComplete="phone"
             {...register("phone")}
@@ -180,7 +180,7 @@ export const ProfileForm = ({ profileInfo, token }: any) => {
         <div className="flex justify-between md:col-span-2 lg:col-span-3">
           <input
             id="password"
-            className="opacity-50"
+            className="opacity-50 outline-none border-gray-1 focus:border-select-1 focus:ring-0"
             type="password"
             autoComplete="password"
             {...register("password")}

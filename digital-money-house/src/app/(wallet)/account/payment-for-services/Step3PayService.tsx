@@ -25,7 +25,7 @@ export function Step3PayService({cardsUser, accountInfo}: any) {
 
             <article className="bg-white p-5 rounded-lg flex flex-col gap-4 md:p-8 md:py-10">       
                 <p className="text-dark-1 font-bold">Tus tarjetas</p>
-                <hr className="md:border-t md:border-transparent md:border-black"/>
+                <hr className="md:border-t  md:border-black"/>
 
                 <CreditCard cardsUser={cardsUser} accountId={accountInfo.id} onSelectCardPg/>
             </article>

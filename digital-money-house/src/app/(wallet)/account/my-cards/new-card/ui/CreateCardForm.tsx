@@ -1,4 +1,5 @@
 "use client"
+import { AmericanExpress, Chip, Mastercard, Visa } from "@/components";
 import { CardForm } from "@/interfaces";
 import { initialCreditCardForm } from "@/lib";
 import { postCards } from "@/services";
@@ -6,17 +7,32 @@ import { errorAlert, successAlert } from "@/utils";
 import clsx from "clsx";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm, useWatch } from "react-hook-form";
 
 export function CreateCardForm( { accountID, cardsUser }: any ) {
     
+    const [ creditCardType, setCreditCardType ] = useState<string>("");
+
     const { register, handleSubmit, reset, formState: { errors}, setError, control  } = 
     useForm<CardForm>( {defaultValues: initialCreditCardForm, mode: 'onChange', } );
     
     const firstAndSecondName = useWatch({ control, name: 'firstAndSecondName' });
     const expirationDate = useWatch({ control, name: 'expirationDate' });
     const fullCardNumber = useWatch({ control, name: 'fullCardNumber' });;
+
+    const displayIconCreditCard = (company: string) => {
+      if (company === "Visa")  return <Visa/>              
+      if (company === "American Express")  return <AmericanExpress/>              
+      if (company === "Mastercard")  return <Mastercard/>                      
+    }
+
+    const getCreditCardType = (cardNumber: string): string => {
+      if (/^4/.test(cardNumber)) return "Visa";
+      if (/^5[1-5]/.test(cardNumber) || /^2(2[2-9][1-9]|[3-7][0-9]{2})/.test(cardNumber)) return "Mastercard";
+      if (/^3[47]/.test(cardNumber)) return "American Express";
+      return ""; 
+    };
     
     const hasErrors = Object.values(errors).some(error => error);
 
@@ -28,9 +44,14 @@ export function CreateCardForm( { accountID, cardsUser }: any ) {
         setError('firstAndSecondName', { type: 'manual', message: 'Initial error message' });
         setError('securityCode', { type: 'manual', message: 'Initial error message' });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, []);
+    }, []);
 
-      const getCardNumberDisplay = () => {
+    useEffect(() => {
+      setCreditCardType(getCreditCardType(fullCardNumber || ""));
+    }, [fullCardNumber]);
+
+
+    const getCardNumberDisplay = () => {
         if (fullCardNumber) {          
             const parts = fullCardNumber.match(/.{1,4}/g) || [];
             return (
@@ -41,7 +62,7 @@ export function CreateCardForm( { accountID, cardsUser }: any ) {
                 }, "flex justify-between text-[18px] z-20")}
                 >
                     {parts.map((part, index) => (
-                        <p key={index} className="flex-1">{part}</p>
+                        <p key={index} className="flex-1 ">{part}</p>
                     ))}
                 </div>
             );
@@ -112,10 +133,18 @@ export function CreateCardForm( { accountID, cardsUser }: any ) {
             }
 
             {hasErrors ?
+              <span className="absolute text-lg bg-gray-2 w-[40px] h-[28px] rounded-md left-6 top-6 transition"></span>
+            : <span className="absolute text-lg rounded-md left-6 top-6 transition">
+                <Chip/>
+              </span>
+            }
+
+            {hasErrors ?
               <span className="absolute text-lg bg-gray-2 w-[43px] h-[32px] rounded-md right-4 top-4 transition"></span>
             : <span className="absolute text-lg rounded-md right-4 top-4 transition">
-                <Image src="/imgs/logoVisa.png" alt="icon" width={78} height={43}/>
-              </span>}
+                {displayIconCreditCard(creditCardType)}
+              </span>
+            }
       
             {getCardNumberDisplay()}
 
@@ -134,7 +163,7 @@ export function CreateCardForm( { accountID, cardsUser }: any ) {
                 <input                                                                                               
                     id="fullCardNumber"                    
                     {...register("fullCardNumber", {required: true, pattern: { value: /^[+]?(\d.*){6,}$/, message: "El teléfono debe contener al menos 6 números" }})}
-                    className="p-4 border-[1.6px] outline-none focus:border-select-1 text-black opacity-50 w-full rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.10)]
+                    className="p-4 border-[1.6px] outline-none border-gray-1 focus:border-select-1 focus:ring-0 text-black opacity-50 w-full rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.10)]
                                 xl:w-[360px] md:min-h-16"
                     placeholder="Número de la tarjeta*"
                     autoComplete="fullCardNumber"                            
@@ -145,7 +174,7 @@ export function CreateCardForm( { accountID, cardsUser }: any ) {
                     type="text"
                     {...register("firstAndSecondName", { required: true, pattern: { value: /^(?=.*\s).{5,}$/, message: "El nombre debe contener al menos 5 caracteres y un espacio en blanco"
                     }})}
-                    className="p-4 border-[1.6px] outline-none focus:border-select-1 text-black opacity-50 w-full rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.10)]
+                    className="p-4 border-[1.6px] outline-none border-gray-1 focus:border-select-1 focus:ring-0 text-black opacity-50 w-full rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.10)]
                                 xl:w-[360px] md:min-h-16"
                     placeholder="Nombre y apellido*"
                     autoComplete="firstAndSecondName"
@@ -157,7 +186,7 @@ export function CreateCardForm( { accountID, cardsUser }: any ) {
                     id="expirationDate"
                     type="text"
                     {...register("expirationDate", { required: true, pattern: { value: /^[+]?(\d.*){6,}$/, message: "La fecha de expiración debe contener al menos 6 números" }})}
-                    className="p-4 border-[1.6px] outline-none focus:border-select-1 text-black opacity-50 w-full rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.10)] 
+                    className="p-4 border-[1.6px] outline-none border-gray-1 focus:border-select-1 focus:ring-0 text-black opacity-50 w-full rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.10)] 
                     md:placeholder:whitespace-normal md:placeholder:break-words md:min-h-16 md:pt-0 lg:whitespace-nowrap lg:p-4 xl:w-[360px]"
                     placeholder="Fecha de vencimiento*"
                     autoComplete="expirationDate"
@@ -166,7 +195,7 @@ export function CreateCardForm( { accountID, cardsUser }: any ) {
                 <input
                     id="securityCode"
                     {...register("securityCode", { required: true, pattern: { value: /^[+]?(\d.*){3,}$/, message: "El código de seguridad debe contener al menos 3 números" }})}
-                    className="p-4 border-[1.6px] outline-none focus:border-select-1 text-black opacity-50 w-full rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.10)] 
+                    className="p-4 border-[1.6px] outline-none border-gray-1 focus:border-select-1 focus:ring-0 text-black opacity-50 w-full rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.10)] 
                     md:placeholder:whitespace-normal md:placeholder:break-words md:min-h-16 md:pt-0 lg:whitespace-nowrap lg:p-4 xl:w-[360px]"
                     placeholder="Código de seguridad*"
                     autoComplete="securityCode"

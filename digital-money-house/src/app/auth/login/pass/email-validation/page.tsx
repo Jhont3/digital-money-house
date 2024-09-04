@@ -2,10 +2,11 @@
 "use client"
 import { useLogInContext } from '@/context';
 import { useFormC } from '@/hooks';
+import { getAccountInfo } from '@/services';
 import clsx from 'clsx';
+import { setCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
-
 
 export default function EmailValidationPage() {
 
@@ -62,15 +63,21 @@ export default function EmailValidationPage() {
       console.log(data);
 
       localStorage.setItem("token", data.token);
-      // TODO
-      // localStorage.setItem("token-init-date", new Date().getTime());
+
+      setCookie('authToken', data.token, {
+        expires: new Date(Date.now() + 3600 * 1000),
+      });
+
+      const accountData = await getAccountInfo(data.token)
+      localStorage.setItem("account-id", accountData.id.toString());
+
       onResetForm();
       setFinalForm(  {
           email: "",
           password: "",
       });
       
-      router.push(`/`);
+      router.push(`/account`);
 
     } catch (error) {
       console.error('Error during login:', error);
@@ -95,7 +102,7 @@ export default function EmailValidationPage() {
                     'border-dark-1' : isValidCode || isValidCode == undefined, 
                     'border-error-2' : isValidCode == false,
                   },
-                  'text-black text-base w-full py-3 px-4 rounded-lg border-[1.6px]')} 
+                  'text-black text-base w-full py-3 px-4 rounded-lg border-[1.6px] border-dark-1 focus:border-dark-1')} 
                   placeholder='Código'
                   autoComplete='current-password'
               />

@@ -8,7 +8,6 @@ import { FormEvent, useState } from 'react';
 import { setCookie } from 'cookies-next';
 import { getAccountInfo } from '@/services';
 
-
 export default function LoginPassPage() {
 
   const { finalStateForm, setFinalForm, emailValidated } = useLogInContext();
@@ -62,7 +61,7 @@ export default function LoginPassPage() {
       localStorage.setItem("token", data.token);
 
       setCookie('authToken', data.token, {
-        expires: new Date(Date.now() + 86400 * 1000),
+        expires: new Date(Date.now() + 3600 * 1000),
       });
 
       const accountData = await getAccountInfo(data.token)
@@ -95,7 +94,7 @@ export default function LoginPassPage() {
                     'border-dark-1' : isValidPass || isValidPass == undefined, 
                     'border-error-2' : isValidPass == false,
                   },
-                  'text-black text-base w-full py-3 px-4 rounded-lg border-[1.6px]')} 
+                  'text-black text-base w-full py-3 px-4 rounded-lg border-[1.6px] border-dark-1 focus:border-dark-1 ')} 
                   placeholder='Contraseña'
                   autoComplete='current-password'
               />
@@ -106,7 +105,7 @@ export default function LoginPassPage() {
               <div className={ clsx({
                 'hidden': isValidPass !== false
               },   
-              'text-error-1 italic text-sm text-center absolute left-1/2 -bottom-10 transform -translate-x-1/2 w-full')}>
+              'text-error-1 italic text-sm text-center absolute left-1/2 -bottom-10 transform -translate-x-1/2 w-full ')}>
                   <p>Contraseña incorrecta. Vuelve a intentarlo</p>
               </div>
           </div>

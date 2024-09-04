@@ -63,7 +63,7 @@ export const CreditCard = ({ cardsUser, accountId, onSelectCardPg }: any) => {
             )}
 
             {onSelectCardPg && (
-              <div className="mt-4 flex items-center">
+              <div className="mt-4 flex items-center relative">
                 <input
                   type="radio"
                   name="selectedCard"
@@ -71,13 +71,13 @@ export const CreditCard = ({ cardsUser, accountId, onSelectCardPg }: any) => {
                   checked={selectedCardId === card.number_id}
                   onChange={() => handleSelect(card.number_id)}
                   className="w-[18px] h-[18px] cursor-pointer appearance-none border-[1.6px] border-dark-1 checked:bg-green-1 
-                  rounded-full"
-                />
+                  rounded-full "
+                />              
               </div>
             )}
           </div>
 
-          <hr className="md:border-t md:border-transparent md:border-black" />
+          <hr className="md:border-t md:border-black" />
         </div>
       ))}
     </>

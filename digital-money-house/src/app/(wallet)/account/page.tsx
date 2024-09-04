@@ -49,7 +49,7 @@ export default async function AccountPage() {
       <article className="bg-white p-4 rounded-lg flex flex-col gap-4 shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-8 md:py-10">
         
         <p className="text-dark-1 font-bold">Tu actividad</p>
-        <hr className="md:border-t md:border-transparent md:border-black"/>
+        <hr className="md:border-t md:border-black"/>
 
         <UserActivity itemsPerPage={10} showPagination={false} allActivities={activitiesShowByOrder}/>
 

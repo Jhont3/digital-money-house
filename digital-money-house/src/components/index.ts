@@ -14,6 +14,10 @@ export * from './common/icons/Claro';
 export * from './common/icons/Personal';
 export * from './common/icons/DMH';
 export * from './common/icons/Filter';
+export * from './common/icons/Visa';
+export * from './common/icons/Chip';
+export * from './common/icons/AmericanExpress';
+export * from './common/icons/Mastercard';
 export * from './ui/subtitle/Subtitle';
 
 export * from './credit-card/CreditCard';
@@ -23,5 +27,3 @@ export * from './payment-method/GoToAmountBtn';
 export * from './confirmation/Confirmation';
 export * from './filter-modal/FilterModalActivities';
 export * from './my-activity/ActivityTittleFilter';
-
-
