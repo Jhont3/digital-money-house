@@ -2,8 +2,8 @@
 "use client"
 import { Check, Subtitle } from "@/components";
 import { roboto } from "@/config";
-import { mockCVU } from "@/lib";
 import { UsePaymentStore } from "@/store";
+import { useAccountStore } from "@/store/account-data";
 import { formatDate, getCreditCardType } from "@/utils";
 import { useRouter } from "next/navigation";
 
@@ -11,6 +11,7 @@ export const Confirmation = ( { onDepositPg, onPayServicesPg } : any ) => {
 
     const router = useRouter()
     const { paymentData, clearPaymentInfo } = UsePaymentStore();
+    const { accountData } = useAccountStore()
     
     const goToAccount = () => {
         clearPaymentInfo()
@@ -61,7 +62,7 @@ export const Confirmation = ( { onDepositPg, onPayServicesPg } : any ) => {
                 {!onPayServicesPg &&
                 <div className="text-white pb-9">
                     <p className="pb-1">Brubank</p>
-                    <p className="text-xs ">CVU {mockCVU}</p>
+                    <p className="text-xs ">CVU {accountData.cvu}</p>
                 </div>
                 }
 

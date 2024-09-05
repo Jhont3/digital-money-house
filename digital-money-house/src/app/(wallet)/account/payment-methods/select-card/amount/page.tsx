@@ -1,14 +1,27 @@
 "use client";
 import { UsePaymentStore } from "@/store";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Step1Amount } from "./Step1Amount";
 import { Step2Amount } from "./Step2Amount";
 import { Subtitle } from "@/components";
+import { getCookieClient } from "@/utils";
+import { getAccountInfo } from "@/services";
+import { useAccountStore } from "@/store/account-data";
 
 export default function AmountPage() {
-  const router = useRouter();
 
+  const { setAccountInfo } = useAccountStore()
+  
+  useEffect(() => {
+    const token = getCookieClient('authToken') || '';
+    const fetchAccountInfo = async () => {
+      const accountInfo = await getAccountInfo(token);
+      setAccountInfo(accountInfo)
+    }
+    fetchAccountInfo()
+  }, [setAccountInfo])
+
+  
   const [ step, setStep ] = useState(1);
   const [ amount, setAmount ] = useState<string>("");
   
@@ -48,8 +61,7 @@ export default function AmountPage() {
 			)}
 
 			{step === 2 && (
-        <Step2Amount           
-        />
+        <Step2Amount />
       )}
      
     </section>

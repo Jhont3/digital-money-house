@@ -1,16 +1,17 @@
 "use client"
 import { EditPencil } from "@/components";
-import { mockCVU } from "@/lib";
 import { postDeposit } from "@/services";
 import { UsePaymentStore } from "@/store";
+import { useAccountStore } from "@/store/account-data";
 import { errorAlert, successAlert } from "@/utils";
 import { useRouter } from "next/navigation";
 import { useState, KeyboardEvent } from "react";
 
 interface Editing { amount: boolean; }
 
-export function Step2Amount( {}: any ) {
+export function Step2Amount( ) {
 
+    const { accountData } = useAccountStore()
     const { paymentData, setPaymentInfo } = UsePaymentStore();
     const [ amount, setAmount ] = useState<string>(`${paymentData.totalAmount}` || "");
     const [ isValidAmount, setIsValidAmount ] = useState<undefined | boolean>(undefined);
@@ -116,7 +117,7 @@ export function Step2Amount( {}: any ) {
 
             <div className="text-white pb-9">
                 <p>Brubank</p>
-                <p className="text-xs">CVU {mockCVU}</p>
+                <p className="text-xs">CVU {accountData.cvu}</p>
             </div>
 
             <button type="submit" className="hidden md:flex items-center justify-center lg:w-full lg:justify-end" >

@@ -1,5 +1,4 @@
 "use client"
-import { mockCVU } from "@/lib"
 import { handleCopyClipboard } from "@/utils"
 import Image from "next/image"
 
@@ -21,20 +20,20 @@ export const CvuAndAlias = ({accountInfo}:any) => {
             <div className="flex justify-between">
                 <p className=" text-green-1 font-bold text-xl">CVU</p>
                 <span className="flex items-center">
-                    <Image src="/imgs/copy.png" alt="icon" width={24} height={24} onClick={() => {handleCopyClipboard(mockCVU)}}/>
+                    <Image src="/imgs/copy.png" alt="icon" width={24} height={24} onClick={() => {handleCopyClipboard(accountInfo.cvu)}}/>
                 </span>
             </div>
 
-            <p className="text-gray-1 md:col-span-1">{mockCVU}</p>
+            <p className="text-gray-1 md:col-span-1">{accountInfo.cvu}</p>
         </div>
 
         <div className="hidden md:grid col-span-4 grid-cols-4">
             <div className="col-span-3 row-span-2">
                 <p className="text-green-1 font-bold text-xl">CVU</p>
-                <p className="text-gray-1">{mockCVU}</p>
+                <p className="text-gray-1">{accountInfo.cvu}</p>
             </div>
             <span className="flex items-center md:row-span-2 md:justify-end">
-                <Image src="/imgs/copy.png" alt="icon" width={32} height={32} onClick={() => {handleCopyClipboard(mockCVU)}}/>
+                <Image src="/imgs/copy.png" alt="icon" width={32} height={32} onClick={() => {handleCopyClipboard(accountInfo.cvu)}}/>
             </span>
         </div>
 
