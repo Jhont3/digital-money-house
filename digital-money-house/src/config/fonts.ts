@@ -1,4 +1,4 @@
-import { Open_Sans } from "next/font/google";
+import { Open_Sans, Roboto } from "next/font/google";
 
 export const openSans = Open_Sans({ subsets: ["latin"] });
-
+export const roboto = Roboto({ subsets: ["latin"], weight: ["400", "700"] });

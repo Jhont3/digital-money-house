@@ -1,7 +1,6 @@
 export const Check = () => (
 <svg
-  width="45"
-  height="47"
+  className="w-[45px] h-[47px] md:w-[66px] md:h-[68]"
   viewBox="0 0 45 47"
   fill="none"
   xmlns="http://www.w3.org/2000/svg"

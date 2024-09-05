@@ -2,9 +2,10 @@
 import { Transaction } from "@/interfaces";
 import { postTransaction } from "@/services";
 import { UsePaymentStore } from "@/store";
+import { errorAlert } from "@/utils";
 import { useRouter } from "next/navigation";
 
-export function PayServiceButton ( {accountId}: any ) {
+export function PayServiceButton ( ) {
     
     const { paymentData } = UsePaymentStore();
     console.log(paymentData);
@@ -15,6 +16,11 @@ export function PayServiceButton ( {accountId}: any ) {
         event.preventDefault();
         const newDate = new Date().toISOString();
         const accountId = localStorage.getItem('account-id');
+
+        if (!paymentData.selectedCardId) {
+            errorAlert("Seleccione una tarjeta de credito")
+            return
+        }
 
         const normalizedData: Transaction = {   
             amount: -1153.73,
@@ -36,13 +42,15 @@ export function PayServiceButton ( {accountId}: any ) {
         }
     };
 
-
     return (
-        <button
-            onClick={handleConfirmationSubmit}
-            className= {"bg-green-1 text-dark-1 font-bold py-2 px-4 rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.10)]"}         
-        >
-            Continuar
-        </button>
+        <div className="w-full flex justify-end">
+            <button
+                onClick={handleConfirmationSubmit}
+                className="bg-green-1 text-dark-1 font-bold py-2 px-4 rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.10)] w-40 h-12
+                md:w-56 "         
+            >
+                Continuar
+            </button>
+        </div>
     )
 }

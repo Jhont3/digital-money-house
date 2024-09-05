@@ -45,12 +45,13 @@ export function Step1PayService( {setStep}: any ) {
                     value={searchInput}
                     onChange={handleSearchInputChange}
                     onKeyDown={handleSearchInputKeyDown}
-                    className="p-2 pl-8 w-full h-16 rounded-lg border-[1.6px] outline-none border-gray-1 focus:border-select-1 focus:ring-0"
+                    className="p-2 pl-8 w-full h-16 rounded-lg border-[1.6px] outline-none border-gray-1 focus:border-select-1 
+                    focus:ring-0 shadow-[0_4px_4px_rgba(0,0,0,0.10)]"
                     placeholder="Buscá entre más de 5.000 empresas"
                 />
             </div>
 
-            <div className="bg-white p-5 rounded-lg ">
+            <div className="bg-white p-5 rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.10)]">
 
                 <h3 className="font-bold pb-5">Más recientes</h3>
 

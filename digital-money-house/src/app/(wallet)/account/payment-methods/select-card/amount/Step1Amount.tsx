@@ -8,7 +8,7 @@ export function Step1Amount( {handleAmountSubmit, onChangeInput, amount, isValid
         <>
             <div className="bg-dark-1 rounded-lg px-5 py-4 md:px-14 md:py-12">
                 <h2 className="font-bold text-xl text-green-1 pb-4 md:text-2xl md:pb-6">
-                ¿Cuánto quieres ingresar a la cuenta?
+                    ¿Cuánto querés ingresar a la cuenta?
                 </h2>
         
                 <form >

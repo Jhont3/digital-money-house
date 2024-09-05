@@ -14,23 +14,25 @@ export function Step3PayService({cardsUser, accountInfo}: any) {
                     <h2 className="font-bold text-xl text-green-1 pb-4 md:p-0 md:text-2xl">
                         Cablevisión
                     </h2>
-                    <span className='hidden md:inline-block text-white font-semibold text-xs underline'>Ver detalles del pago</span>
+                    <span className='hidden md:inline-block text-white font-semibold text-xs underline md:text-base'>
+                        Ver detalles del pago
+                    </span>
                 </div>
-                <hr className="border-t border-gray-[#cecece]] py-2"/>
+                <hr className="border-t border-gray-[#cecece]] py-2 md:border-dark-2"/>
                 <div className='text-white font-bold flex justify-between'>
-                    <span >Total a pagar</span>
-                    <span >1.153,75</span>
+                    <span className='md:text-2xl'>Total a pagar</span>
+                    <span className='md:text-2xl'>1.153,75</span>
                 </div>
             </div>
 
             <article className="bg-white p-5 rounded-lg flex flex-col gap-4 md:p-8 md:py-10">       
                 <p className="text-dark-1 font-bold">Tus tarjetas</p>
-                <hr className="md:border-t  md:border-black"/>
+                <hr className="md:border-t md:border-black"/>
 
-                <CreditCard cardsUser={cardsUser} accountId={accountInfo.id} onSelectCardPg/>
+                <CreditCard cardsUser={cardsUser} accountId={accountInfo.id} onSelectCardPg />
             </article>
 
-            <PayServiceButton accountId={accountInfo.id} />
+            <PayServiceButton />
         </>
     );
 }

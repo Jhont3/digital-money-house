@@ -65,7 +65,7 @@ export function Step2Amount( {}: any ) {
             const resp = await postDeposit( Number(accountId), normalizedData);
                 
             if (!resp.error) {
-                setAmount("")                
+                setAmount("")             
                 router.push(`/account/payment-methods/select-card/amount/confirmation`);
                 router.refresh();
             }
