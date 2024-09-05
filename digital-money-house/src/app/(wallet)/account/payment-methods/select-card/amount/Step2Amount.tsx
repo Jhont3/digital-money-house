@@ -4,6 +4,7 @@ import { postDeposit } from "@/services";
 import { UsePaymentStore } from "@/store";
 import { useAccountStore } from "@/store/account-data";
 import { errorAlert, successAlert } from "@/utils";
+import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { useState, KeyboardEvent } from "react";
 
@@ -102,7 +103,11 @@ export function Step2Amount( ) {
                     id="amount"                     
                     name="amount"
                     value={amount}
-                    className="font-bold text-white bg-dark-1 outline-none border-gray-1 focus:border-select-1 focus:ring-0"                                           
+                    className={clsx({
+                        "text-green-1": !editing.amount,
+                        "text-white": editing.amount
+                    },
+                        "font-bold bg-dark-1 outline-none border-gray-1 focus:border-select-1 focus:ring-0")}                                           
                     autoComplete={'off'}                   
                     onChange={onChangeInput}
                     onKeyDown={handleKeyDown}

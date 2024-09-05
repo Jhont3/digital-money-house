@@ -1,6 +1,7 @@
+import { UserInputs } from "@/interfaces";
 import {httpGetRevalidate, httpPatch} from "./common/http";
 
-export async function getUserInfo(id: number, token: string, revalidateTag = "", options = {}): Promise<any> {
+export async function getUserInfo(id: number, token: string, revalidateTag = "", options = {}): Promise<UserInputs> {
 	return httpGetRevalidate(`/users/${id}`, token, revalidateTag, {
 		headers: {
       "Content-Type": "application/json",
@@ -13,7 +14,6 @@ export async function getUserInfo(id: number, token: string, revalidateTag = "",
 			throw error;
 		});
 }
-
 
 export async function patchUserInfo(id: number, body: any, options = {}): Promise<any> {
 	return httpPatch(`/users/${id}`,body, {

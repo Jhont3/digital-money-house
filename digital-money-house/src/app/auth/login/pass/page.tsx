@@ -31,7 +31,6 @@ export default function LoginPassPage() {
 
       if (!passValid) return;
 
-      console.log(emailValidated, "email validation")
       if (!emailValidated) {
         setFinalForm({ ...formState, password: formState.password });
         onResetForm();
@@ -56,7 +55,6 @@ export default function LoginPassPage() {
       }
 
       const data = await response.json();
-      console.log(data);
 
       localStorage.setItem("token", data.token);
 
@@ -74,8 +72,6 @@ export default function LoginPassPage() {
       console.error('Error during login:', error);
     }
 
-    console.log(formState, "form state")
-    console.log(finalStateForm, "final state")
     onResetForm();
   }
 

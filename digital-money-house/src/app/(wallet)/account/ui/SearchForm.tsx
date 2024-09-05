@@ -16,7 +16,6 @@ export function SearchForm ( {allActivities, onDashboard}:SearchFormProps ) {
 
     const { activities, setActivities, inputSearch, setInputSearch } = useActivitiesManagement()
     const { isFilterModalOpen, setIsFilterModalOpen } = useFilterModalContext()
-    console.log(activities);
 
     useEffect(() => {
         if(!inputSearch ) {

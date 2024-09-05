@@ -4,8 +4,6 @@ import { PayServiceButton } from './ui/PayServiceButton';
 
 export function Step3PayService({cardsUser, accountInfo}: any) {
 
-    console.log({accountInfo});
-
     return (
         <>
             <div className="bg-dark-1 rounded-lg px-5 py-4 md:px-14 md:py-12 flex flex-col gap-3 ">

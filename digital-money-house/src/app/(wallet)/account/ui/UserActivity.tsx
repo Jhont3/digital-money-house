@@ -12,7 +12,6 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
   const searchQuery = searchParams.get('search')?.toLowerCase() || '';
   
   const { activities, setActivities, inputSearch, setInputSearch } = useActivitiesManagement()
-  console.log(activities);
 
   const [ currentPage, setCurrentPage ] = useState(1);
   const [ loading, setLoading ] = useState(true);
@@ -62,24 +61,26 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
     <>
       {paginatedActivities?.map((activity, i) => (
         <>
-        <div className="flex justify-between" key={`${activity.id}${i}`}>
-          <p className="flex items-center text-sm gap-2 text-dark-1 md:text-base md:gap-3">
-              <span>
-                  <Image src="/imgs/greenCircle.png" alt="icon" width={24} height={24} className="md:w-8 md:h-8" />
-              </span>
-            {activity.destination === "My account" ? 'Ingresaste dinero' : `${activity.description}`}
-          </p>
-          <div className="flex flex-col">
-              <span className="text-sm text-dark-2 text-end md:text-base">
-                  {activity.amount > 0 ? formatNumberToARS(activity.amount) : `-${formatNumberToARS(Math.abs(activity.amount))}`}
-              </span>
-              <span className="text-xs text-black opacity-50 text-end md:text-sm md:opacity-40">
-                  {getDayOfWeek(activity.dated)}
-              </span>
+        <div key={`${activity.id}${i}`} className="flex flex-col gap-4 ">
+          <div className="flex justify-between" >
+            <p className="flex items-center text-sm gap-2 text-dark-1 md:text-base md:gap-3">
+                <span>
+                    <Image src="/imgs/greenCircle.png" alt="icon" width={24} height={24} className="md:w-8 md:h-8" />
+                </span>
+              {activity.destination === "My account" ? 'Ingresaste dinero' : `${activity.description}`}
+            </p>
+            <div className="flex flex-col">
+                <span className="text-sm text-dark-2 text-end md:text-base">
+                    {activity.amount > 0 ? formatNumberToARS(activity.amount) : `-${formatNumberToARS(Math.abs(activity.amount))}`}
+                </span>
+                <span className="text-xs text-black opacity-50 text-end md:text-sm md:opacity-40">
+                    {getDayOfWeek(activity.dated)}
+                </span>
+            </div>
           </div>
+          
+          <hr key={`${i}${activity.id}`} className="md:border-t md:border-black" />
         </div>
-        
-        <hr key={`${i}${activity.id}`} className="md:border-t md:border-black" />
         </>
         
       ))}
@@ -90,7 +91,7 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
             <button
               key={i}
               onClick={() => setCurrentPage(i + 1)}
-              className={`px-2 py-1 rounded text-dark-1 font-bold shadow-[0_4px_4px_rgba(0,0,0,0.10)] ${i + 1 === currentPage ? 'bg-gray-1' : ''}`}
+              className={`px-2 py-1 rounded text-dark-1 font-bold ${i + 1 === currentPage ? 'bg-gray-1' : ''}`}
             >
               {i + 1}
             </button>

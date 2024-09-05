@@ -10,7 +10,7 @@ export default async function WalletLayout( {children} : { children: React.React
 
   return (
     <>  
-        <Navbar isBgGreen={false} onUserPage={true} />
+        <Navbar isBgGreen={false} onUserPage={true} optionalLogoRoute="/account" profileInfo={profileInfo}/>
         <main className={"p-4 min-h-[86vh] bg-gray-1 md:p-0 md:grid md:grid-cols-12 md:gap-0 "}>
           <TopSidebar profileInfo={profileInfo}/>
           <SideMenu/>

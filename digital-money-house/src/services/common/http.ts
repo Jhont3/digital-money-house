@@ -198,6 +198,9 @@ export const httpPatch = async (endpoint: string, body: object, options: HttpGet
     method: 'PATCH',
     headers,
     body: JSON.stringify(body),
+    next: {
+      tags: ["user-info"],
+    }
   });
   return handleResponse(response);
 }

@@ -14,8 +14,8 @@ export const Confirmation = ( { onDepositPg, onPayServicesPg } : any ) => {
     const { accountData } = useAccountStore()
     
     const goToAccount = () => {
-        clearPaymentInfo()
         router.push(`/account`);
+        clearPaymentInfo()
     }
 
     return (
@@ -46,7 +46,7 @@ export const Confirmation = ( { onDepositPg, onPayServicesPg } : any ) => {
                 <div>
                     <p className="text-xs pb-1 md:text-base">{formatDate(new Date().toISOString())}</p>
                     <p className="text-green-1 font-bold text-xl">
-                        {onDepositPg && <span>${paymentData.totalAmount || "Cargando..."}</span>}
+                        {onDepositPg && <span>${paymentData.totalAmount}</span>}
                         {onPayServicesPg && <span>$1.153,75</span>}                        
                     </p>
                 </div>

@@ -25,15 +25,12 @@ export default function EmailValidationPage() {
     e.preventDefault();
 
     try {
-      console.log(formState.validationCode)
 
       const code = formState?.validationCode ?? '';
       const codeValid = validateCode(code);
       setIsValidCode(codeValid);
 
       if (!codeValid) return;
-
-      console.log(finalStateForm, "final state")
 
       const response = await fetch('https://digitalmoney.digitalhouse.com/api/login', {
         method: 'POST',
@@ -60,7 +57,6 @@ export default function EmailValidationPage() {
       }
 
       const data = await response.json();
-      console.log(data);
 
       localStorage.setItem("token", data.token);
 
@@ -83,8 +79,6 @@ export default function EmailValidationPage() {
       console.error('Error during login:', error);
     }
 
-    console.log(formState, "form state")
-    console.log(finalStateForm, "final state")
     onResetForm();
   }
 

@@ -1,7 +1,6 @@
 import { CvuAndAlias, ProfileForm, Subtitle } from "@/components";
 import ArrowIcon from "@/components/ui/svg/ArrowIcon";
 import { getAccountInfo, getUserInfo } from "@/services";
-import { errorAlert, successAlert } from "@/utils";
 import { cookies } from "next/headers";
 import Link from "next/link";
 

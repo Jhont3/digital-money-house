@@ -27,7 +27,7 @@ export const NavInUserPage = ({profileInfo}:any) => {
             onClick={()=>{setIsSidebarOpen(true)}}
         />
 
-        <Link href={'/account'}>
+        <Link href={'/account/profile'}>
           <p className="hidden md:inline-flex text-white font-bold items-center h-full">
             Hola, {profileInfo?.firstname} {profileInfo?.lastname}
           </p>

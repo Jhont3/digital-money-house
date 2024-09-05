@@ -1,6 +1,10 @@
 "use client";
 import { Editing, UserInputs } from "@/interfaces";
+import { patchUserInfo } from "@/services";
+import { errorAlert, successAlert } from "@/utils";
+import clsx from "clsx";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect, useState, KeyboardEvent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -51,13 +55,27 @@ export const ProfileForm = ({ profileInfo, token }: any) => {
     }));
   };
 
-
+  const router = useRouter()
 
   const onSubmit: SubmitHandler<UserInputs> = async (data) => {
     const { password, ...restData } = data;
-    const submitData = password === "******" || password === "" ? restData : data;
-    console.log(submitData, "data del submit");
-    // Perform the actual form submission logic here
+    let submitData = password === "******" || password === "" ? restData : data;
+
+    if (submitData.dni !== 0) {
+      return
+    }
+    
+    try {
+      await patchUserInfo(profileInfo.id, submitData)
+      successAlert("Cambios realizados!!")
+      await fetch("/api/revalidate?tag=user-info");
+      router.refresh();
+      
+    } catch (error) {
+      console.error(error);
+      errorAlert("Algo fue mal, intentalo mas tarde...")
+    }
+    
   };
 
   return (
@@ -74,7 +92,11 @@ export const ProfileForm = ({ profileInfo, token }: any) => {
         <div className="flex justify-between md:col-span-2 lg:col-span-3">
           <input
             id="email"
-            className="opacity-50 outline-none border-gray-1 focus:border-select-1 focus:ring-0"
+            className={clsx({
+              "opacity-100": !editing.email,
+              "opacity-50": editing.email,
+            },
+              "outline-none border-gray-1 focus:border-select-1 focus:ring-0")}
             {...register("email", { required: true })}
             autoComplete="securityCode"
             defaultValue={profileInfo?.email}
@@ -91,7 +113,11 @@ export const ProfileForm = ({ profileInfo, token }: any) => {
         <div className="flex justify-between md:col-span-2 lg:col-span-3">
           <input
             id="fullname"
-            className="opacity-50 outline-none border-gray-1 focus:border-select-1 focus:ring-0"
+            className={clsx({
+              "opacity-100": !editing.fullname,
+              "opacity-50": editing.fullname,
+            },
+              "outline-none border-gray-1 focus:border-select-1 focus:ring-0")}
             autoComplete="fullname"
             defaultValue={`${profileInfo?.firstname} ${profileInfo?.lastname}`}
             onChange={handleFullnameChange}
@@ -120,8 +146,12 @@ export const ProfileForm = ({ profileInfo, token }: any) => {
         <div className="flex justify-between md:col-span-2 lg:col-span-3">
           <input
             id="dni"
-            className="opacity-50 outline-none border-gray-1 focus:border-select-1 focus:ring-0"
-            type="text"
+            type="number"
+            className={clsx({
+              "opacity-100": !editing.dni,
+              "opacity-50": editing.dni,
+            },
+              "outline-none border-gray-1 focus:border-select-1 focus:ring-0")}
             autoComplete="dni"
             {...register("dni")}
             defaultValue={`${profileInfo?.dni}`}
@@ -150,7 +180,11 @@ export const ProfileForm = ({ profileInfo, token }: any) => {
         <div className="flex justify-between md:col-span-2 lg:col-span-3">
           <input
             id="phone"
-            className="opacity-50 outline-none border-gray-1 focus:border-select-1 focus:ring-0"
+            className={clsx({
+              "opacity-100": !editing.phone,
+              "opacity-50": editing.phone,
+            },
+              "outline-none border-gray-1 focus:border-select-1 focus:ring-0")}
             type="text"
             autoComplete="phone"
             {...register("phone")}
@@ -180,7 +214,11 @@ export const ProfileForm = ({ profileInfo, token }: any) => {
         <div className="flex justify-between md:col-span-2 lg:col-span-3">
           <input
             id="password"
-            className="opacity-50 outline-none border-gray-1 focus:border-select-1 focus:ring-0"
+            className={clsx({
+              "opacity-100": !editing.password,
+              "opacity-50": editing.password,
+            },
+              "outline-none border-gray-1 focus:border-select-1 focus:ring-0")}
             type="password"
             autoComplete="password"
             {...register("password")}

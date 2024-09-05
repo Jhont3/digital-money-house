@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
   const cookieHasAuthToken = request.cookies.has("authToken");
-  // console.log('url', request.nextUrl.pathname);
+ 
   const url = request.nextUrl.clone();
 
   if (!cookieHasAuthToken && url.pathname.startsWith("/account")) {

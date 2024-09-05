@@ -24,7 +24,7 @@ export default function RegisterPage() {
   const router = useRouter();
 
   const onSubmit: SubmitHandler<Inputs> = async (data)  => {
-    console.log(data, "1");
+    
     try {
 
       if (hasErrors) return;
@@ -48,11 +48,6 @@ export default function RegisterPage() {
       if (!response.ok) {
         throw new Error('Login failed');
       }
-      const responseData  = await response.json();
-
-      console.log(data);
-      console.log(responseData, "respuesta");
-      // localStorage.setItem("token", responseData?.token);
 
       reset()
       router.push(`/auth/new-account/success`);
@@ -60,13 +55,13 @@ export default function RegisterPage() {
     } catch (error) {
       console.error('Error during login:', error);
     }
-    console.log("final")
+
     reset()
   }
 
   return (
     <>
-      <Navbar isBgGreen={true} loginBtnOn={true} onUserPage={false}/>
+      <Navbar isBgGreen={true} loginBtnOn={true} onUserPage={false} />
       <div className="w-full min-h-[86vh] bg-dark-1 flex flex-col justify-center">
         <h2 className="text-lg font-semibold text-white text-center py-4 ">
           Crear cuenta

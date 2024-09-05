@@ -14,9 +14,6 @@ interface FilterModalProps {
 export const FilterModalActivities = ({ allActivities }: FilterModalProps) => {
   const [ selectedFilter, setSelectedFilter ] = useState<string>("");
 
-  console.log(allActivities);
-  
-
   const filters = [
     "Hoy",
     "Ayer",
@@ -31,7 +28,6 @@ export const FilterModalActivities = ({ allActivities }: FilterModalProps) => {
   const { isFilterModalOpen, setIsFilterModalOpen } = useFilterModalContext()
 
   const { activities, setActivities } = useActivitiesManagement();
-  console.log(activities);
 
   const handleFilterChange = (filter: string) => {
     setSelectedFilter(filter);

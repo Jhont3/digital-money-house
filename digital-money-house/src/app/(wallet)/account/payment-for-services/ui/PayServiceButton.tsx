@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 export function PayServiceButton ({accountInfo}:any) {
     
     const { paymentData } = UsePaymentStore();
-    console.log(paymentData);
     
     const router = useRouter();
 
@@ -27,8 +26,6 @@ export function PayServiceButton ({accountInfo}:any) {
             dated: newDate.toString(),
             description: `Pago a ${paymentData.destination}`,
         };
-
-        console.log(normalizedData);
         
         try {
             if (accountInfo.available_amount < 1153.73) {

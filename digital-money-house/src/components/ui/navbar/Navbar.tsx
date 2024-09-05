@@ -1,35 +1,18 @@
 "use client";
 import Link from "next/link";
 import clsx from 'clsx';
-import { useEffect, useState } from "react";
-import { getCookie } from 'cookies-next';
-import { getAccountInfo, getUserInfo } from "@/services";
 import { NavInUserPage } from "./NavInUserPage";
 import { DMH } from "@/components/common/icons/DMH";
-
 
 interface NavbarProps {
   isBgGreen: boolean;
   loginBtnOn?: boolean;
   onUserPage: boolean;
+  optionalLogoRoute?: string;
+  profileInfo?: any
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ isBgGreen, loginBtnOn, onUserPage }) => {
-  const [profileInfo, setProfileInfo] = useState<any>(null);
-  console.log(profileInfo);
-  
-
-  useEffect(() => {
-    if (onUserPage) {
-      const fetchData = async () => {
-        const token = getCookie('authToken') as string || '';
-        const accountInfo = await getAccountInfo(token);
-        const profileInfo = await getUserInfo(accountInfo.user_id, token);
-        setProfileInfo(profileInfo);
-      }
-      fetchData();
-    };
-  }, [onUserPage]);
+export const Navbar: React.FC<NavbarProps> = ({ isBgGreen, loginBtnOn, onUserPage, optionalLogoRoute, profileInfo }) => {
 
   return (
     <nav className={clsx({
@@ -41,7 +24,7 @@ export const Navbar: React.FC<NavbarProps> = ({ isBgGreen, loginBtnOn, onUserPag
     )}>
       {/* Page logo */}
       <div className="p-2">
-          <DMH href="/" isBgGreen={isBgGreen}/>
+          <DMH href={optionalLogoRoute || "/"} isBgGreen={isBgGreen}/>
       </div>
 
       {/* Normal login/register links */}

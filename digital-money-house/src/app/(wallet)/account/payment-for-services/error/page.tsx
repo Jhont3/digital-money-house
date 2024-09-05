@@ -9,8 +9,8 @@ export default function ErrorPage() {
     const { clearPaymentInfo } = UsePaymentStore();
     
     const goToPayServices = () => {
-        clearPaymentInfo()
         router.push(`/account/payment-for-services`,);
+        clearPaymentInfo()
     }
     
     return(
