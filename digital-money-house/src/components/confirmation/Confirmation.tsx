@@ -73,11 +73,11 @@ export const Confirmation = ( { onDepositPg, onPayServicesPg } : any ) => {
             </div>
 
             <div className="flex flex-col md:flex-row-reverse gap-5 mb-3">
-                <button onClick={()=>{}} className="bg-green-1 w-full h-12 text-dark-1 rounded-lg font-bold flex items-center justify-center">          
+                <button onClick={()=>{}} className="bg-green-1 w-full h-12 text-dark-1 rounded-lg font-bold flex items-center justify-center shadow-[0_4px_4px_rgba(0,0,0,0.10)]">          
                         Descargar comprobante
                 </button>
 
-                <button onClick={goToAccount}  className="bg-[#cecece] w-full h-12 text-dark-1 rounded-lg font-bold flex items-center justify-center">                 
+                <button onClick={goToAccount}  className="bg-[#cecece] w-full h-12 text-dark-1 rounded-lg font-bold flex items-center justify-center shadow-[0_4px_4px_rgba(0,0,0,0.10)]">                 
                         Ir al inicio             
                 </button>
             </div>

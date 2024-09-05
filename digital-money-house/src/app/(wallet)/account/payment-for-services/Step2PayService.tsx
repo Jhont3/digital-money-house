@@ -60,7 +60,7 @@ export function Step2PayService( {setStep}: any ) {
                     "bg-[#cecece]": !isValidAccountNumber,
                     "bg-green-1": isValidAccountNumber,
                 },
-                "mt-4  text-white py-2 px-4 rounded-lg")}             
+                "mt-4 text-dark-1 font-bold py-2 px-4 rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.10)]")}             
                 >
                 Continuar
             </button>

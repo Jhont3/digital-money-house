@@ -1,4 +1,4 @@
-import { CreditCard, GoToAmountBtn, Subtitle } from "@/components";
+import { Add, CreditCard, GoToAmountBtn, Subtitle } from "@/components";
 import { getAccountInfo, getCards } from "@/services";
 import { cookies } from "next/headers";
 import Image from "next/image";
@@ -25,11 +25,11 @@ export default async function SelectCardPage() {
                     
                 </article>
 
-                <div>
+                <div className="lg:flex lg:justify-between lg:mt-5">
                     <Link href={"/account/my-cards/new-card"}  className="flex justify-between pt-4 pb-2">
                         <div className="flex items-center gap-4 md:pt-2 md:pb-3">
                             <span className="justify-start">
-                                <Image src="/imgs/add.png" alt="add icon" width={27} height={27} className="md:w-8 md:h-8"/>
+                                <Add/>
                             </span>
                             <p className=" text-green-1 font-bold md:text-xl">Nueva tarjeta</p>
                         </div>

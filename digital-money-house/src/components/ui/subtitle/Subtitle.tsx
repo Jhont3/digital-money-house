@@ -10,7 +10,7 @@ export const Subtitle = ({ text }: SubtitleProps) => {
         <span className="flex items-center">
           <Image src="/imgs/greyArrow.png" alt="icon" width={12} height={12}/>
         </span> &nbsp;
-        <span className="underline text-base text-dark-1">{text}</span>
+        <span className="underline text-base text-dark-1 font-semibold">{text}</span>
       </p>
     )
 }

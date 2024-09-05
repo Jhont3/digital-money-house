@@ -1,9 +1,8 @@
 "use client"
 import { Transaction } from "@/interfaces";
-import { postTransaction, postTransference } from "@/services";
+import { postTransaction } from "@/services";
 import { UsePaymentStore } from "@/store";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 export function PayServiceButton ( {accountId}: any ) {
     
@@ -30,28 +29,18 @@ export function PayServiceButton ( {accountId}: any ) {
 
             if (!resp.error) {
                 router.push(`/account/payment-for-services/confirmation`);
+                router.refresh();
             }
         } catch (error) {
             console.error(error);
         }
     };
 
-	// const redirectToActivityPage = () => {
-	// 	if (searchInput.trim().length > 0) {
-	// 		router.push(`/account/my-activity?search=${searchInput}`);
-	// 	}
-	// };
 
     return (
         <button
             onClick={handleConfirmationSubmit}
-            // disabled={!isValidAccountNumber}
-            // className= {clsx({                
-            //     "bg-[#cecece]": !isValidAccountNumber,
-            //     "bg-green-1": isValidAccountNumber,
-            // },
-            // "mt-4  text-white py-2 px-4 rounded-lg")}    
-            className= {"bg-green-1 text-white py-2 px-4 rounded-lg"}         
+            className= {"bg-green-1 text-dark-1 font-bold py-2 px-4 rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.10)]"}         
         >
             Continuar
         </button>

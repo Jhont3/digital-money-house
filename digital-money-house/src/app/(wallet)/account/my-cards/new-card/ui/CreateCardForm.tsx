@@ -209,7 +209,7 @@ export function CreateCardForm( { accountID, cardsUser }: any ) {
                   className={ clsx({
                     'bg-button-1': hasErrors,
                     'bg-green-1': !hasErrors
-                }," transition text-black text-sm font-bold rounded-xl p-3 my-3 min-w-[300px] lg:min-w-[218px] md:min-w-[360px] lg:col-span-1 xl:w-[360px] md:min-h-16 lg:my-0")}
+                }," transition text-black text-sm font-bold rounded-xl p-3 my-3 min-w-[300px] lg:min-w-[218px] md:min-w-[360px] lg:col-span-1 xl:w-[360px] md:min-h-16 lg:my-0 shadow-[0_4px_4px_rgba(0,0,0,0.10)]")}
                 >
                     Continuar
                 </button>

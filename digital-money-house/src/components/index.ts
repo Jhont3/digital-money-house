@@ -20,6 +20,7 @@ export * from './common/icons/DownArrow';
 export * from './common/icons/AmericanExpress';
 export * from './common/icons/Mastercard';
 export * from './common/icons/RightArrow';
+export * from './common/icons/Add';
 export * from './ui/subtitle/Subtitle';
 
 export * from './credit-card/CreditCard';

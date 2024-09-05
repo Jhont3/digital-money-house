@@ -11,7 +11,7 @@ interface Editing { amount: boolean; }
 
 export function Step2Amount( {}: any ) {
 
-    const { paymentData, setPaymentInfo, clearPaymentInfo } = UsePaymentStore();
+    const { paymentData, setPaymentInfo } = UsePaymentStore();
     const [ amount, setAmount ] = useState<string>(`${paymentData.totalAmount}` || "");
     const [ isValidAmount, setIsValidAmount ] = useState<undefined | boolean>(undefined);
     const [ editing, setEditing ] = useState<Editing>({ amount: true, });        
@@ -67,6 +67,7 @@ export function Step2Amount( {}: any ) {
             if (!resp.error) {
                 setAmount("")                
                 router.push(`/account/payment-methods/select-card/amount/confirmation`);
+                router.refresh();
             }
     
         } catch (error) {
@@ -120,14 +121,14 @@ export function Step2Amount( {}: any ) {
             </div>
 
             <button type="submit" className="hidden md:flex items-center justify-center lg:w-full lg:justify-end" >
-                <span className="bg-green-1 w-full h-16 text-dark-1 rounded-lg font-bold flex justify-center items-center lg:w-64 "> 
+                <span className="bg-green-1 w-full h-16 text-dark-1 rounded-lg font-bold flex justify-center items-center lg:w-64 shadow-[0_4px_4px_rgba(0,0,0,0.10)]"> 
                     Continuar
                 </span>
             </button>
         </form>
 
         <button onClick={handleConfirmationSubmit} className="flex justify-end md:hidden ">
-            <span className="bg-green-1 w-40 h-12 text-dark-1 rounded-lg font-bold flex items-center justify-center"> 
+            <span className="bg-green-1 w-40 h-12 text-dark-1 rounded-lg font-bold flex items-center justify-center shadow-[0_4px_4px_rgba(0,0,0,0.10)]"> 
                 Continuar
             </span>
         </button>

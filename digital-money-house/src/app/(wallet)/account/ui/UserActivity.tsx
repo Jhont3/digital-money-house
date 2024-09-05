@@ -89,7 +89,7 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
             <button
               key={i}
               onClick={() => setCurrentPage(i + 1)}
-              className={`px-2 py-1 rounded text-dark-1 ${i + 1 === currentPage ? 'bg-gray-1' : ''}`}
+              className={`px-2 py-1 rounded text-dark-1 font-bold shadow-[0_4px_4px_rgba(0,0,0,0.10)] ${i + 1 === currentPage ? 'bg-gray-1' : ''}`}
             >
               {i + 1}
             </button>

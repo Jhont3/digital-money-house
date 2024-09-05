@@ -56,7 +56,7 @@ export const CreditCard = ({ cardsUser, accountId, onSelectCardPg }: any) => {
 
             {!onSelectCardPg && (
               <button className="flex items-start" onClick={() => handleDelete(card.id)}>
-                <span className="text-xs text-black font-bold text-end md:text-base">
+                <span className="text-xs text-black font-bold text-end md:text-base ">
                   Eliminar
                 </span>
               </button>
@@ -70,8 +70,8 @@ export const CreditCard = ({ cardsUser, accountId, onSelectCardPg }: any) => {
                   value={card.number_id}
                   checked={selectedCardId === card.number_id}
                   onChange={() => handleSelect(card.number_id)}
-                  className="w-[18px] h-[18px] cursor-pointer appearance-none border-[1.6px] border-dark-1 checked:bg-green-1 
-                  rounded-full "
+                  className="w-4 h-4 cursor-pointer appearance-none border-[1.6px] border-dark-1 checked:bg-green-1 
+                  rounded-full border-opacity-50"
                 />              
               </div>
             )}
