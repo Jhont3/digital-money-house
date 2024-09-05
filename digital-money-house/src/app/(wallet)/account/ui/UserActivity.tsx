@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { formatNumberToARS, getDayOfWeek } from "@/utils";
 import { UserActivityProps } from "@/interfaces";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useMemo, useState, useEffect } from "react";
 import { useActivitiesManagement } from "@/store";
 
@@ -78,7 +78,8 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
               </span>
           </div>
         </div>
-        <hr className="md:border-t md:border-black"/>
+        
+        <hr className="md:border-t md:border-black" />
         </>
         
       ))}

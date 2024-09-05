@@ -1,7 +1,6 @@
 import { Add, CreditCard, GoToAmountBtn, Subtitle } from "@/components";
 import { getAccountInfo, getCards } from "@/services";
 import { cookies } from "next/headers";
-import Image from "next/image";
 import Link from "next/link";
 
 export default async function SelectCardPage() {
@@ -21,7 +20,7 @@ export default async function SelectCardPage() {
 
                 <article className="bg-white p-5 rounded-lg flex flex-col gap-4 md:p-8 md:py-10">
 
-                    <CreditCard cardsUser={cardsUser} accountId={accountInfo.id} onSelectCardPg/>
+                    <CreditCard cardsUser={cardsUser} accountId={accountInfo.id} onSelectCardPg eraseLastHr/>
                     
                 </article>
 

@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export const CreditCard = ({ cardsUser, accountId, onSelectCardPg }: any) => {
+export const CreditCard = ({ cardsUser, accountId, onSelectCardPg, eraseLastHr }: any) => {
   const router = useRouter();
 
   const [ selectedCardId, setSelectedCardId ] = useState<number | null>(null);
@@ -38,7 +38,7 @@ export const CreditCard = ({ cardsUser, accountId, onSelectCardPg }: any) => {
 
   return (
     <>
-      {cardsToShow.map((card: CardData) => (
+      {cardsToShow.map((card: CardData, i:any) => (
         <div key={card.id}>
           <div className="flex justify-between py-4">
             <p className="flex items-center text-sm gap-2 text-dark-1 md:text-base md:gap-3">
@@ -63,21 +63,22 @@ export const CreditCard = ({ cardsUser, accountId, onSelectCardPg }: any) => {
             )}
 
             {onSelectCardPg && (
-              <div className="mt-4 flex items-center relative">
+              <div className=" flex items-center relative">
                 <input
                   type="radio"
                   name="selectedCard"
                   value={card.number_id}
                   checked={selectedCardId === card.number_id}
                   onChange={() => handleSelect(card.number_id)}
-                  className="w-4 h-4 cursor-pointer appearance-none border-[1.6px] border-dark-1 checked:bg-green-1 
-                  rounded-full border-opacity-50"
+                className="w-4 h-4 cursor-pointer appearance-none border-[1.6px] border-dark-1 checked:bg-green-1 
+                    rounded-full border-opacity-50 relative"
                 />              
               </div>
             )}
           </div>
-
-          <hr className="md:border-t md:border-black" />
+          {!(eraseLastHr && i === cardsToShow.length - 1) && (
+            <hr className="md:border-t md:border-black" />
+          )} 
         </div>
       ))}
     </>

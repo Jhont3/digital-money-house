@@ -101,7 +101,6 @@ export function Step2Amount( {}: any ) {
                     id="amount"                     
                     name="amount"
                     value={amount}
-                    // placeholder={`$${paymentData.totalAmount}`}
                     className="font-bold text-white bg-dark-1 outline-none border-gray-1 focus:border-select-1 focus:ring-0"                                           
                     autoComplete={'off'}                   
                     onChange={onChangeInput}
