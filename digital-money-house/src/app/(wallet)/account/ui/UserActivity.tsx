@@ -79,7 +79,7 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
           </div>
         </div>
         
-        <hr className="md:border-t md:border-black" />
+        <hr key={`${i}${activity.id}`} className="md:border-t md:border-black" />
         </>
         
       ))}

@@ -18,7 +18,10 @@ export const Confirmation = ( { onDepositPg, onPayServicesPg } : any ) => {
     }
 
     return (
-        <section className="flex flex-col gap-4 md:col-span-9 md:p-12 md:py-12 md:gap-5 lg:px-20">
+        <article className="flex flex-col gap-4 md:col-span-9 md:p-12 md:py-12 md:gap-5 lg:px-20">
+            {onDepositPg && <Subtitle text="Cargar dinero"/>  }
+            {onDepositPg && <Subtitle text="Pagar servicios"/>  }
+            
             <Subtitle text="Cargar dinero"/>  
 
             <div className="bg-green-1 text-black rounded-lg flex flex-col justify-center items-center h-28 gap-2 xl:h-36">
@@ -84,6 +87,6 @@ export const Confirmation = ( { onDepositPg, onPayServicesPg } : any ) => {
                         Ir al inicio             
                 </button>
             </div>
-        </section>
+        </article>
     )
 }

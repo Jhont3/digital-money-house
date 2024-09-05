@@ -5,7 +5,7 @@ import { UsePaymentStore } from "@/store";
 import { errorAlert } from "@/utils";
 import { useRouter } from "next/navigation";
 
-export function PayServiceButton ( ) {
+export function PayServiceButton ({accountInfo}:any) {
     
     const { paymentData } = UsePaymentStore();
     console.log(paymentData);
@@ -31,6 +31,10 @@ export function PayServiceButton ( ) {
         console.log(normalizedData);
         
         try {
+            if (accountInfo.available_amount < 1153.73) {
+                throw new Error
+            }
+
             const resp = await postTransaction(Number(accountId), normalizedData);
 
             if (!resp.error) {
@@ -39,6 +43,7 @@ export function PayServiceButton ( ) {
             }
         } catch (error) {
             console.error(error);
+            router.push(`/account/payment-for-services/error`);
         }
     };
 
