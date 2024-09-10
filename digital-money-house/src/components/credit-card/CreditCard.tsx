@@ -3,9 +3,9 @@ import { CardData } from "@/interfaces";
 import { deleteCard } from "@/services";
 import { UsePaymentStore } from "@/store";
 import { errorAlert, successAlert } from "@/utils";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { GreenCircle } from "../common/icons/GreenCircle";
 
 export const CreditCard = ({ cardsUser, accountId, onSelectCardPg, eraseLastHr }: any) => {
   const router = useRouter();
@@ -43,13 +43,7 @@ export const CreditCard = ({ cardsUser, accountId, onSelectCardPg, eraseLastHr }
           <div className="flex justify-between py-4">
             <p className="flex items-center text-sm gap-2 text-dark-1 md:text-base md:gap-3">
               <span>
-                <Image
-                  src="/imgs/greenCircle.png"
-                  alt="icon"
-                  width={24}
-                  height={24}
-                  className="md:w-8 md:h-8"
-                />
+                <GreenCircle className="w-[24px] h-[24px] md:w-8 md:h-8"/>
               </span>
               Terminada en {card.number_id.toString().slice(-4)}
             </p>

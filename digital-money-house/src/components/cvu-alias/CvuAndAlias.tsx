@@ -1,6 +1,6 @@
 "use client"
 import { handleCopyClipboard } from "@/utils"
-import Image from "next/image"
+import { Copy } from "../common/icons/Copy"
 
 export const CvuAndAlias = ({accountInfo}:any) => {
 
@@ -19,8 +19,8 @@ export const CvuAndAlias = ({accountInfo}:any) => {
         <div className="col-span-4 md:hidden">
             <div className="flex justify-between">
                 <p className=" text-green-1 font-bold text-xl">CVU</p>
-                <span className="flex items-center">
-                    <Image src="/imgs/copy.png" alt="icon" width={24} height={24} onClick={() => {handleCopyClipboard(accountInfo.cvu)}}/>
+                <span className="flex items-center" onClick={() => {handleCopyClipboard(accountInfo.cvu)}}>
+                    <Copy className="w-6 h-6" />                   
                 </span>
             </div>
 
@@ -32,8 +32,8 @@ export const CvuAndAlias = ({accountInfo}:any) => {
                 <p className="text-green-1 font-bold text-xl">CVU</p>
                 <p className="text-gray-1">{accountInfo.cvu}</p>
             </div>
-            <span className="flex items-center md:row-span-2 md:justify-end">
-                <Image src="/imgs/copy.png" alt="icon" width={32} height={32} onClick={() => {handleCopyClipboard(accountInfo.cvu)}}/>
+            <span className="flex items-center md:row-span-2 md:justify-end" onClick={() => {handleCopyClipboard(accountInfo.cvu)}}>
+                <Copy className="w-8 h-8"/> 
             </span>
         </div>
 
@@ -42,8 +42,8 @@ export const CvuAndAlias = ({accountInfo}:any) => {
         <div className="col-span-4 md:hidden">
             <div className="flex justify-between md:col-span-2 lg:col-span-3">
                 <p className=" text-green-1 font-bold text-xl">Alias</p>
-                <span className="flex items-center md:justify-end">
-                    <Image src="/imgs/copy.png" alt="icon" width={24} height={24} onClick={() => {handleCopyClipboard(accountInfo?.alias)}}/>
+                <span className="flex items-center md:justify-end" onClick={() => {handleCopyClipboard(accountInfo?.alias)}}>
+                    <Copy className="w-6 h-6" />
                 </span>
             </div>
 
@@ -55,8 +55,8 @@ export const CvuAndAlias = ({accountInfo}:any) => {
                 <p className="text-green-1 font-bold text-xl">Alias</p>
                 <p className="text-gray-1">{accountInfo?.alias}</p>
             </div>
-            <span className="flex items-center md:row-span-2 md:justify-end">
-                <Image src="/imgs/copy.png" alt="icon" width={32} height={32} onClick={() => {handleCopyClipboard(accountInfo?.alias)}}/>
+            <span className="flex items-center md:row-span-2 md:justify-end" onClick={() => {handleCopyClipboard(accountInfo?.alias)}}>
+                <Copy className="w-8 h-8" />                        
             </span>
         </div>
 

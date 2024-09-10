@@ -1,5 +1,4 @@
-import { Subtitle } from "@/components";
-import Image from "next/image";
+import { Card, GreenArrow, Subtitle, User } from "@/components";
 import Link from "next/link";
 
 export default function PaymentMethodsPage() {
@@ -13,7 +12,7 @@ export default function PaymentMethodsPage() {
                 >
                     <div className="flex gap-4 items-center">
                         <span className="justify-start">
-                            <Image src="/imgs/user.png" alt="user icon" width={34} height={34}/>
+                            <User className="w-[34px] h-[34px]"/>
                         </span>
                         <p className="text-green-1 font-bold text-xl lg:inline-block">
                             <span className="block lg:inline">Tranferencia </span>
@@ -21,7 +20,7 @@ export default function PaymentMethodsPage() {
                         </p>
                     </div>
                     <span className="flex justify-end items-center">
-                        <Image src="/imgs/arrow.png" alt="arrow icon" width={18} height={18}/>
+                        <GreenArrow className="w-[18px] h-[18px]"/>
                     </span>
                 </Link>
 
@@ -30,7 +29,7 @@ export default function PaymentMethodsPage() {
                 >
                     <div className="flex gap-4 items-center">
                         <span className="justify-start">
-                            <Image src="/imgs/card.png" alt="card icon" width={34} height={34}/>
+                            <Card className="w-[36px] h-[34px]"/>
                         </span>
                         <p className="text-green-1 font-bold text-xl lg:inline-block">
                             <span className="block lg:inline">Seleccionar </span>
@@ -38,7 +37,7 @@ export default function PaymentMethodsPage() {
                         </p>
                     </div>
                     <span className="flex justify-end items-center">
-                        <Image src="/imgs/arrow.png" alt="arrow icon" width={18} height={18}/>
+                        <GreenArrow className="w-[18px] h-[18px]"/>
                     </span>
                 </Link>
 

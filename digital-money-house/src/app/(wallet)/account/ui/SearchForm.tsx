@@ -1,10 +1,9 @@
 "use client"
-import { FilterModalActivities } from "@/components";
+import { Filter, FilterModalActivities, Search } from "@/components";
 import { useFilterModalContext } from "@/context";
 import { Activity } from "@/interfaces";
 import { useActivitiesManagement } from "@/store";
 import clsx from "clsx";
-import Image from "next/image"
 import { useRouter } from "next/navigation";
 import { KeyboardEvent, ChangeEvent, useEffect } from "react";
 interface SearchFormProps {
@@ -69,7 +68,7 @@ export function SearchForm ( {allActivities, onDashboard}:SearchFormProps ) {
         {/* Search input*/}
         <div className="relative w-full">
             <span className="absolute left-3 top-1/2 transform -translate-y-1/2 z-10">
-                <Image src="/imgs/search.png" alt="icon" width={14.7} height={14.7}/>
+                <Search/>
             </span>
 
             <div className="flex gap-5">
@@ -93,7 +92,7 @@ export function SearchForm ( {allActivities, onDashboard}:SearchFormProps ) {
                 >
                     <p className="text-dark-1 font-bold">Filtrar</p>
                     <span className="flex items-center">
-                        <Image src="/imgs/filter.png" alt="filter icon" width={17} height={13} className="md:w-[18px] md:h-[18px]"/>
+                        <Filter className="w-[17px] h-[13px] md:w-[18px] md:h-[18px]"/>
                     </span>
                 </div>
                 }

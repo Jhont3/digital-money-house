@@ -1,7 +1,6 @@
-import { CreditCard, Subtitle } from "@/components";
+import { Add, CreditCard, GreenArrow, GreyArrow, Subtitle } from "@/components";
 import { getAccountInfo, getCards } from "@/services";
 import { cookies } from "next/headers";
-import Image from "next/image";
 import Link from "next/link";
 
 export default async function MyCardsPage() {
@@ -27,12 +26,12 @@ export default async function MyCardsPage() {
             <Link href={"/account/my-cards/new-card"}  className="flex justify-between py-4">
                 <div className="flex gap-4">
                     <span className="justify-start">
-                        <Image src="/imgs/add.png" alt="add icon" width={34} height={34}/>
+                        <Add className="w-[34px] h-[34px]"/>
                     </span>
                     <p className=" text-green-1 font-bold text-xl">Nueva tarjeta</p>
                 </div>
                 <span className="flex justify-end items-center">
-                    <Image src="/imgs/arrow.png" alt="add icon" width={18} height={18}/>
+                    <GreenArrow className="w-[18px] h-[18px]"/>
                 </span>
             </Link>
 

@@ -1,10 +1,10 @@
 "use client"
-import Image from "next/image";
 import { formatNumberToARS, getDayOfWeek } from "@/utils";
 import { UserActivityProps } from "@/interfaces";
 import { useSearchParams } from "next/navigation";
 import { useMemo, useState, useEffect } from "react";
 import { useActivitiesManagement } from "@/store";
+import { GreenCircle } from "@/components";
 
 export function UserActivity({ itemsPerPage, showPagination, allActivities }: UserActivityProps) {
 
@@ -65,7 +65,7 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
           <div className="flex justify-between" >
             <p className="flex items-center text-sm gap-2 text-dark-1 md:text-base md:gap-3">
                 <span>
-                    <Image src="/imgs/greenCircle.png" alt="icon" width={24} height={24} className="md:w-8 md:h-8" />
+                  <GreenCircle className="w-[24px] h-[24px] md:w-8 md:h-8"/>
                 </span>
               {activity.destination === "My account" ? 'Ingresaste dinero' : `${activity.description}`}
             </p>

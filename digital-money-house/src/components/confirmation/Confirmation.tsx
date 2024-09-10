@@ -26,7 +26,7 @@ export const Confirmation = ( { onDepositPg, onPayServicesPg } : any ) => {
             <Subtitle text="Cargar dinero"/>  
 
             <div className="bg-green-1 text-black rounded-lg flex flex-col justify-center items-center h-28 gap-2 xl:h-36">
-                <div><Check/></div>
+                <div><Check className="w-[45px] h-[47px] md:w-[66px] md:h-[68]" fill="black"/></div>
                 <p className="md:text-2xl font-bold">
                     {onDepositPg && <span>Ya cargamos el dinero en tu cuenta</span>}
                     {onPayServicesPg && <span className="md:text-2xl">Ya realizamos tu pago</span>}                                       

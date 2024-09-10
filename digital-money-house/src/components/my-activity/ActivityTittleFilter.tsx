@@ -15,7 +15,7 @@ export const ActivityTittleFilter = () => {
             <div className="flex gap-2 md:hidden">
                 <p className="text-dark-1 underline">Filtrar</p>
                 <span className="flex items-center">
-                    <Filter />
+                    <Filter className="w-[17px] h-[13px]"/>
                 </span>
             </div>
         </div>     

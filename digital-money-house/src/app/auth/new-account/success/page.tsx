@@ -1,7 +1,6 @@
 "use client"
-import { Navbar } from "@/components";
+import { Check, Navbar } from "@/components";
 import { useLogInContext } from "@/context";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export default function SuccessPage() {
@@ -21,13 +20,7 @@ export default function SuccessPage() {
         <div className="flex flex-col justify-center items-center gap-8 px-[15vw]">
         <h2 className="text-white text-center font-semibold text-3xl ">Registro Existoso</h2>
         <div className="flex justify-center">
-          <Image
-                src="/imgs/check.png "
-                alt="success image"
-                width={101}
-                height={104}
-                className="object-cover text-center"
-          />
+          <Check className="w-[101px] h-[104px] object-cover text-center" fill="#C1FD35"/>
         </div>
         <p className="text-white text-center">Hemos enviado un correo de confirmación para validar tu email, por favor revisalo para iniciar sesión.</p>
         <div className="pb-6 w-full md:w-[360px] flex justify-center">

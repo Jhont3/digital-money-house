@@ -1,9 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import ActualCash from "./ui/ActualCash";
 import { SearchForm } from "./ui";
 import { UserActivity } from "./ui/UserActivity";
-import { Subtitle } from "@/components";
+import { GreyArrow, Subtitle } from "@/components";
 import { getAccountInfo, getActivity } from "@/services";
 import { cookies } from "next/headers";
 
@@ -56,7 +55,7 @@ export default async function AccountPage() {
         <Link href={'/account/my-activity'} className="text-black font-bold text-[12px] flex justify-between md:text-base">
           <span className="">Ver toda tu actividad</span>
           <span className="flex items-center">
-            <Image src="/imgs/greyArrow.png" alt="icon" width={12} height={12} className="md:w-[18px] md:h-[18px]"/>
+            <GreyArrow className="w-[14px] h-[14px] md:w-[18px] md:h-[18px]"/>
           </span>
         </Link>      
 

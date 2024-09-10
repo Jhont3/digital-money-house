@@ -3,10 +3,10 @@ import { Editing, UserInputs } from "@/interfaces";
 import { patchUserInfo } from "@/services";
 import { errorAlert, successAlert } from "@/utils";
 import clsx from "clsx";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, KeyboardEvent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { GreyEdit } from "../common/icons/GreyEdit";
 
 export const ProfileForm = ({ profileInfo, token }: any) => {
   const {
@@ -128,13 +128,7 @@ export const ProfileForm = ({ profileInfo, token }: any) => {
             onClick={() => handleEdit("fullname")}
             className="flex items-center md:justify-end"
           >
-            <Image
-              src="/imgs/edit.png"
-              className="grayscale"
-              alt="icon"
-              width={22}
-              height={22}
-            />
+            <GreyEdit/>
           </span>
         </div>
       </div>
@@ -162,13 +156,7 @@ export const ProfileForm = ({ profileInfo, token }: any) => {
             className="flex items-center md:justify-end"
             onClick={() => handleEdit("dni")}
           >
-            <Image
-              src="/imgs/edit.png"
-              className="grayscale"
-              alt="icon"
-              width={22}
-              height={22}
-            />
+            <GreyEdit/>
           </span>
         </div>
       </div>
@@ -196,13 +184,7 @@ export const ProfileForm = ({ profileInfo, token }: any) => {
             className="flex items-center md:justify-end"
             onClick={() => handleEdit("phone")}
           >
-            <Image
-              src="/imgs/edit.png"
-              className="grayscale"
-              alt="icon"
-              width={22}
-              height={22}
-            />
+            <GreyEdit/>
           </span>
         </div>
       </div>
@@ -230,13 +212,7 @@ export const ProfileForm = ({ profileInfo, token }: any) => {
             className="flex items-center md:justify-end"
             onClick={() => handleEdit("password")}
           >
-            <Image
-              src="/imgs/edit.png"
-              className="grayscale"
-              alt="icon"
-              width={22}
-              height={22}
-            />
+            <GreyEdit/>
           </span>
         </div>
       </div>

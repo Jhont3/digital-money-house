@@ -28,7 +28,7 @@ export default async function SelectCardPage() {
                     <Link href={"/account/my-cards/new-card"}  className="flex justify-between pt-4 pb-2">
                         <div className="flex items-center gap-4 md:pt-2 md:pb-3">
                             <span className="justify-start">
-                                <Add/>
+                                <Add className="w-7 h-7 md:w-8 md:h-8"/>
                             </span>
                             <p className=" text-green-1 font-bold md:text-xl">Nueva tarjeta</p>
                         </div>

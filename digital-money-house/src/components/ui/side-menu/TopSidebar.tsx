@@ -1,11 +1,11 @@
 "use client";
 import { useSideBarContext } from "@/context";
 import clsx from "clsx";
-import Image from "next/image";
 import { ActiveLink } from "./ActiveLink";
 import { navItems } from "@/lib";
 import { useRouter } from "next/navigation";
 import { logOut } from "@/utils";
+import { Close } from "@/components";
 
 
 export const TopSidebar = ({profileInfo}:any) => {
@@ -47,12 +47,7 @@ export const TopSidebar = ({profileInfo}:any) => {
             className="flex w-full justify-end z-50"
             onClick={() => setIsSidebarOpen(false)}
           >
-            <Image
-              src="/imgs/close.png"
-              alt="close icon"
-              width={14}
-              height={14}
-            />
+            <Close/>
           </button>
           <div className="text-green-1 font-bold">
             <p>Hola,</p>

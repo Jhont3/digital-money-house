@@ -22,6 +22,15 @@ export * from './common/icons/AmericanExpress';
 export * from './common/icons/Mastercard';
 export * from './common/icons/RightArrow';
 export * from './common/icons/Add';
+export * from './common/icons/GreyArrow';
+export * from './common/icons/GreenArrow';
+export * from './common/icons/User';
+export * from './common/icons/Card';
+export * from './common/icons/GreenCircle';
+export * from './common/icons/Copy';
+export * from './common/icons/GreyEdit';
+export * from './common/icons/Hamburger';
+export * from './common/icons/Close';
 export * from './ui/subtitle/Subtitle';
 
 export * from './credit-card/CreditCard';

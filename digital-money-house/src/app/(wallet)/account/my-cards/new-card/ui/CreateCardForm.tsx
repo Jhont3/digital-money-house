@@ -1,5 +1,5 @@
 "use client"
-import { AmericanExpress, Chip, Mastercard, Visa } from "@/components";
+import { AmericanExpress, Chip, GreyArrow, Mastercard, Visa } from "@/components";
 import { CardForm } from "@/interfaces";
 import { initialCreditCardForm } from "@/lib";
 import { postCards } from "@/services";
@@ -106,7 +106,7 @@ export function CreateCardForm( { accountID, cardsUser }: any ) {
         {/* Title */}
         <div className="flex md:hidden">
           <span className="flex items-center">
-              <Image src="/imgs/greyArrow.png" alt="icon" width={12} height={12}/>
+              <GreyArrow className="w-[12px] h-[12px]"/>              
           </span> &nbsp;
           <h2 ><span className="underline decoration-1 decoration-[rgba(0,0,0,0.50)] text-base text-dark-1 font-semibold">Tarjetas</span></h2>
         </div>
