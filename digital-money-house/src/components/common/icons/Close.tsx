@@ -9,14 +9,14 @@ export const Close = () => (
     <path
       d="M2 2L16 16"
       stroke="#C1FD35"
-      stroke-width="3"
-      stroke-linecap="round"
+      strokeWidth="3"
+      strokeLinecap="round"
     />
     <path
       d="M16 2L2 15"
       stroke="#C1FD35"
-      stroke-width="3"
-      stroke-linecap="round"
+      strokeWidth="3"
+      strokeLinecap="round"
     />
   </svg>
 );

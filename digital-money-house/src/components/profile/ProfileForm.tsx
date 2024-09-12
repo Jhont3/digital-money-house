@@ -60,10 +60,6 @@ export const ProfileForm = ({ profileInfo, token }: any) => {
   const onSubmit: SubmitHandler<UserInputs> = async (data) => {
     const { password, ...restData } = data;
     let submitData = password === "******" || password === "" ? restData : data;
-
-    if (submitData.dni !== 0) {
-      return
-    }
     
     try {
       await patchUserInfo(profileInfo.id, submitData)
