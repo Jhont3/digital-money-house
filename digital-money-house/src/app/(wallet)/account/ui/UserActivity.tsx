@@ -60,7 +60,6 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
   return (
     <>
       {paginatedActivities?.map((activity, i) => (
-        <>
         <div key={`${activity.id}${i}`} className="flex flex-col gap-4 ">
           <div className="flex justify-between" >
             <p className="flex items-center text-sm gap-2 text-dark-1 md:text-base md:gap-3">
@@ -81,7 +80,6 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
           
           <hr key={`${i}${activity.id}`} className="md:border-t md:border-black" />
         </div>
-        </>
         
       ))}
 
