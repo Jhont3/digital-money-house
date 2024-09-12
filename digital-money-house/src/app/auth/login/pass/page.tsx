@@ -18,7 +18,7 @@ export default function LoginPassPage() {
   const router = useRouter();
 
   const validatePassword = (password: string): boolean => {
-    return /^(?=.*\d)[a-zA-Z\d]{6,}$/.test(password);
+    return /^(?=.*\d)(?=.*[A-Z])(?=.*[\W_])[A-Za-z\d\W_]{6,20}$/.test(password);
   };
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {

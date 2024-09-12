@@ -111,7 +111,14 @@ export default function RegisterPage() {
             <input
               id="email"
               type="email"
-              {...register("email", { required: true, minLength: 2 })}            
+              {...register("email", { 
+                required: true,       
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Introduce un correo electrónico válido",
+                },
+                minLength: 2 })
+              }            
               className={clsx ({
                       'border-dark-1' :  !errors?.email,  
                       'border-error-2' : errors?.email,
@@ -125,7 +132,14 @@ export default function RegisterPage() {
             <input
               id="pass"
               type="password"
-              {...register("pass", { required: true, minLength: 6 })}            
+              {...register("pass", { 
+                required: true,       
+                pattern: {
+                  value: /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,20}$/,
+                  message: "La contraseña debe tener entre 6 y 20 caracteres, al menos un carácter especial, una mayúscula y un número"                  
+                },
+                minLength: 6 })
+              }            
               className={clsx ({
                       'border-dark-1' :  !errors?.pass,  
                       'border-error-2' : errors?.pass,

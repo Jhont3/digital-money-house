@@ -136,7 +136,6 @@ La App Digital Money House es una billetera virtual desarrollada con Next.js que
 
 - **Pago de Servicio**
   * [x] Ingresar número de cuenta del servicio.
-  * [x] Verificar validez del número y existencia de facturas pendientes.
   * [x] Seleccionar medio de pago.
   * [x] Agregar nuevo medio de pago.
   * [x] Seleccionar medio de pago existente.
