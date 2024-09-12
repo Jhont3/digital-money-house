@@ -3,6 +3,6 @@ import { successAlert } from "./successAlert";
 
 export const handleCopyClipboard = (dataToCopy: string) => {
     navigator.clipboard.writeText(dataToCopy)
-        .then(() => successAlert('Copied successfully'))
-        .catch(() => errorAlert('Copy failed'));
+        .then(() => successAlert('Se copió la información satistactoriamente'))
+        .catch(() => errorAlert('Algo falló, intentá nuevamente mas tarde...'));
 }

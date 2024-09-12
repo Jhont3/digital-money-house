@@ -50,11 +50,11 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
   
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p>Cargando...</p>;
   }
 
   if (activities.length === 0) {
-    return <div>No activities found</div>;
+    return <div>No se encontraron actividades</div>;
   }
 
   return (
