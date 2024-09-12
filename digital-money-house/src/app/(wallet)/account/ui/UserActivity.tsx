@@ -66,7 +66,7 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
                 <span>
                   <GreenCircle className="w-[24px] h-[24px] md:w-8 md:h-8"/>
                 </span>
-              {activity.destination === "My account" ? 'Ingresaste dinero' : `${activity.description}`}
+              {activity.destination === "My account" ? 'Depósito de dinero' : `${activity.description}`}
             </p>
             <div className="flex flex-col">
                 <span className="text-sm text-dark-2 text-end md:text-base">

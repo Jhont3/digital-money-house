@@ -4,7 +4,7 @@ import { Filter } from "../common/icons/Filter"
 
 export const ActivityTittleFilter = () => {
 
-    const { isFilterModalOpen, setIsFilterModalOpen } = useFilterModalContext()
+    const { setIsFilterModalOpen } = useFilterModalContext()
 
     return (                   
         <div 
