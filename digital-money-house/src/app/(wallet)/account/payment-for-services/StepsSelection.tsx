@@ -4,13 +4,13 @@ import { Step1PayService } from "./Step1PayService";
 import { Step2PayService } from "./Step2PayService"
 import { Step3PayService } from "./Step3PayService"
 
-export function StepsServicePayment( {cardsUser, accountInfo}:any ) {
+export function StepsServicePayment( {cardsUser, accountInfo, services}:any ) {
 
     const [ step, setStep ] = useState(1);
 
     return (
         <>
-            {step === 1 && <Step1PayService setStep={setStep}/>}
+            {step === 1 && <Step1PayService setStep={setStep} services={services} />}
             {step === 2 && <Step2PayService setStep={setStep}/>}
             {step === 3 && <Step3PayService cardsUser={cardsUser} accountInfo={accountInfo}/>}
         </>

@@ -1,4 +1,5 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
+const API_URL_SERVICE = 'https://digitalmoney.digitalhouse.com';
 
 const defaultHeaders = {
   'Content-Type': 'application/json',
@@ -59,6 +60,20 @@ export const httpGet = async (endpoint: string, token: string , options: HttpGet
   return handleResponse(response);
 };
 
+export const httpGetServices = async (endpoint: string, options: HttpGetOptions = {}): Promise<unknown> => {
+  const headers = {
+    ...defaultHeaders,
+    ...getUserConfigHeaders(),
+    ...options.headers,
+  };
+
+  const response = await fetch(`${API_URL_SERVICE}${endpoint}`, {
+    ...options,
+    method: 'GET',
+    headers,
+  });
+  return handleResponse(response);
+};
 
 export const httpGetRevalidateCards = async (endpoint: string, token: string, revalidateTag: string, options: HttpGetOptions = {}): Promise<unknown> => {
   const headers = {
