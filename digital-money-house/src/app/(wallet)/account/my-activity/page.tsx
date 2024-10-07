@@ -2,7 +2,7 @@ import { Subtitle } from "@/components";
 import { UserActivity } from "../ui/UserActivity";
 import { SearchForm } from "../ui";
 import { cookies } from "next/headers";
-import { getAccountInfo, getActivity } from "@/services";
+import { getAccountInfo, getActivity, getTransactionById } from "@/services";
 import { ActivityTittleFilter } from "@/components";
 
 export default async function MyActivityPage() {

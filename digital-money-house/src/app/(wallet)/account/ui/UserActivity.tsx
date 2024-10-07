@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useMemo, useState, useEffect } from "react";
 import { useActivitiesManagement } from "@/store";
 import { GreenCircle } from "@/components";
+import Link from "next/link";
 
 export function UserActivity({ itemsPerPage, showPagination, allActivities }: UserActivityProps) {
 
@@ -60,7 +61,7 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
   return (
     <>
       {paginatedActivities?.map((activity, i) => (
-        <div key={`${activity.id}${i}`} className="flex flex-col gap-4 ">
+        <Link href={`/account/my-activity/${activity.id}`} key={`${activity.id}${i}`} className="flex flex-col gap-4 ">
           <div className="flex justify-between" >
             <p className="flex items-center text-sm gap-2 text-dark-1 md:text-base md:gap-3">
                 <span>
@@ -79,7 +80,7 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
           </div>
           
           <hr key={`${i}${activity.id}`} className="md:border-t md:border-black" />
-        </div>
+        </Link>
         
       ))}
 

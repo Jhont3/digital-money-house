@@ -32,6 +32,8 @@ La App Digital Money House es una billetera virtual desarrollada con Next.js que
    npm run dev
 ```
 
+#### IMPORTANTE: Al momento de creación de una cuenta el codigo de verificación en "000" o puedes recargar la página si fue una creacion exitosa para luego logearte.
+
 
 ## Funcionalidades Principales
 

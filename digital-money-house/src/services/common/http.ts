@@ -59,6 +59,7 @@ export const httpGet = async (endpoint: string, token: string , options: HttpGet
   return handleResponse(response);
 };
 
+
 export const httpGetRevalidateCards = async (endpoint: string, token: string, revalidateTag: string, options: HttpGetOptions = {}): Promise<unknown> => {
   const headers = {
     Authorization: token,
