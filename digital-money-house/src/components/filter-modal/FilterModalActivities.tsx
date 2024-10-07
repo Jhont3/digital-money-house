@@ -86,6 +86,11 @@ export const FilterModalActivities = ({ allActivities }: FilterModalProps) => {
     setActivities(filteredActivities);
   };
 
+  const handleClearFilters = () => {
+    setActivities(allActivities);
+    setSelectedFilter("");
+  };
+
   return (
     <>
       {isFilterModalOpen && (
@@ -102,7 +107,7 @@ export const FilterModalActivities = ({ allActivities }: FilterModalProps) => {
               </div>
               
               <button
-                onClick={() => setActivities(allActivities)}
+                onClick={handleClearFilters}
                 className="text-gray-500 text-sm"
               >
                 Borrar filtros

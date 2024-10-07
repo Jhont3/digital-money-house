@@ -40,7 +40,7 @@ export function UserActivity({ itemsPerPage, showPagination, allActivities }: Us
     try {
       if (searchQuery) {
         setActivities(activities)
-      } 
+      }
 
     } catch (error) {
       console.error("Error fetching user activities:", error);

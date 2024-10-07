@@ -19,7 +19,7 @@ export const NavInUserPage = ({profileInfo}:any) => {
         </Link>
         <span onClick={()=>{setIsSidebarOpen(true)}}><Hamburger className="p-1 object-cover md:hidden w-10 h-10" /></span>
 
-        <Link href={'/account/profile'}>
+        <Link href={'/account'}>
           <p className="hidden md:inline-flex text-white font-bold items-center h-full">
             Hola, {profileInfo?.firstname} {profileInfo?.lastname}
           </p>
