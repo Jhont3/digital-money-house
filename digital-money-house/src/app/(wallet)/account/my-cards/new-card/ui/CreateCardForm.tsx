@@ -19,7 +19,8 @@ export function CreateCardForm( { accountID, cardsUser }: any ) {
     
     const firstAndSecondName = useWatch({ control, name: 'firstAndSecondName' });
     const expirationDate = useWatch({ control, name: 'expirationDate' });
-    const fullCardNumber = useWatch({ control, name: 'fullCardNumber' });;
+    const fullCardNumber = useWatch({ control, name: 'fullCardNumber' });
+    const securityCode = useWatch({ control, name: 'securityCode' });
 
     const displayIconCreditCard = (company: string) => {
       if (company === "Visa")  return <Visa/>              
@@ -73,12 +74,33 @@ export function CreateCardForm( { accountID, cardsUser }: any ) {
     const onSubmit: SubmitHandler<CardForm> = async (data)  => {
       
       try {
+
+        if (hasErrors) {
+          errorAlert("Algo falló en la creación de la tarjeta de crédito")
+          return
+        }
         
         if (cardsUser.length > 9) {
           errorAlert("Puedes tener maximo 10 tarjetas de credito")
           return;
         }
         
+        //Validate date of credit card
+        const expirationDateParts = expirationDate.split("/");
+        const month = parseInt(expirationDateParts[0], 10);
+        const year = parseInt(expirationDateParts[1], 10);
+        if (month < 1 || month > 12 || year < new Date().getFullYear()) {
+            errorAlert("La fecha de expiración debe ser mayor a la fecha actual");
+            return;
+        }
+    
+        const isFutureDate = new Date(year, month - 1, 1) > new Date();
+        if (!isFutureDate) {
+            errorAlert("La fecha de expiración debe ser mayor a la fecha actual");
+            return;
+        }
+
+        // Normalize data
         let normalizedData = { 
           number_id: Number(data.fullCardNumber),
           first_last_name: data.firstAndSecondName,
@@ -154,21 +176,29 @@ export function CreateCardForm( { accountID, cardsUser }: any ) {
           <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-6 items-center md:gap-4 lg:gap-6">
               <div className="flex flex-col gap-6 min-w-[300px] md:min-w-[360px] md:gap-4 lg:flex-row lg:gap-6">
                 <input                                                                                               
-                    id="fullCardNumber"                    
-                    {...register("fullCardNumber", {required: true, pattern: { value: /^[+]?(\d.*){6,}$/, message: "El teléfono debe contener al menos 6 números" }})}
-                    className="p-4 border-[1.6px] outline-none border-gray-1 focus:border-select-1 focus:ring-0 text-black opacity-50 w-full rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.10)]
-                                xl:w-[360px] md:min-h-16"
+                    id="fullCardNumber"
+                    maxLength={16}                   
+                    {...register("fullCardNumber", {required: true, pattern: { value: /^\d{14,16}$/, message: "El numero de la tarjeta debe ser de al menos 14 numeros" }})}
+                    className={clsx({
+                      'border-error-2': errors.fullCardNumber,
+                      'border-gray-1': !errors.fullCardNumber || fullCardNumber=== "",
+                    }, 
+                    "p-4 border-[1.6px] outline-none focus:border-select-1 focus:ring-0 text-black opacity-50 w-full rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.10)] xl:w-[360px] md:min-h-16")}
                     placeholder="Número de la tarjeta*"
-                    autoComplete="fullCardNumber"                            
+                    autoComplete="fullCardNumber"                         
                 />
 
                 <input
                     id="firstAndSecondName"
                     type="text"
-                    {...register("firstAndSecondName", { required: true, pattern: { value: /^(?=.*\s).{5,}$/, message: "El nombre debe contener al menos 5 caracteres y un espacio en blanco"
+                    maxLength={40} 
+                    {...register("firstAndSecondName", { required: true, pattern: { value: /^(?=.*\s)(?=.{5,40}$)([A-Za-z]{2,})(?: [A-Za-z]{2,})$/, message: "El nombre debe contener entre 5 y 40 caracteres, solo letras y un único espacio."
                     }})}
-                    className="p-4 border-[1.6px] outline-none border-gray-1 focus:border-select-1 focus:ring-0 text-black opacity-50 w-full rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.10)]
-                                xl:w-[360px] md:min-h-16"
+                    className={clsx({
+                      'border-error-2': errors.firstAndSecondName,
+                      'border-gray-1': !errors.firstAndSecondName || firstAndSecondName === "",
+                    },
+                    "p-4 border-[1.6px] outline-none focus:border-select-1 focus:ring-0 text-black opacity-50 w-full rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.10)] xl:w-[360px] md:min-h-16")}
                     placeholder="Nombre y apellido*"
                     autoComplete="firstAndSecondName"
                 />
@@ -178,18 +208,26 @@ export function CreateCardForm( { accountID, cardsUser }: any ) {
                 <input
                     id="expirationDate"
                     type="text"
-                    {...register("expirationDate", { required: true, pattern: { value: /^[+]?(\d.*){6,}$/, message: "La fecha de expiración debe contener al menos 6 números" }})}
-                    className="p-4 border-[1.6px] outline-none border-gray-1 focus:border-select-1 focus:ring-0 text-black opacity-50 w-full rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.10)] 
-                    md:placeholder:whitespace-normal md:placeholder:break-words md:min-h-16 md:pt-0 lg:whitespace-nowrap lg:p-4 xl:w-[360px]"
+                    maxLength={7}
+                    {...register("expirationDate", { required: true, pattern: { value: /^(0[1-9]|1[0-2])\/\d{4}$/, message: "La fecha de expiración debe contener al menos 6 números" }})}
+                    className={clsx({
+                      'border-error-2': errors.expirationDate,
+                      'border-gray-1': !errors.expirationDate || expirationDate === "",
+                    },
+                    "p-4 border-[1.6px] outline-none focus:border-select-1 focus:ring-0 text-black opacity-50 w-full rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.10)] md:placeholder:whitespace-normal md:placeholder:break-words md:min-h-16 md:pt-0 lg:whitespace-nowrap lg:p-4 xl:w-[360px]")}
                     placeholder="Fecha de vencimiento*"
                     autoComplete="expirationDate"
                 />
 
                 <input
                     id="securityCode"
-                    {...register("securityCode", { required: true, pattern: { value: /^[+]?(\d.*){3,}$/, message: "El código de seguridad debe contener al menos 3 números" }})}
-                    className="p-4 border-[1.6px] outline-none border-gray-1 focus:border-select-1 focus:ring-0 text-black opacity-50 w-full rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.10)] 
-                    md:placeholder:whitespace-normal md:placeholder:break-words md:min-h-16 md:pt-0 lg:whitespace-nowrap lg:p-4 xl:w-[360px]"
+                    maxLength={4}
+                    {...register("securityCode", { required: true, pattern: { value: /^\d{3,4}$/, message: "El código de seguridad debe contener al menos 3 números" }})}
+                    className={clsx({
+                      'border-error-2': errors.securityCode,
+                      'border-gray-1': !errors.securityCode || securityCode === "",
+                    },
+                    "p-4 border-[1.6px] outline-none focus:border-select-1 focus:ring-0 text-black opacity-50 w-full rounded-lg shadow-[0_4px_4px_rgba(0,0,0,0.10)] md:placeholder:whitespace-normal md:placeholder:break-words md:min-h-16 md:pt-0 lg:whitespace-nowrap lg:p-4 xl:w-[360px]")}
                     placeholder="Código de seguridad*"
                     autoComplete="securityCode"
                 />
